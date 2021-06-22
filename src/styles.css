@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; width:100%; }
+body {
+    min-height: 100vh;
+    display:flex;
+    flex-direction: column;
+}
+
+main {
+    display: flex;
+    flex: 1 1 auto;
+}
+nav,aside {
+    width: 15em;
+}
+
+nav {
+    order: -1;
+}
+
+.content {
+    flex: 1;
+}
+
+header, nav, footer, section, aside {
+    padding: 5px;
+}
+
+/* Responsive */
+@media (max-width: 640px){
+    main {
+       flex-direction: column;
+    }
+    nav,aside {
+        width: auto;
+    }
+    .content {
+        flex-basis: auto;
+    }
+}
