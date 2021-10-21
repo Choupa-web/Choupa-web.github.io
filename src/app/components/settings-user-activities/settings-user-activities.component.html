@@ -1,0 +1,39 @@
+<div class="list-container">
+    <div class="activity-container column-container">
+      <div class="list" id="activities"
+      cdkDropList
+      #activitiesList="cdkDropList"
+      [cdkDropListData]="activitiesList"
+      [cdkDropListConnectedTo]="[userList]"
+      (cdkDropListDropped)="onDrop($event)">
+        <h2>Liste des activités</h2>
+        <ng-container *ngIf="isActivities">
+          <mat-card *ngFor="let activity of activitiesList" cdkDrag>
+            <mat-card-header>
+              <mat-card-subtitle>{{activity.activityName}}</mat-card-subtitle>
+            </mat-card-header>
+          </mat-card>
+        </ng-container>
+       
+      </div>
+    </div>
+  
+    <div class="userActivity-container column-container">
+      <div class="list" id="userActivities"
+            cdkDropList
+            #userList="cdkDropList"
+            [cdkDropListData]="userActivitiesList"
+            [cdkDropListConnectedTo]="[activitiesList]"
+            (cdkDropListDropped)="onDrop($event)">
+        <h2>Activités à suivre</h2>
+        <ng-container *ngIf="isActivities">
+          <mat-card *ngFor="let userActivity of userActivities" cdkDrag>
+            <mat-card-header>
+              <mat-card-subtitle>{{userActivity.activityName}}</mat-card-subtitle>
+            </mat-card-header>
+          </mat-card>
+        </ng-container>
+       
+      </div>
+    </div>
+  </div>

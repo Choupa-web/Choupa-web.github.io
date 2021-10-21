@@ -1,32 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; width:100%; }
+html { height: 100%; }
 body {
+         margin: 0;
+         font-family: Roboto, "Helvetica Neue", sans-serif;
+         width:100%;
+        
+    }
+app-root {
     min-height: 100vh;
     display:flex;
     flex-direction: column;
 }
+h1 {
+    margin: 20px 0 !important;
+}
 
+header, footer {
+        flex-grow: 0;
+}
 main {
     display: flex;
-    flex: 1 1 auto;
-}
-nav,aside {
-    width: 15em;
+    flex-grow: 1;
+    /*padding-top: 15px;*/
+    background-color: #fafafa;
 }
 
+aside {
+    width: 30em;
+    flex-grow: 0;
+}
 nav {
-    order: -1;
+    width: 30em;
+    flex-grow: 0;
+    /*box-shadow: inset -1px 0 0 rgb(0 0 0 / 10%);*/
 }
 
-.content {
-    flex: 1;
+
+section#content {
+    flex-grow: 1;
+    padding-top: 20px;
+    padding-left: 15px;
+
+}
+.mat-h1, .mat-h2 {
+    color: #673ab7;
 }
 
-header, nav, footer, section, aside {
-    padding: 5px;
-}
 
 /* Responsive */
 @media (max-width: 640px){

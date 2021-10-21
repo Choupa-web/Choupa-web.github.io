@@ -1,0 +1,25 @@
+{
+    "usersActivities":[
+        {  
+            "user" : "persan27190@gmail.com",
+            "activityName" : "VTT",
+            "shortcut" : "vtt"
+        },
+        {
+            "user" : "persan27190@gmail.com",
+            "activityName" : "Vélo de route",
+            "shortcut" : "route"
+        },
+        {
+            "user" : "persan27190@gmail.com",
+            "activityName" : "Rameur",
+            "shortcut" : "rameur"
+        },
+        {
+            "user" : "persan27190@gmail.com",
+            "activityName" : "Vélo élliptique",
+            "shortcut" : "elliptique"
+        }
+    
+    ]
+}
