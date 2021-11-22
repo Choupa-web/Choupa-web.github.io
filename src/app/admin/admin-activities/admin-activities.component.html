@@ -1,6 +1,0 @@
-<h1 class="mat-h1">Liste des activités disponibles</h1>
-<button mat-raised-button color="accent" (click)="addActivity()">Ajouter une activité</button>
-<app-activities *ngIf="data.length > 0" [activitiesList]="data"></app-activities>
-<mat-toolbar *ngIf="data.length == 0" color="primary">
-    <span>Il n'y pas encore d'activités...</span>
-</mat-toolbar>
