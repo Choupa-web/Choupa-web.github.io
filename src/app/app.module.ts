@@ -27,6 +27,9 @@ import { MatTableModule} from '@angular/material/table';
 import { DragDropModule} from '@angular/cdk/drag-drop';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import { AuthNavComponent } from './components/auth-nav/auth-nav.component';
+import { environment as env } from '../environments/environment';
+import {FlexModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -39,16 +42,14 @@ import { MatBottomSheetModule} from '@angular/material/bottom-sheet';
     LoginButtonComponent,
     LogoutButtonComponent,
     SignupButtonComponent,
-    DashboardComponent
+    DashboardComponent,
+    AuthNavComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AuthModule.forRoot({
-      domain: 'YOUR_DOMAIN',
-      clientId: 'YOUR_CLIENT_ID'
-    }),
+    AuthModule.forRoot({...env.auth }),
     MatButtonModule,
     MatIconModule,
     MatListModule,
@@ -63,7 +64,8 @@ import { MatBottomSheetModule} from '@angular/material/bottom-sheet';
     HttpClientModule,
     MatToolbarModule,
     MatBottomSheetModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlexModule
   ],
   providers: [],
   bootstrap: [AppComponent]

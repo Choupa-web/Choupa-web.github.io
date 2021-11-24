@@ -1,0 +1,13 @@
+<div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutAlign.xs="end center" fxLayoutAlign.sm="end center" fxLayoutGap="20px">
+  <ng-container *ngIf="(auth.isAuthenticated$ | async) === false">
+    <app-login-button></app-login-button>
+    <app-signup-button></app-signup-button>
+  </ng-container>
+  <ng-container *ngIf="auth.isAuthenticated$ | async">
+    <button class="user-name" mat-button color="accent">{{ userName }}</button>
+    <app-logout-button></app-logout-button>
+  </ng-container>
+</div>
+
+
+

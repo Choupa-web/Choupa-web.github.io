@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
@@ -6,12 +6,9 @@ import { AuthService } from '@auth0/auth0-angular';
   templateUrl: './login-button.component.html',
   styleUrls: ['./login-button.component.css']
 })
-export class LoginButtonComponent implements OnInit {
+export class LoginButtonComponent {
 
-  constructor(private auth:AuthService) { }
-
-  ngOnInit(): void {
-  }
+  constructor(private auth: AuthService) { }
 
   loginWithRedirect(): void {
     this.auth.loginWithRedirect();
