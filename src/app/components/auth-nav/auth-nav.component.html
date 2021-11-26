@@ -4,7 +4,7 @@
     <app-signup-button></app-signup-button>
   </ng-container>
   <ng-container *ngIf="auth.isAuthenticated$ | async">
-    <button class="user-name" mat-button color="accent">{{ userName }}</button>
+    <button class="user-name" mat-button >{{ userName }}</button>
     <app-logout-button></app-logout-button>
   </ng-container>
 </div>
