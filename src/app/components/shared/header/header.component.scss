@@ -1,12 +1,5 @@
-/*@use 'sass:map';*/
-@import '~@angular/material/theming';
-@include mat-core();
-
-$my-primary: ($mat-indigo, 500);
-
-
 header {
-  background-color: $my-primary;
+  background-color:#3f51b5;
   padding: 10px;
 }
 div {
@@ -14,3 +7,4 @@ div {
     color: white;
     font-size: 2em;
 }
+
