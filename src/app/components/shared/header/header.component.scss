@@ -1,0 +1,16 @@
+/*@use 'sass:map';*/
+@import '~@angular/material/theming';
+@include mat-core();
+
+$my-primary: ($mat-indigo, 500);
+
+
+header {
+  background-color: $my-primary;
+  padding: 10px;
+}
+div {
+    /*width: 60%;*/
+    color: white;
+    font-size: 2em;
+}

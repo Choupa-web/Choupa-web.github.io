@@ -1,0 +1,48 @@
+#sidebar {
+  padding-top: 50px;
+}
+nav {
+    /*margin-top: 50px;*/
+    margin-right: 50px;
+    display: flex;
+    justify-content: flex-end;
+    /*flex-grow: 0; */
+
+}
+a {
+    text-decoration: none;
+    font-weight: 500 !important;
+}
+a>div {
+    font-weight: 500 !important;
+}
+
+.mat-list-base {
+    width: min-content;
+}
+
+.mat-list-base .mat-list-item.mat-list-item-with-avatar .mat-list-item-content .mat-list-text, .mat-list-base .mat-list-item.mat-list-option .mat-list-item-content .mat-list-text, .mat-list-base .mat-list-option.mat-list-item-with-avatar .mat-list-item-content .mat-list-text, .mat-list-base .mat-list-option.mat-list-option .mat-list-item-content .mat-list-text {
+    padding-left: 0 !important;
+}
+
+.mat-list-base .mat-list-item .mat-list-item-content {
+    padding: 0 !important;
+}
+
+.mat-list-item {
+    height: auto;
+    font-size: 14px;
+}
+
+fa-icon {
+    margin-right: 10px;
+}
+
+
+mat-list-item {
+    height: 40px !important;
+}
+
+.active {
+    color: #673ab7;
+}
