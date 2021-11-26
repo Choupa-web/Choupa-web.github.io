@@ -4,7 +4,7 @@ import {AuthService} from '@auth0/auth0-angular';
 @Component({
   selector: 'app-auth-nav',
   templateUrl: './auth-nav.component.html',
-  styleUrls: ['./auth-nav.component.css']
+  styleUrls: ['./auth-nav.component.scss']
 })
 export class AuthNavComponent implements OnInit {
 
