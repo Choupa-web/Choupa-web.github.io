@@ -1,33 +1,14 @@
-<div id="sidebar">
-  <nav id=navigation>
-    <mat-list>
-    <mat-list-item>
+<mat-list>
+  <mat-list-item fxLayout="row" fxLayoutAlign="center center">
+    <button routerLink="" mat-fab color="primary" aria-label="home">
+      <mat-icon>home</mat-icon>
+    </button>
+  </mat-list-item>
+  <div mat-subheader></div>
+ <mat-list-item>
         <a mat-line mat-list-item routerLink="dashboard" routerLinkActive="active" href="#"><fa-icon [icon]="faDashboard"></fa-icon>Dashboard</a>
     </mat-list-item>
-    <div mat-subheader>PARAMETRAGES</div>
     <mat-list-item>
-        <a mat-line mat-list-item routerLink="userSettings" routerLinkActive="active" href="#"><fa-icon [icon]="faUser"></fa-icon>Utilisateur</a>
+        <a mat-line mat-list-item routerLink="" routerLinkActive="active" href="#"><fa-icon [icon]="faBiking"></fa-icon>Mes activités</a>
     </mat-list-item>
-    <mat-list-item>
-        <a mat-line mat-list-item routerLink="importSettings" routerLinkActive="active" href="#"><fa-icon [icon]="faImport"></fa-icon>Importation</a>
-    </mat-list-item>
-    <mat-list-item>
-        <a mat-line mat-list-item routerLink="fieldsSettings" routerLinkActive="active" href="#"><fa-icon [icon]="faDataField"></fa-icon>Champs de données</a>
-    </mat-list-item>
-    <div mat-subheader>MES ACTIVITES</div>
-    <mat-list-item>
-        <a mat-line mat-list-item routerLink="importActivity" routerLinkActive="active" href="#"><fa-icon [icon]="faImportActivity"></fa-icon>Importer une activité</a>
-    </mat-list-item>
-    <mat-list-item>
-        <a mat-line mat-list-item routerLink="viewActivity" routerLinkActive="active" href="#"><fa-icon [icon]="faActivityView"></fa-icon>Voir mes activités</a>
-    </mat-list-item>
-    <div mat-subheader>ESPACE ADMIN</div>
-    <mat-list-item>
-        <a mat-line mat-list-item routerLink="adminActivities" routerLinkActive="active" href="#"><fa-icon [icon]="faImportActivity"></fa-icon>Les activités</a>
-    </mat-list-item>
-    <mat-list-item>
-        <a mat-line mat-list-item routerLink="adminFields" routerLinkActive="active" href="#"><fa-icon [icon]="faImportActivity"></fa-icon>Les types de champs</a>
-    </mat-list-item>
-    </mat-list>
-  </nav>
-</div>
+</mat-list>
