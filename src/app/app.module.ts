@@ -30,6 +30,7 @@ import { MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { AuthNavComponent } from './components/auth-nav/auth-nav.component';
 import { environment as env } from '../environments/environment';
 import {FlexModule} from '@angular/flex-layout';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import {FlexModule} from '@angular/flex-layout';
     MatToolbarModule,
     MatBottomSheetModule,
     ReactiveFormsModule,
-    FlexModule
+    FlexModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]
