@@ -31,6 +31,7 @@ import { AuthNavComponent } from './components/auth-nav/auth-nav.component';
 import { environment as env } from '../environments/environment';
 import {FlexModule} from '@angular/flex-layout';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { ActivityAddComponent } from './components/activities/activity-add/activity-add.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     LogoutButtonComponent,
     SignupButtonComponent,
     DashboardComponent,
-    AuthNavComponent
+    AuthNavComponent,
+    ActivityAddComponent
   ],
   imports: [
     BrowserModule,
