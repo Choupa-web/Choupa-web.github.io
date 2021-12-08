@@ -1,6 +1,6 @@
 
 
-<app-header></app-header>
+<app-header [menuOpened]="menuOpened" (openCloseMenu)="openCloseMenu($event)"></app-header>
 <mat-sidenav-container class="container">
   <mat-sidenav #sidenav mode="side" opened="opened">
     <app-sidebar></app-sidebar>
@@ -9,10 +9,7 @@
     <app-aside></app-aside>
   </mat-sidenav>
   <mat-sidenav-content class="main" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px">
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <button mat-icon-button class="btnCollapseMenu" (click)="sidenav.toggle()" color="primary" aria-label="Menu">
-        <mat-icon>menu</mat-icon>
-      </button>
+    <div fxLayout="row" fxLayoutAlign="end center">
       <button mat-icon-button class="btnCollapseMenu" (click)="sidenav2.toggle()" color="primary" aria-label="Menu">
         <mat-icon>menu</mat-icon>
       </button>

@@ -1,6 +1,10 @@
-<header fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="space-between stretch">
-    <div class="mat-h1">
-      The Garmin Experience...
-    </div>
+<header>
+  <mat-toolbar color="primary">
+    <button mat-icon-button aria-label="Ouvrir/Fermer Menu" (click)="openMenu($event)">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>The Garmin Experience...</span>
+    <span class="spacer"></span>
     <app-auth-nav></app-auth-nav>
+  </mat-toolbar>
 </header>
