@@ -11,7 +11,7 @@ export const MAINMENU: MenuItem[] = [
   },
   {
     label: 'Mes activités',
-    routerLink: '',
+    routerLink: 'activities',
     icon: 'biking'
   }
 ];

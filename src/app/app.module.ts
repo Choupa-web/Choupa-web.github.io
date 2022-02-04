@@ -32,6 +32,8 @@ import { environment as env } from '../environments/environment';
 import {FlexModule} from '@angular/flex-layout';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { ActivityAddComponent } from './components/activities/activity-add/activity-add.component';
+import { ActivitiesListComponent } from './components/activities/activities-list/activities-list.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { ActivityAddComponent } from './components/activities/activity-add/activ
     SignupButtonComponent,
     DashboardComponent,
     AuthNavComponent,
-    ActivityAddComponent
+    ActivityAddComponent,
+    ActivitiesListComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +72,8 @@ import { ActivityAddComponent } from './components/activities/activity-add/activ
     MatBottomSheetModule,
     ReactiveFormsModule,
     FlexModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

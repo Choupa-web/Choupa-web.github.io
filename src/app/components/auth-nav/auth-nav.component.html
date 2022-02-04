@@ -4,6 +4,9 @@
     <app-signup-button></app-signup-button>
   </ng-container>
   <ng-container *ngIf="auth.isAuthenticated$ | async">
+    <button mat-icon-button aria-label="Ajouter nouvelle activité" (click)="addNewActivity()">
+      <mat-icon>add_task</mat-icon>
+    </button>
     <button class="user-name" mat-button >{{ userName }}</button>
     <app-logout-button></app-logout-button>
   </ng-container>

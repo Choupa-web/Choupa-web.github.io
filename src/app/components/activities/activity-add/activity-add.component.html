@@ -1,0 +1,111 @@
+<h2>Nouvelle activité</h2>
+<form [formGroup]="addActivityFormGroup">
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="40px">
+  <div fxLayout="column">
+    <mat-form-field appearance="outline">
+      <mat-label>Durée de l'activité</mat-label>
+      <input matInput [formControl]="duration">
+      <mat-error *ngIf="duration.hasError('required')">La durée de votre activité est manquante</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Distance</mat-label>
+      <input matInput [formControl]="distance">
+      <mat-error *ngIf="distance.hasError('required')">La distance de votre activité est manquante</mat-error>
+    </mat-form-field>
+  </div>
+  <div fxLayout="column">
+    <mat-form-field appearance="outline">
+      <mat-label>Vitesse moyenne</mat-label>
+      <input matInput [formControl]="averageSpeed">
+      <mat-error *ngIf="averageSpeed.hasError('required')">La vitesse moyenne de votre activité est manquante</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Vitesse max</mat-label>
+      <input matInput [formControl]="maxSpeed">
+      <mat-error *ngIf="maxSpeed.hasError('required')">La vitesse maximum de votre activité est manquante</mat-error>
+    </mat-form-field>
+  </div>
+  <div fxLayout="column">
+    <mat-form-field appearance="outline">
+      <mat-label>FC moyenne</mat-label>
+      <input matInput [formControl]="averageFc">
+      <mat-error *ngIf="averageFc.hasError('required')">La fréquence cardiaque moyenne de votre activité est manquante</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>FC max</mat-label>
+      <input matInput [formControl]="maxFc">
+      <mat-error *ngIf="maxFc.hasError('required')">La fréquence cardiaque maximum de votre activité est manquante</mat-error>
+    </mat-form-field>
+  </div>
+  <div fxLayout="column">
+    <mat-form-field appearance="outline">
+      <mat-label>Aérobie</mat-label>
+      <input matInput [formControl]="aerobie">
+      <mat-error *ngIf="aerobie.hasError('required')">La valeur aérobie de votre activité est manquante</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Anaérobique</mat-label>
+      <input matInput [formControl]="anaerobique">
+      <mat-error *ngIf="anaerobique.hasError('required')">La valeur anaérobique de votre activité est manquante</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Exercice Load</mat-label>
+      <input matInput [formControl]="exerciceLoad">
+      <mat-error *ngIf="exerciceLoad.hasError('required')">La valeur exercice load de votre activité est manquante</mat-error>
+    </mat-form-field>
+  </div>
+</div>
+<div id="select-activity">
+  <mat-form-field appearance="outline">
+    <mat-label>Sélectionnez une activité</mat-label>
+    <mat-select [formControl]="selectedActivity" [errorStateMatcher]="matcher">
+      <mat-option *ngFor="let activity of activitiesList" value="activity.key">{{ activity.name }}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="selectedActivity.hasError('required')">Vous devez sélectionner une activité</mat-error>
+  </mat-form-field>
+</div>
+<ng-container id="home-trainer-activity">
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="40px">
+  <div fxLayout="column">
+    <mat-form-field appearance="outline">
+      <mat-label>Puissance moyenne</mat-label>
+      <input matInput [formControl]="averagePower">
+      <mat-error *ngIf="averagePower.hasError('required')">La puissance moyenne de votre activité est manquante</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Puissance max</mat-label>
+      <input matInput [formControl]="maxPower">
+      <mat-error *ngIf="maxPower.hasError('required')">La puissance max de votre activité est manquante</mat-error>
+    </mat-form-field>
+  </div>
+  <div fxLayout="column">
+    <mat-form-field appearance="outline">
+      <mat-label>FTP</mat-label>
+      <input matInput [formControl]="ftp">
+      <mat-error *ngIf="ftp.hasError('required')">La valeur FTP de votre activité est manquante</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Energie</mat-label>
+      <input matInput [formControl]="energy">
+      <mat-error *ngIf="energy.hasError('required')">La valeur energie de votre activité est manquante</mat-error>
+    </mat-form-field>
+  </div>
+  <div fxLayout="column">
+    <mat-form-field appearance="outline">
+      <mat-label>Cadence moyenne</mat-label>
+      <input matInput [formControl]="averageCadence">
+      <mat-error *ngIf="averageCadence.hasError('required')">La cadence moyenne de votre activité est manquante</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Cadence max</mat-label>
+      <input matInput [formControl]="maxCadence">
+      <mat-error *ngIf="maxCadence.hasError('required')">La cadence maximum de votre activité est manquante</mat-error>
+    </mat-form-field>
+  </div>
+</div>
+</ng-container>
+<div fxLayout="row" fxLayoutAlign="end">
+  <button mat-raised-button color="accent">Ajouter</button>
+</div>
+</form>
+
