@@ -34,6 +34,11 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { ActivityAddComponent } from './components/activities/activity-add/activity-add.component';
 import { ActivitiesListComponent } from './components/activities/activities-list/activities-list.component';
 import {MatSelectModule} from '@angular/material/select';
+import { ActivityCommonFormComponent } from './components/shared/activity-common-form/activity-common-form.component';
+import { ActivityHometrainerFormComponent } from './components/shared/activity-hometrainer-form/activity-hometrainer-form.component';
+import { ReplaceCommaByDotInCtrlDirective } from './directives/replace-comma-bydot-in-ctrl.directive';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -49,7 +54,10 @@ import {MatSelectModule} from '@angular/material/select';
     DashboardComponent,
     AuthNavComponent,
     ActivityAddComponent,
-    ActivitiesListComponent
+    ActivitiesListComponent,
+    ActivityCommonFormComponent,
+    ActivityHometrainerFormComponent,
+    ReplaceCommaByDotInCtrlDirective
   ],
   imports: [
     BrowserModule,
@@ -73,7 +81,9 @@ import {MatSelectModule} from '@angular/material/select';
     ReactiveFormsModule,
     FlexModule,
     MatSidenavModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

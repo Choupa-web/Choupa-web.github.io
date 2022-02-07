@@ -1,6 +1,7 @@
 import {Activity} from '../enums/activity.enum';
 
 export interface BaseActivityDatas {
+  activityDate: string;
   duration: number;
   distance: number;
   maxSpeed?: number;
@@ -13,12 +14,12 @@ export interface BaseActivityDatas {
 }
 
 export interface HometrainerActivityDatas extends BaseActivityDatas {
-  averagePower: number;
-  maxPower: number;
-  ftp: number;
-  energy: number;
-  averageCadence: number;
-  maxCadence: number;
+  averagePower?: number;
+  maxPower?: number;
+  ftp?: number;
+  energy?: number;
+  averageCadence?: number;
+  maxCadence?: number;
 }
 
 export class MyActivity {
