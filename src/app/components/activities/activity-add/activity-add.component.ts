@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {Activity, VELO_INSIDE, VTT} from '../../../enums/activity.enum';
@@ -20,24 +20,24 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './activity-add.component.html',
   styleUrls: ['./activity-add.component.scss']
 })
-export class ActivityAddComponent implements OnInit, AfterViewInit {
-  selectedActivity: FormControl = new FormControl('VELO_INSIDE', [Validators.required]);
-  activityDate: FormControl = new FormControl('', [Validators.required]);
-  duration: FormControl = new FormControl('', [Validators.required, Validators.pattern(numberWithNoDecimals)]);
-  distance: FormControl = new FormControl('', [Validators.required, Validators.pattern(twoDecimalsRegex)]);
-  averageSpeed: FormControl = new FormControl('', [Validators.required, Validators.pattern(twoDecimalsRegex)]);
-  maxSpeed: FormControl = new FormControl('', [Validators.required, Validators.pattern(twoDecimalsRegex)]);
-  averageFc: FormControl = new FormControl('', [Validators.required, Validators.pattern(numberWithNoDecimals)]);
-  maxFc: FormControl = new FormControl('', [Validators.required, Validators.pattern(numberWithNoDecimals)]);
-  aerobie: FormControl = new FormControl('', [Validators.required, Validators.pattern(twoDecimalsRegex)]);
-  anaerobique: FormControl = new FormControl('', [Validators.required, Validators.pattern(twoDecimalsRegex)]);
-  exerciceLoad: FormControl = new FormControl('', [Validators.required, Validators.pattern(numberWithNoDecimals)]);
-  averagePower: FormControl = new FormControl('', [Validators.pattern(numberWithNoDecimals)] );
-  maxPower: FormControl = new FormControl('', [Validators.pattern(numberWithNoDecimals)]);
-  ftp: FormControl = new FormControl('', [Validators.pattern(numberWithNoDecimals)]);
-  energy: FormControl = new FormControl('', [Validators.pattern(numberWithNoDecimals)]);
-  averageCadence: FormControl = new FormControl('', [Validators.pattern(numberWithNoDecimals)]);
-  maxCadence: FormControl = new FormControl('', [Validators.pattern(numberWithNoDecimals)]);
+export class ActivityAddComponent implements OnInit {
+  selectedActivity: FormControl;
+  activityDate: FormControl;
+  duration: FormControl;
+  distance: FormControl;
+  averageSpeed: FormControl;
+  maxSpeed: FormControl ;
+  averageFc: FormControl;
+  maxFc: FormControl;
+  aerobie: FormControl;
+  anaerobique: FormControl;
+  exerciceLoad: FormControl;
+  averagePower: FormControl;
+  maxPower: FormControl;
+  ftp: FormControl;
+  energy: FormControl;
+  averageCadence: FormControl;
+  maxCadence: FormControl;
   matcher: MyErrorStateMatcher = new MyErrorStateMatcher();
   addActivityFormGroup: FormGroup;
   activitiesList: MyActivity[] = [{key: 'VTT', name: Activity.VTT}, {key: 'VELO_INSIDE', name: Activity.VELO_INSIDE}];
@@ -46,7 +46,7 @@ export class ActivityAddComponent implements OnInit, AfterViewInit {
   VTT_ACT: string = VTT;
   userEmail: string;
 
-  constructor(private fb: FormBuilder, public auth: AuthService, private as: ActivitiesService) { }
+  constructor(private fb: FormBuilder, public auth: AuthService, private activityService: ActivitiesService) { }
 
   ngOnInit(): void {
     this.auth.user$.subscribe( (userInfo) => {
@@ -54,6 +54,23 @@ export class ActivityAddComponent implements OnInit, AfterViewInit {
         this.userEmail = userInfo.email;
       }
     });
+    this.selectedActivity = new FormControl('VELO_INSIDE', [Validators.required]);
+    this.activityDate = new FormControl('', [Validators.required]);
+    this.duration = new FormControl('', [Validators.required, Validators.pattern(numberWithNoDecimals)]);
+    this.distance = new FormControl('', [Validators.required, Validators.pattern(twoDecimalsRegex)]);
+    this.averageSpeed = new FormControl('', [Validators.required, Validators.pattern(twoDecimalsRegex)]);
+    this.maxSpeed = new FormControl('', [Validators.required, Validators.pattern(twoDecimalsRegex)]);
+    this.averageFc = new FormControl('', [Validators.required, Validators.pattern(numberWithNoDecimals)]);
+    this.maxFc = new FormControl('', [Validators.required, Validators.pattern(numberWithNoDecimals)]);
+    this.aerobie = new FormControl('', [Validators.required, Validators.pattern(twoDecimalsRegex)]);
+    this.anaerobique = new FormControl('', [Validators.required, Validators.pattern(twoDecimalsRegex)]);
+    this.exerciceLoad = new FormControl('', [Validators.required, Validators.pattern(numberWithNoDecimals)]);
+    this.averagePower = new FormControl('', [Validators.pattern(numberWithNoDecimals)] );
+    this.maxPower = new FormControl('', [Validators.pattern(numberWithNoDecimals)]);
+    this.ftp = new FormControl('', [Validators.pattern(numberWithNoDecimals)]);
+    this.energy = new FormControl('', [Validators.pattern(numberWithNoDecimals)]);
+    this.averageCadence = new FormControl('', [Validators.pattern(numberWithNoDecimals)]);
+    this.maxCadence = new FormControl('', [Validators.pattern(numberWithNoDecimals)]);
     this.addActivityFormGroup = this.fb.group([
       this.activityDate,
       this.duration,
@@ -73,15 +90,13 @@ export class ActivityAddComponent implements OnInit, AfterViewInit {
       this.averageCadence,
       this.maxCadence
     ]);
-  }
-
-  ngAfterViewInit(): void {
     this.selectedActivity.valueChanges.subscribe({
       next: (value) => {
         console.log('selectedActivity: ', value);
       }
     });
   }
+
 
   /**
    * Save new activity
@@ -110,7 +125,7 @@ export class ActivityAddComponent implements OnInit, AfterViewInit {
       };
       console.log('payload: ', payload);
     }
-    this.as.addHomeTrainerActivity(payload, this.userEmail).subscribe({
+    this.activityService.addHomeTrainerActivity(payload, this.userEmail).subscribe({
       next: (newActivity) => {
         console.log('newactivity: ', newActivity);
       }
