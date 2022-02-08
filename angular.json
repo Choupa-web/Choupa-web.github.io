@@ -118,7 +118,7 @@
   "defaultProject": "garminPerformances2",
   "schematics": {
     "@schematics/angular:component": {
-      "styleext": "scss"
+      "style": "scss"
     }
   }
 }

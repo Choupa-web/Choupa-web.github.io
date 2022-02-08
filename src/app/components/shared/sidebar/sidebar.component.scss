@@ -3,16 +3,25 @@
 }
 
 a {
-    text-decoration: none;
-    font-weight: 500 !important;
+  text-decoration: none;
+  font-weight: 500 !important;
+  color: white !important;
 }
 
+
 .active {
-    color: #673ab7;
+    color: #E9527E !important;
 }
 
 fa-icon {
   margin-right: 10px;
+}
+
+mat-list {
+  background-color: #3F51B5;
+  margin-left: 20px;
+  padding: 20px 10px;
+  border-radius: 8px;
 }
 
 

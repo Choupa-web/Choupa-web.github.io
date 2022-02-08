@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-auth-nav',
@@ -9,7 +10,7 @@ import { AuthService } from '@auth0/auth0-angular';
 export class AuthNavComponent implements OnInit {
 
   public userName: string;
-  constructor(public auth: AuthService) { }
+  constructor(public auth: AuthService, private route: Router) { }
 
   ngOnInit(): void {
     this.auth.user$.subscribe( (userInfo) => {
@@ -19,7 +20,9 @@ export class AuthNavComponent implements OnInit {
       }
     });
   }
-
+  addNewActivity(): void {
+    this.route.navigateByUrl('/activity/add');
+  }
 
 
 }

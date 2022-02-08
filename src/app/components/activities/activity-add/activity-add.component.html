@@ -1,0 +1,114 @@
+<h2>Nouvelle activité</h2>
+<form [formGroup]="addActivityFormGroup">
+<div id="common-info" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap="20px">
+  <div fxLayout="row wrap" fxLayoutGap="15px" fxLayout.md="column" fxLayout.sm="column" fxLayout.xs="column">
+    <mat-form-field appearance="outline">
+      <mat-label>Date de l'activité</mat-label>
+      <input matInput [matDatepicker]="picker" [formControl]="activityDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="duration.hasError('required')">Date de l'activité manquante</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Durée de l'activité (mn)</mat-label>
+      <input matInput [formControl]="duration">
+      <mat-error *ngIf="duration.hasError('required')">Durée de l'activité manquante</mat-error>
+      <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Distance</mat-label>
+      <input appReplaceCommaByDotInCtrl matInput [formControl]="distance">
+      <mat-error *ngIf="distance.hasError('required')">Distance de l'activité manquante</mat-error>
+      <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Vitesse moyenne</mat-label>
+      <input appReplaceCommaByDotInCtrl matInput [formControl]="averageSpeed">
+      <mat-error *ngIf="averageSpeed.hasError('required')">Vitesse moyenne de l'activité manquante</mat-error>
+      <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Vitesse max</mat-label>
+      <input appReplaceCommaByDotInCtrl matInput [formControl]="maxSpeed">
+      <mat-error *ngIf="maxSpeed.hasError('required')">Vitesse maximum de l'activité manquante</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>FC moyenne</mat-label>
+      <input matInput [formControl]="averageFc">
+      <mat-error *ngIf="averageFc.hasError('required')">Fréquence cardiaque moyenne de l'activité manquante</mat-error>
+      <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>FC max</mat-label>
+      <input matInput [formControl]="maxFc">
+      <mat-error *ngIf="maxFc.hasError('required')">Fréquence cardiaque maximum de l'activité manquante</mat-error>
+      <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Aérobie</mat-label>
+      <input appReplaceCommaByDotInCtrl matInput [formControl]="aerobie">
+      <mat-error *ngIf="aerobie.hasError('required')">Aérobie de l'activité manquante</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Exercice Load</mat-label>
+      <input matInput [formControl]="exerciceLoad">
+      <mat-error *ngIf="exerciceLoad.hasError('required')">Exercice load de l'activité manquant</mat-error>
+      <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Anaérobique</mat-label>
+      <input appReplaceCommaByDotInCtrl matInput [formControl]="anaerobique">
+      <mat-error *ngIf="anaerobique.hasError('required')">La valeur anaérobique de votre activité est manquante</mat-error>
+    </mat-form-field>
+  </div>
+</div>
+<div id="activity-info" fxLayout="row" fxLayoutGap="20px" fxLayout.md="column" fxLayout.sm="column" fxLayout.xs="column">
+    <div id="select-activity">
+      <mat-form-field appearance="outline">
+        <mat-label>Sélectionnez une activité</mat-label>
+        <mat-select [formControl]="selectedActivity" [errorStateMatcher]="matcher">
+          <mat-option *ngFor="let activity of activitiesList" [value]="activity.key">{{ activity.name }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="selectedActivity.hasError('required')">Activité manquante</mat-error>
+      </mat-form-field>
+    </div>
+    <ng-container id="home-trainer-activity" *ngIf="selectedActivity.value === HOME_TRAINER">
+      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="40px">
+          <mat-form-field appearance="outline">
+            <mat-label>Puissance moyenne</mat-label>
+            <input matInput [formControl]="averagePower">
+            <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
+          </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Puissance max</mat-label>
+          <input matInput [formControl]="maxPower">
+          <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
+        </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Cadence moyenne</mat-label>
+            <input matInput [formControl]="averageCadence">
+            <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Cadence max</mat-label>
+            <input matInput [formControl]="maxCadence">
+            <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>FTP</mat-label>
+            <input matInput [formControl]="ftp">
+            <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Energie</mat-label>
+            <input matInput [formControl]="energy">
+            <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
+          </mat-form-field>
+      </div>
+    </ng-container>
+</div>
+<div fxLayout="row" fxLayoutAlign="end">
+  <button mat-raised-button color="accent" (click)="addNewActivity(selectedActivity.value)" [disabled]="addActivityFormGroup.invalid">Ajouter</button>
+</div>
+</form>
+

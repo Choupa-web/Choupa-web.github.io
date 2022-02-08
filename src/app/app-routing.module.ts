@@ -3,11 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from '@auth0/auth0-angular';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {ActivityAddComponent} from './components/activities/activity-add/activity-add.component';
+import {ActivitiesListComponent} from './components/activities/activities-list/activities-list.component';
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'activities', component: ActivitiesListComponent},
+  { path: 'activity/add', component: ActivityAddComponent},
   { path: '', component: HomeComponent},
   { path: '**', component: HomeComponent }
 ];

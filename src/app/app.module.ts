@@ -31,6 +31,18 @@ import { AuthNavComponent } from './components/auth-nav/auth-nav.component';
 import { environment as env } from '../environments/environment';
 import {FlexModule} from '@angular/flex-layout';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { ActivityAddComponent } from './components/activities/activity-add/activity-add.component';
+import { ActivitiesListComponent } from './components/activities/activities-list/activities-list.component';
+import {MatSelectModule} from '@angular/material/select';
+import { ActivityCommonFormComponent } from './components/shared/activity-common-form/activity-common-form.component';
+import { ActivityHometrainerFormComponent } from './components/shared/activity-hometrainer-form/activity-hometrainer-form.component';
+import { ReplaceCommaByDotInCtrlDirective } from './directives/replace-comma-bydot-in-ctrl.directive';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
+import {registerLocaleData} from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+
+registerLocaleData(localeFr, 'fr');
 
 @NgModule({
   declarations: [
@@ -44,7 +56,12 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     LogoutButtonComponent,
     SignupButtonComponent,
     DashboardComponent,
-    AuthNavComponent
+    AuthNavComponent,
+    ActivityAddComponent,
+    ActivitiesListComponent,
+    ActivityCommonFormComponent,
+    ActivityHometrainerFormComponent,
+    ReplaceCommaByDotInCtrlDirective
   ],
   imports: [
     BrowserModule,
@@ -67,9 +84,12 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatBottomSheetModule,
     ReactiveFormsModule,
     FlexModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
