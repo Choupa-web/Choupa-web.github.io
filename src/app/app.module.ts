@@ -42,6 +42,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { AlertComponent } from './components/shared/alert/alert.component';
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -62,13 +64,14 @@ registerLocaleData(localeFr, 'fr');
     ActivitiesListComponent,
     ActivityCommonFormComponent,
     ActivityHometrainerFormComponent,
-    ReplaceCommaByDotInCtrlDirective
+    ReplaceCommaByDotInCtrlDirective,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AuthModule.forRoot({...env.auth }),
+    AuthModule.forRoot({ ...env.auth }),
     MatButtonModule,
     MatIconModule,
     MatListModule,
@@ -89,9 +92,20 @@ registerLocaleData(localeFr, 'fr');
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSnackBarModule,
   ],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+      },
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
