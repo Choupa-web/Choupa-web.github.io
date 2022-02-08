@@ -1,6 +1,6 @@
 
 
-<app-header [menuOpened]="menuOpened" (openCloseMenu)="openCloseMenu($event)"></app-header>
+<app-header [menuOpened]="menuOpened" (openCloseMenu)="openCloseMenu()"></app-header>
 <mat-sidenav-container class="container">
   <mat-sidenav class="left-sidenav" #sidenav mode="side" opened="opened">
     <app-sidebar></app-sidebar>
@@ -10,6 +10,7 @@
   </mat-sidenav>
   <mat-sidenav-content class="main" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px">
     <div fxLayout="row" fxLayoutAlign="end center">
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
       <button mat-icon-button class="btnCollapseMenu" (click)="sidenav2.toggle()" color="primary" aria-label="Menu">
         <mat-icon>menu</mat-icon>
       </button>

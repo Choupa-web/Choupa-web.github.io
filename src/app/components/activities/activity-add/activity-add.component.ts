@@ -12,6 +12,7 @@ import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
 } from '@angular/material-moment-adapter';
 import 'moment/locale/fr';
+import {GeneralService} from '../../../services/general.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -68,7 +69,8 @@ export class ActivityAddComponent implements OnInit {
     private fb: FormBuilder,
     public auth: AuthService,
     private activityService: ActivitiesService,
-    private adapter: DateAdapter<any>
+    private adapter: DateAdapter<any>,
+    private generalService: GeneralService
   ) {}
 
   ngOnInit(): void {
@@ -109,7 +111,7 @@ export class ActivityAddComponent implements OnInit {
     this.averageSpeed = new FormControl('', [
       Validators.required,
       Validators.pattern(twoDecimalsRegex),
-      Validators.max(20)
+      Validators.max(40)
     ]);
     this.maxSpeed = new FormControl('', [
       Validators.required,
@@ -185,6 +187,8 @@ export class ActivityAddComponent implements OnInit {
    */
   addNewActivity = (activityName: string): void => {
     const isActivityValid = this.checkActivityValidity();
+    console.log('isActivityValid: ', isActivityValid);
+    console.log('activity name: ', activityName);
     if (isActivityValid) {
       let payload: HometrainerActivityDatas;
       if (activityName === this.HOME_TRAINER) {
@@ -208,21 +212,23 @@ export class ActivityAddComponent implements OnInit {
         };
         console.log('payload: ', payload);
       }
+      this.generalService.sendLoadingActivityChangeInformation(true);
       this.activityService
         .addHomeTrainerActivity(payload, this.userEmail)
         .subscribe({
           next: (newActivity) => {
             console.log('newactivity: ', newActivity);
+            this.generalService.sendLoadingActivityChangeInformation(false);
           },
         });
     }
   }
 
   checkActivityValidity = (): boolean => {
-    const speedCheck = this.averageSpeed.value < this.maxSpeed.value;
-    const freqCheck = this.averageFc.value < this.maxFc.value;
-    const cadenceCheck = this.averageCadence.value < this.maxCadence.value;
-    const powerCheck = this.averagePower.value < this.maxPower.value;
+    const speedCheck = Number(this.averageSpeed.value) < Number(this.maxSpeed.value);
+    const freqCheck = Number(this.averageFc.value) < Number(this.maxFc.value);
+    const cadenceCheck = Number(this.averageCadence.value) < Number(this.maxCadence.value);
+    const powerCheck = Number(this.averagePower.value) < Number(this.maxPower.value);
     return (speedCheck && freqCheck && cadenceCheck && powerCheck);
   }
 }

@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
+import {GeneralService} from './services/general.service';
 
 @Component({
   selector: 'app-root',
@@ -9,18 +10,29 @@ import {MatSidenav} from '@angular/material/sidenav';
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'garminPerformances2';
   menuOpened: boolean;
+  loading: boolean;
 
   @ViewChild('sidenav') sidenav: MatSidenav;
 
+  constructor(private generalService: GeneralService) {
+    this.generalService.sendLoadingActivityChangeInformation(false);
+  }
+
   ngOnInit(): void {
     this.menuOpened = false;
+    this.generalService.activityLoadingStatuschange.subscribe({
+      next: (loadingStatus) => {
+        this.loading = loadingStatus;
+        console.log('progress bar update');
+      }
+    });
   }
 
   ngAfterViewInit(): void {
     this.sidenav.toggle(false);
   }
 
-  openCloseMenu = ($event): void => {
+  openCloseMenu = (): void => {
     this.menuOpened = !this.menuOpened;
     this.sidenav.toggle(this.menuOpened);
   }
