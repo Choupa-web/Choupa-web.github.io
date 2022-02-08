@@ -38,7 +38,11 @@ import { ActivityCommonFormComponent } from './components/shared/activity-common
 import { ActivityHometrainerFormComponent } from './components/shared/activity-hometrainer-form/activity-hometrainer-form.component';
 import { ReplaceCommaByDotInCtrlDirective } from './directives/replace-comma-bydot-in-ctrl.directive';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
+import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
+import {registerLocaleData} from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+
+registerLocaleData(localeFr, 'fr');
 
 @NgModule({
   declarations: [
@@ -85,7 +89,7 @@ import {MatNativeDateModule} from '@angular/material/core';
     MatDatepickerModule,
     MatNativeDateModule
   ],
-  providers: [],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
