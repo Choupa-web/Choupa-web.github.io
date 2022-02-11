@@ -1,4 +1,4 @@
-import {Activity} from '../enums/activity.enum';
+import {ActivityList} from '../enums/activity.enum';
 
 export interface BaseActivityDatas {
   activityDate: string;
@@ -24,5 +24,5 @@ export interface HometrainerActivityDatas extends BaseActivityDatas {
 
 export class MyActivity {
   key: string;
-  name: Activity;
+  name: ActivityList;
 }
