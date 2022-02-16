@@ -23,27 +23,31 @@ import { MatCardModule} from '@angular/material/card';
 import { MatRadioModule} from '@angular/material/radio';
 import { MatInputModule} from '@angular/material/input';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { DragDropModule} from '@angular/cdk/drag-drop';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { AuthNavComponent } from './components/auth-nav/auth-nav.component';
 import { environment as env } from '../environments/environment';
-import {FlexModule} from '@angular/flex-layout';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { FlexModule } from '@angular/flex-layout';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { ActivityAddComponent } from './components/activities/activity-add/activity-add.component';
 import { ActivitiesListComponent } from './components/activities/activities-list/activities-list.component';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { ActivityCommonFormComponent } from './components/shared/activity-common-form/activity-common-form.component';
 import { ActivityHometrainerFormComponent } from './components/shared/activity-hometrainer-form/activity-hometrainer-form.component';
 import { ReplaceCommaByDotInCtrlDirective } from './directives/replace-comma-bydot-in-ctrl.directive';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
-import {registerLocaleData} from '@angular/common';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { AlertComponent } from './components/shared/alert/alert.component';
-import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import { ActivityEditComponent } from './components/activities/activity-edit/activity-edit.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -66,6 +70,7 @@ registerLocaleData(localeFr, 'fr');
     ActivityHometrainerFormComponent,
     ReplaceCommaByDotInCtrlDirective,
     AlertComponent,
+    ActivityEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,6 +99,10 @@ registerLocaleData(localeFr, 'fr');
     MatNativeDateModule,
     MatProgressBarModule,
     MatSnackBarModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },

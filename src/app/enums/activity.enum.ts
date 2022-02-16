@@ -1,11 +1,19 @@
 /**
- * Liste des activités possible
+ * Liste des types d'activités possible
  */
-export enum Activity {
+export enum ActivitiesType {
   VTT = 'VTT',
-  VELO_INSIDE = 'Vélo intérieur',
+  VELO_INSIDE = 'VELO_INSIDE',
+  RAMEUR = 'RAMEUR'
+}
+
+/**
+ * Nom des activités
+ */
+export enum ActivitiesLabel {
+  VTT = 'Vtt',
+  VELO_INSIDE = 'Vélo home trainer',
   RAMEUR = 'Rameur'
 }
 
-export const VELO_INSIDE = 'VELO_INSIDE';
-export const VTT = 'VTT';
+

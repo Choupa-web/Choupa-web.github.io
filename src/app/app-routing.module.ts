@@ -5,6 +5,7 @@ import { AuthGuard } from '@auth0/auth0-angular';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {ActivityAddComponent} from './components/activities/activity-add/activity-add.component';
 import {ActivitiesListComponent} from './components/activities/activities-list/activities-list.component';
+import {ActivityEditComponent} from './components/activities/activity-edit/activity-edit.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'activities', component: ActivitiesListComponent},
   { path: 'activity/add', component: ActivityAddComponent},
+  { path: 'activity/edit/id', component: ActivityEditComponent},
   { path: '', component: HomeComponent},
   { path: '**', component: HomeComponent }
 ];
