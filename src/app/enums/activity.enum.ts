@@ -1,31 +1,19 @@
 /**
- * Liste des activités possible
+ * Liste des types d'activités possible
  */
-export enum ActivityList {
+export enum ActivitiesType {
   VTT = 'VTT',
-  VELO_INSIDE = 'Vélo intérieur',
+  VELO_INSIDE = 'VELO_INSIDE',
+  RAMEUR = 'RAMEUR'
+}
+
+/**
+ * Nom des activités
+ */
+export enum ActivitiesLabel {
+  VTT = 'Vtt',
+  VELO_INSIDE = 'Vélo home trainer',
   RAMEUR = 'Rameur'
 }
 
-export const VELO_INSIDE = 'VELO_INSIDE';
-export const VTT = ActivityList.VTT;
 
-export interface Activity {
-  activityName: string;
-  activityDate: string;
-  aerobie: number;
-  anaerobique: number;
-  averageCadence?: number;
-  averageFc: number;
-  averagePower?: number;
-  averageSpeed: number;
-  distance: number;
-  duration: number;
-  energy: number;
-  exerciceLoad: number;
-  ftp?: number;
-  maxCadence?: number;
-  maxFc: number;
-  maxPower?: number;
-  maxSpeed: number;
-}

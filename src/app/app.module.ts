@@ -46,6 +46,8 @@ import { AlertComponent } from './components/shared/alert/alert.component';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import { ActivityEditComponent } from './components/activities/activity-edit/activity-edit.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -68,6 +70,7 @@ registerLocaleData(localeFr, 'fr');
     ActivityHometrainerFormComponent,
     ReplaceCommaByDotInCtrlDirective,
     AlertComponent,
+    ActivityEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -97,7 +100,9 @@ registerLocaleData(localeFr, 'fr');
     MatProgressBarModule,
     MatSnackBarModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },

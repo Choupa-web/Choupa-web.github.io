@@ -4,13 +4,24 @@
                showFirstLastButtons
                aria-label="Select page of periodic elements">
 </mat-paginator>
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8" aria-label="Liste des activités" aria-describedby="Choupa">
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button (click)="deleteActivity(element.id)" aria-label="Supprimer une activité">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button mat-icon-button (click)="editActivity(element.id)" aria-label="Modifier une activité">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </td>
+  </ng-container>
   <ng-container matColumnDef="activityName">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Activité </th>
     <td mat-cell *matCellDef="let element"> {{element.activityName}} </td>
   </ng-container>
   <ng-container matColumnDef="activityDate">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+    <th mat-header-cell *matHeaderCellDef> Date </th>
     <td mat-cell *matCellDef="let element"> {{element.activityDate}} </td>
   </ng-container>
   <ng-container matColumnDef="duration">

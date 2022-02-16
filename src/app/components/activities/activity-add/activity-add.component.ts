@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import { ErrorStateMatcher, DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { ActivityList, VELO_INSIDE, VTT} from '../../../enums/activity.enum';
+import { ActivitiesType, ActivitiesLabel} from '../../../enums/activity.enum';
 import { HometrainerActivityDatas, MyActivity} from '../../../models/activities.model';
 import { AuthService} from '@auth0/auth0-angular';
 import { numberWithNoDecimals, twoDecimalsRegex} from '../../../utils/Regex.utils';
@@ -57,12 +57,12 @@ export class ActivityAddComponent implements OnInit {
   matcher: MyErrorStateMatcher = new MyErrorStateMatcher();
   addActivityFormGroup: FormGroup;
   activitiesList: MyActivity[] = [
-    { key: 'VTT', name: ActivityList.VTT },
-    { key: 'VELO_INSIDE', name: ActivityList.VELO_INSIDE },
+    { key: ActivitiesType.VTT, name: ActivitiesLabel.VTT },
+    { key: ActivitiesType.VELO_INSIDE, name: ActivitiesLabel.VELO_INSIDE },
   ];
 
-  HOME_TRAINER: string = VELO_INSIDE;
-  VTT_ACT: string = VTT;
+  HOME_TRAINER: string = ActivitiesType.VELO_INSIDE;
+  VTT: string = ActivitiesType.VTT;
   userEmail: string;
 
   constructor(
@@ -191,7 +191,9 @@ export class ActivityAddComponent implements OnInit {
       let payload: HometrainerActivityDatas;
       if (activityName === this.HOME_TRAINER) {
         payload = {
+          userEmail: this.userEmail,
           activityDate: this.activityDate.value.format('DD/MM/yyyy'),
+          activityName,
           aerobie: this.aerobie.value,
           anaerobique: this.anaerobique.value,
           averageCadence: this.averageCadence.value,

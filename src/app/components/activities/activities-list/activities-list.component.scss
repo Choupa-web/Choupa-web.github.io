@@ -4,7 +4,13 @@ table {
 .mat-column-activityDate {
   font-weight: bold;
 }
-.mat-row .mat-cell {
+a {
+  color: #3F51B5;
+}
+.mat-column-actions {
+  width: 15%;
+}
+/*.mat-row .mat-cell {
   border-bottom: 1px solid transparent;
   border-top: 1px solid transparent;
   cursor: pointer;
@@ -12,4 +18,4 @@ table {
 
 .mat-row:hover .mat-cell {
   border-color: currentColor;
-}
+}*/

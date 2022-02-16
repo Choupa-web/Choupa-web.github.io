@@ -50,15 +50,15 @@
       <mat-error *ngIf="aerobie.hasError('required')">Aérobie de l'activité manquante</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
+      <mat-label>Anaérobique</mat-label>
+      <input appReplaceCommaByDotInCtrl matInput [formControl]="anaerobique">
+      <mat-error *ngIf="anaerobique.hasError('required')">La valeur anaérobique de votre activité est manquante</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Exercice Load</mat-label>
       <input matInput [formControl]="exerciceLoad">
       <mat-error *ngIf="exerciceLoad.hasError('required')">Exercice load de l'activité manquant</mat-error>
       <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Anaérobique</mat-label>
-      <input appReplaceCommaByDotInCtrl matInput [formControl]="anaerobique">
-      <mat-error *ngIf="anaerobique.hasError('required')">La valeur anaérobique de votre activité est manquante</mat-error>
     </mat-form-field>
   </div>
 </div>
