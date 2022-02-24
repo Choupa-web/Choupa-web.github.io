@@ -82,33 +82,28 @@
         <mat-form-field appearance="outline">
           <mat-label>Puissance max</mat-label>
           <input matInput [formControl]="maxPower">
-          <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
+          <mat-error *ngIf="maxPower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
         </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Cadence moyenne</mat-label>
             <input matInput [formControl]="averageCadence">
-            <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
+            <mat-error *ngIf="averageCadence.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Cadence max</mat-label>
             <input matInput [formControl]="maxCadence">
-            <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
+            <mat-error *ngIf="maxCadence.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
-            <mat-label>FTP</mat-label>
-            <input matInput [formControl]="ftp">
-            <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Energie</mat-label>
-            <input matInput [formControl]="energy">
+            <mat-label>Puissance moyenne maximum</mat-label>
+            <input matInput [formControl]="maxAveragePower">
             <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
           </mat-form-field>
       </div>
     </ng-container>
 </div>
 <div fxLayout="row" fxLayoutAlign="end">
-  <button mat-raised-button color="accent" (click)="addNewActivity(selectedActivity.value)" [disabled]="addActivityFormGroup.invalid">Ajouter</button>
+  <button mat-raised-button color="accent" (click)="addNewActivity()" [disabled]="addActivityFormGroup.invalid">Ajouter</button>
 </div>
 </form>
 

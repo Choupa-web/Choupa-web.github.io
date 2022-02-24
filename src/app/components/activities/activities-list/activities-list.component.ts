@@ -1,5 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild, Inject} from '@angular/core';
-import {ActivitiesLabel, ActivitiesType} from '../../../enums/activity.enum';
+import { Component, OnInit, ViewChild, Inject} from '@angular/core';
 import {ActivitiesService} from '../../../services/activities.service';
 import {GeneralService} from '../../../services/general.service';
 import {MatPaginator} from '@angular/material/paginator';
@@ -16,7 +15,7 @@ import {ActivityEditComponent} from '../activity-edit/activity-edit.component';
   templateUrl: './activities-list.component.html',
   styleUrls: ['./activities-list.component.scss'],
 })
-export class ActivitiesListComponent implements OnInit, AfterViewInit {
+export class ActivitiesListComponent implements OnInit {
   userEmail: string;
   myActivities: Activity[] = [];
   dataSource: MatTableDataSource<Activity>;
@@ -46,228 +45,19 @@ export class ActivitiesListComponent implements OnInit, AfterViewInit {
     this.auth.user$.subscribe((userInfo) => {
       if (userInfo) {
         this.userEmail = userInfo.email;
-        this.myActivities = [
-          {
-            id: 1,
-            userMail: this.userEmail,
-            activityName: ActivitiesType.VELO_INSIDE,
-            activityDate: '07/02/2022',
-            aerobie: 3.4,
-            anaerobique: 1.0,
-            averageCadence: 60,
-            averageFc: 130,
-            averagePower: 100,
-            averageSpeed: 15,
-            distance: 5,
-            duration: 30,
-            energy: 50,
-            exerciceLoad: 20,
-            ftp: 117,
-            maxCadence: 90,
-            maxFc: 149,
-            maxPower: 210,
-            maxSpeed: 31,
-          },
-          {
-            id: 2,
-            userMail: this.userEmail,
-            activityName: ActivitiesType.VTT,
-            activityDate: '04/02/2022',
-            aerobie: 3.4,
-            anaerobique: 1.0,
-            averageCadence: null,
-            averageFc: 130,
-            averagePower: null,
-            averageSpeed: 15,
-            distance: 5,
-            duration: 30,
-            energy: 50,
-            exerciceLoad: 20,
-            ftp: null,
-            maxCadence: null,
-            maxFc: 149,
-            maxPower: null,
-            maxSpeed: 20,
-          },
-          {
-            id: 3,
-            userMail: this.userEmail,
-            activityName: ActivitiesType.VELO_INSIDE,
-            activityDate: '07/02/2022',
-            aerobie: 3.4,
-            anaerobique: 1.0,
-            averageCadence: 60,
-            averageFc: 130,
-            averagePower: 100,
-            averageSpeed: 15,
-            distance: 5,
-            duration: 30,
-            energy: 50,
-            exerciceLoad: 20,
-            ftp: 117,
-            maxCadence: 90,
-            maxFc: 149,
-            maxPower: 210,
-            maxSpeed: 31,
-          },
-          {
-            id: 4,
-            userMail: this.userEmail,
-            activityName: ActivitiesType.VTT,
-            activityDate: '04/02/2022',
-            aerobie: 3.4,
-            anaerobique: 1.0,
-            averageCadence: null,
-            averageFc: 130,
-            averagePower: null,
-            averageSpeed: 15,
-            distance: 5,
-            duration: 30,
-            energy: 50,
-            exerciceLoad: 20,
-            ftp: null,
-            maxCadence: null,
-            maxFc: 149,
-            maxPower: null,
-            maxSpeed: 20,
-          },
-          {
-            id: 5,
-            userMail: this.userEmail,
-            activityName: ActivitiesType.VELO_INSIDE,
-            activityDate: '07/02/2022',
-            aerobie: 3.4,
-            anaerobique: 1.0,
-            averageCadence: 60,
-            averageFc: 130,
-            averagePower: 100,
-            averageSpeed: 15,
-            distance: 5,
-            duration: 30,
-            energy: 50,
-            exerciceLoad: 20,
-            ftp: 117,
-            maxCadence: 90,
-            maxFc: 149,
-            maxPower: 210,
-            maxSpeed: 31,
-          },
-          {
-            id: 6,
-            userMail: this.userEmail,
-            activityName: ActivitiesType.VTT,
-            activityDate: '04/02/2022',
-            aerobie: 3.4,
-            anaerobique: 1.0,
-            averageCadence: null,
-            averageFc: 130,
-            averagePower: null,
-            averageSpeed: 15,
-            distance: 5,
-            duration: 30,
-            energy: 50,
-            exerciceLoad: 20,
-            ftp: null,
-            maxCadence: null,
-            maxFc: 149,
-            maxPower: null,
-            maxSpeed: 20,
-          },
-          {
-            id: 7,
-            userMail: this.userEmail,
-            activityName: ActivitiesType.VELO_INSIDE,
-            activityDate: '07/03/2021',
-            aerobie: 3.4,
-            anaerobique: 1.0,
-            averageCadence: 60,
-            averageFc: 130,
-            averagePower: 100,
-            averageSpeed: 15,
-            distance: 5,
-            duration: 30,
-            energy: 50,
-            exerciceLoad: 20,
-            ftp: 117,
-            maxCadence: 90,
-            maxFc: 149,
-            maxPower: 210,
-            maxSpeed: 31,
-          },
-          {
-            id: 8,
-            userMail: this.userEmail,
-            activityName: ActivitiesType.VTT,
-            activityDate: '09/02/2022',
-            aerobie: 3.4,
-            anaerobique: 1.0,
-            averageCadence: null,
-            averageFc: 130,
-            averagePower: null,
-            averageSpeed: 15,
-            distance: 5,
-            duration: 30,
-            energy: 50,
-            exerciceLoad: 20,
-            ftp: null,
-            maxCadence: null,
-            maxFc: 149,
-            maxPower: null,
-            maxSpeed: 20,
-          },
-          {
-            id: 9,
-            userMail: this.userEmail,
-            activityName: ActivitiesType.VELO_INSIDE,
-            activityDate: '07/02/2022',
-            aerobie: 3.4,
-            anaerobique: 1.0,
-            averageCadence: 60,
-            averageFc: 130,
-            averagePower: 100,
-            averageSpeed: 15,
-            distance: 5,
-            duration: 30,
-            energy: 50,
-            exerciceLoad: 20,
-            ftp: 117,
-            maxCadence: 90,
-            maxFc: 149,
-            maxPower: 210,
-            maxSpeed: 31,
-          },
-          {
-            id: 10,
-            userMail: this.userEmail,
-            activityName: ActivitiesType.VTT,
-            activityDate: '04/03/2021',
-            aerobie: 3.4,
-            anaerobique: 1.0,
-            averageCadence: null,
-            averageFc: 130,
-            averagePower: null,
-            averageSpeed: 15,
-            distance: 5,
-            duration: 30,
-            energy: 50,
-            exerciceLoad: 20,
-            ftp: null,
-            maxCadence: null,
-            maxFc: 149,
-            maxPower: null,
-            maxSpeed: 20,
-          },
-        ];
+        this.activitiesService.getAllActivities().subscribe({
+          next: (value) => {
+            this.dataSource = value.map(item => Object.assign({id: item.payload.doc.id}, item.payload.doc.data()));
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          }
+        });
         this.dataSource = new MatTableDataSource<Activity>(this.myActivities);
         this.generalService.sendLoadingActivityChangeInformation(false);
       }
     });
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
 
   /**
    * Suppression d'une activité
@@ -291,7 +81,7 @@ export class ActivitiesListComponent implements OnInit, AfterViewInit {
    * Modification d'une activité
    * @param id - id de l'activité à modifier
    */
-  editActivity = (id: number): void => {
+  editActivity = (id: string): void => {
     const activityToEdit = this.dataSource.data.filter(element => element.id === id);
     this.dialog.open(ActivityEditComponent, {
       data: activityToEdit[0]

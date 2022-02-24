@@ -28,7 +28,7 @@ import { DragDropModule} from '@angular/cdk/drag-drop';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { AuthNavComponent } from './components/auth-nav/auth-nav.component';
-import { environment as env } from '../environments/environment';
+import {environment, environment as env} from '../environments/environment';
 import { FlexModule } from '@angular/flex-layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ActivityAddComponent } from './components/activities/activity-add/activity-add.component';
@@ -48,6 +48,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { ActivityEditComponent } from './components/activities/activity-edit/activity-edit.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {AngularFireModule} from '@angular/fire/compat';
+import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+
 
 registerLocaleData(localeFr, 'fr');
 
@@ -102,7 +105,9 @@ registerLocaleData(localeFr, 'fr');
     MatPaginatorModule,
     MatSortModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
