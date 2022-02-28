@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import { ErrorStateMatcher, DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { ActivitiesType, ActivitiesNameLabel} from '../../../enums/activity.enum';
-import {BaseActivityDatas, HometrainerActivityDatas, MyActivity} from '../../../models/activities.model';
+import {Activity, MyActivity} from '../../../models/activities.model';
 import { AuthService} from '@auth0/auth0-angular';
 import { numberWithNoDecimals, twoDecimalsRegex} from '../../../utils/Regex.utils';
 import { ActivitiesService} from '../../../services/activities.service';
@@ -65,7 +65,6 @@ export class ActivityAddComponent implements OnInit {
   HOME_TRAINER: string = ActivitiesType.VELO_INSIDE;
   VTT: string = ActivitiesType.VTT;
   userEmail: string;
-  hometrainerPayload: HometrainerActivityDatas;
 
   constructor(
     private fb: FormBuilder,
@@ -192,52 +191,35 @@ export class ActivityAddComponent implements OnInit {
    */
   addNewActivity = (): void => {
     const isActivityValid = this.checkActivityValidity();
-    const baseActivityDate = this.convertActivityDate(this.activityDate.value);
+    const convertedActivityDate = this.convertActivityDate(this.activityDate.value);
     if (isActivityValid) {
-      const basePayload: BaseActivityDatas = {
-        activityDate: baseActivityDate,
-        activityName: this.selectedActivity.value,
-        aerobie: this.aerobie.value,
-        anaerobique: this.anaerobique.value,
-        averageFc: this.averageFc.value,
-        averageSpeed: this.averageSpeed.value,
-        distance: this.distance.value,
-        duration: this.duration.value,
-        exerciceLoad: this.exerciceLoad.value,
-        maxFc: this.maxFc.value,
-        userEmail: this.userEmail
+      const Payload: Activity = {
+        userEmail : this.userEmail,
+        activityDate : convertedActivityDate,
+        activityName : this.selectedActivity.value,
+        duration : this.duration.value,
+        distance : this.distance.value,
+        maxSpeed : this.maxSpeed.value,
+        averageSpeed : this.averageSpeed.value,
+        averageFc : this.averageFc.value,
+        maxFc : this.maxFc.value,
+        aerobie : this.aerobie.value,
+        anaerobique : this.anaerobique.value,
+        exerciceLoad : this.exerciceLoad.value,
+        hometrainerData : {
+          averagePower : this.averagePower.value,
+          maxPower : this.maxPower.value,
+          averageCadence : this.averageCadence.value,
+          maxCadence : this.maxCadence.value,
+          maxAveragePower: this.maxAveragePower.value,
+        },
       };
       this.generalService.sendLoadingActivityChangeInformation(true);
-      this.activityService.addBaseActivity(basePayload).then(
-        (value) => {
-          console.log('value: ', value.id);
-          if (value.id) {
-            switch (this.selectedActivity.value){
-              case ActivitiesType.VELO_INSIDE:
-                this.hometrainerPayload =  {
-                  userEmail: this.userEmail,
-                  averageCadence: this.averageCadence.value,
-                  averagePower: this.averagePower.value,
-                  maxAveragePower: this.maxAveragePower.value,
-                  idActivity: value.id,
-                  maxCadence: this.maxCadence.value,
-                  maxPower: this.maxPower.value
-                };
-                this.activityService.addHomeTrainerActivity(this.hometrainerPayload).then(
-                  (response) => {
-                    if (response.id) {
-                      this.generalService.sendLoadingActivityChangeInformation(false);
-                      this.notificationService.success('Activité ajoutée avec succès');
-                      this.addActivityFormGroup.reset();
-                      this.addActivityFormGroup.clearValidators();
-                    }
-                  }
-                );
-                break;
-              case ActivitiesType.VTT: break;
-              case ActivitiesType.RAMEUR: break;
-              default: break;
-            }
+      this.activityService.addActivity(Payload).then(
+        (newActivity) => {
+          if (newActivity.id) {
+            this.generalService.sendLoadingActivityChangeInformation(false);
+            this.notificationService.success('Nouvelle activité ajoutée');
           }
         }
       );
@@ -249,7 +231,7 @@ export class ActivityAddComponent implements OnInit {
     const freqCheck = Number(this.averageFc.value) < Number(this.maxFc.value);
     const cadenceCheck = Number(this.averageCadence.value) < Number(this.maxCadence.value);
     const powerCheck = Number(this.averagePower.value) < Number(this.maxPower.value);
-    return (speedCheck && freqCheck);
+    return (speedCheck && freqCheck && cadenceCheck && powerCheck);
   }
 
   convertActivityDate = (dateToBeConverted: Moment): string => {
