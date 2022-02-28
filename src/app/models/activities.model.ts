@@ -1,4 +1,4 @@
-import {ActivitiesNameLabel, ActivitiesType} from '../enums/activity.enum';
+import {ActivitiesNameLabel} from '../enums/activity.enum';
 
 export interface BaseActivityDatas {
   id?: string;

@@ -17,7 +17,6 @@ import {ActivityEditComponent} from '../activity-edit/activity-edit.component';
 })
 export class ActivitiesListComponent implements OnInit {
   userEmail: string;
-  myActivities: Activity[] = [];
   dataSource: MatTableDataSource<Activity>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -46,16 +45,21 @@ export class ActivitiesListComponent implements OnInit {
       if (userInfo) {
         this.userEmail = userInfo.email;
         this.activitiesService.getAllActivities().subscribe({
-          next: (value) => {
-            this.dataSource = value.map(item => Object.assign({id: item.payload.doc.id}, item.payload.doc.data()));
+          next: (response) => {
+            this.dataSource = response.map(item => Object.assign({id: item.payload.doc.id}, item.payload.doc.data()));
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
+            console.log('myActivities: ', this.dataSource);
+            this.generalService.sendLoadingActivityChangeInformation(false);
           }
         });
-        this.dataSource = new MatTableDataSource<Activity>(this.myActivities);
-        this.generalService.sendLoadingActivityChangeInformation(false);
       }
     });
+    this.activitiesService.getActivity('BpxQrc1wda1vVyLP561z').subscribe({
+      next: (response) => {
+        console.log('reponse: ', response);
+      }
+    })
   }
 
 
@@ -63,17 +67,17 @@ export class ActivitiesListComponent implements OnInit {
    * Suppression d'une activité
    * @param id - id de l'activité à supprimer
    */
-  deleteActivity = (id: number): void => {
+  deleteActivity = (id: string): void => {
     this.generalService.sendLoadingActivityChangeInformation(true);
-    this.activitiesService.deleteActivity(id).subscribe({
-      next: (result) => {
-        if (result) {
-          this.generalService.sendLoadingActivityChangeInformation(false);
-          this.notificationService.success(
-            `L\'activité ${id} a été effacée avec succes !`
-          );
-        }
-      },
+    this.activitiesService.deleteBaseActivity(id).then(() =>
+      {
+        this.generalService.sendLoadingActivityChangeInformation(false);
+        this.notificationService.success(
+          `L\'activité ${id} a été effacée avec succes !`
+        );
+      }).catch((err) => {
+        this.generalService.sendLoadingActivityChangeInformation(false);
+        this.notificationService.failure(err);
     });
   }
 
