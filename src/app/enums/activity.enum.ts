@@ -36,10 +36,7 @@ export enum ActivityFieldsLabel {
   maxAveragePower = 'Puissance moy max(20mn)'
 }
 export enum FirebaseCollections {
-  BASE_ACTIVITY = 'activities',
-  HOMETRAINER_ACTIVITY = 'hometrainer-activities',
-  VTT_ACTIVITY = ' vtt-activities',
-  ROWER_ACTIVITY = 'rower-activities'
+  ACTIVITY = 'activities',
 }
 
 

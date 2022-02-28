@@ -4,11 +4,11 @@ import {GeneralService} from '../../../services/general.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
-import {Activity, HometrainerActivityDatas} from '../../../models/activities.model';
 import {AuthService} from '@auth0/auth0-angular';
 import {NotificationService} from '../../../services/notification.service';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {ActivityEditComponent} from '../activity-edit/activity-edit.component';
+import {Activity} from '../../../models/activities.model';
 
 @Component({
   selector: 'app-activities-list',
@@ -55,11 +55,6 @@ export class ActivitiesListComponent implements OnInit {
         });
       }
     });
-    this.activitiesService.getActivity('BpxQrc1wda1vVyLP561z').subscribe({
-      next: (response) => {
-        console.log('reponse: ', response);
-      }
-    })
   }
 
 
@@ -69,7 +64,7 @@ export class ActivitiesListComponent implements OnInit {
    */
   deleteActivity = (id: string): void => {
     this.generalService.sendLoadingActivityChangeInformation(true);
-    this.activitiesService.deleteBaseActivity(id).then(() =>
+    this.activitiesService.deleteActivity(id).then(() =>
       {
         this.generalService.sendLoadingActivityChangeInformation(false);
         this.notificationService.success(
