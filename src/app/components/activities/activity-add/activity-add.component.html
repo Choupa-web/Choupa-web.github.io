@@ -10,8 +10,8 @@
       <mat-error *ngIf="duration.hasError('required')">Date de l'activité manquante</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>Durée de l'activité (mn)</mat-label>
-      <input matInput [formControl]="duration">
+      <mat-label>Durée de l'activité</mat-label>
+      <input type="time" matInput [formControl]="duration">
       <mat-error *ngIf="duration.hasError('required')">Durée de l'activité manquante</mat-error>
       <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
     </mat-form-field>

@@ -101,9 +101,7 @@ export class ActivityAddComponent implements OnInit {
     ]);
     this.activityDate = new FormControl('', [Validators.required]);
     this.duration = new FormControl('', [
-      Validators.required,
-      Validators.pattern(numberWithNoDecimals),
-      Validators.max(180)
+      Validators.required
     ]);
     this.distance = new FormControl('', [
       Validators.required,
