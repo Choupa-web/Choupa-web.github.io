@@ -34,8 +34,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { ActivityAddComponent } from './components/activities/activity-add/activity-add.component';
 import { ActivitiesListComponent } from './components/activities/activities-list/activities-list.component';
 import { MatSelectModule } from '@angular/material/select';
-import { ActivityCommonFormComponent } from './components/shared/activity-common-form/activity-common-form.component';
-import { ActivityHometrainerFormComponent } from './components/shared/activity-hometrainer-form/activity-hometrainer-form.component';
 import { ReplaceCommaByDotInCtrlDirective } from './directives/replace-comma-bydot-in-ctrl.directive';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -50,6 +48,7 @@ import { ActivityEditComponent } from './components/activities/activity-edit/act
 import {MatDialogModule} from '@angular/material/dialog';
 import {AngularFireModule} from '@angular/fire/compat';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+import { HometrainerActivityFormComponent } from './components/activities/hometrainer-activity-form/hometrainer-activity-form.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -69,11 +68,10 @@ registerLocaleData(localeFr, 'fr');
     AuthNavComponent,
     ActivityAddComponent,
     ActivitiesListComponent,
-    ActivityCommonFormComponent,
-    ActivityHometrainerFormComponent,
     ReplaceCommaByDotInCtrlDirective,
     AlertComponent,
     ActivityEditComponent,
+    HometrainerActivityFormComponent,
   ],
   imports: [
     BrowserModule,
