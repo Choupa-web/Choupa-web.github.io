@@ -25,6 +25,12 @@ export interface Activity {
     constance: number;
     difficulty: number;
   };
+  rowerData?: {
+    averageStrokesfrequency: number;
+    maxStrokesFrequency: number;
+    averagePace: number;
+    strokes: number;
+  };
 }
 
 export class MyActivity {

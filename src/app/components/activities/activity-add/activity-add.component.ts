@@ -1,15 +1,15 @@
-import { Component, OnInit} from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import { ErrorStateMatcher, DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { ActivitiesType, ActivitiesNameLabel} from '../../../enums/activity.enum';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {DateAdapter, ErrorStateMatcher, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {ActivitiesNameLabel, ActivitiesType} from '../../../enums/activity.enum';
 import {Activity, MyActivity} from '../../../models/activities.model';
-import { AuthService} from '@auth0/auth0-angular';
-import { numberWithNoDecimals, twoDecimalsRegex} from '../../../utils/Regex.utils';
-import { ActivitiesService} from '../../../services/activities.service';
+import {AuthService} from '@auth0/auth0-angular';
+import {numberWithNoDecimals, twoDecimalsRegex} from '../../../utils/Regex.utils';
+import {ActivitiesService} from '../../../services/activities.service';
 import {
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
   MAT_MOMENT_DATE_FORMATS,
   MomentDateAdapter,
-  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
 } from '@angular/material-moment-adapter';
 import 'moment/locale/fr';
 import {GeneralService} from '../../../services/general.service';
@@ -57,9 +57,13 @@ export class ActivityAddComponent implements OnInit {
   maxCadence: FormControl;
   matcher: MyErrorStateMatcher = new MyErrorStateMatcher();
   addActivityFormGroup: FormGroup;
+  hometrainerActivityFormGroup: FormGroup;
+  vttActivityFormGroup: FormGroup;
+  rowerActivityFormGroup: FormGroup;
   activitiesList: MyActivity[] = [
     { key: ActivitiesType.VTT, name: ActivitiesNameLabel.VTT },
     { key: ActivitiesType.VELO_INSIDE, name: ActivitiesNameLabel.VELO_INSIDE },
+    { key: ActivitiesType.RAMEUR, name: ActivitiesNameLabel.RAMEUR }
   ];
 
   HOME_TRAINER: string = ActivitiesType.VELO_INSIDE;
@@ -164,6 +168,13 @@ export class ActivityAddComponent implements OnInit {
       Validators.required,
       Validators.pattern(numberWithNoDecimals),
     ]);
+    this.hometrainerActivityFormGroup = this.fb.group([
+      this.averagePower,
+      this.maxPower,
+      this.maxAveragePower,
+      this.averageCadence,
+      this.maxCadence
+    ]);
     this.addActivityFormGroup = this.fb.group([
       this.activityDate,
       this.duration,
@@ -176,11 +187,7 @@ export class ActivityAddComponent implements OnInit {
       this.anaerobique,
       this.exerciceLoad,
       this.selectedActivity,
-      this.averagePower,
-      this.maxPower,
-      this.maxAveragePower,
-      this.averageCadence,
-      this.maxCadence,
+      this.hometrainerActivityFormGroup,
     ]);
   }
 

@@ -1,0 +1,27 @@
+<div *ngIf="activityFormGroup" fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="40px" [formGroup]="activityFormGroup">
+  <mat-form-field appearance="outline">
+    <mat-label>Puissance moyenne</mat-label>
+    <input matInput formControlName="averagePower">
+    <!--<mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>-->
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Puissance max</mat-label>
+    <input matInput formControlName="maxPower">
+   <!-- <mat-error *ngIf="maxPower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>-->
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Cadence moyenne</mat-label>
+    <input matInput formControlName="averageCadence">
+    <!--<mat-error *ngIf="averageCadence.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>-->
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Cadence max</mat-label>
+    <input matInput formControlName="maxCadence">
+    <!--<mat-error *ngIf="maxCadence.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>-->
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Puissance moyenne maximum</mat-label>
+    <input matInput formControlName="maxAveragePower">
+   <!-- <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>-->
+  </mat-form-field>
+</div>
