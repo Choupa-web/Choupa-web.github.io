@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Inject} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivitiesService} from '../../../services/activities.service';
 import {GeneralService} from '../../../services/general.service';
 import {MatPaginator} from '@angular/material/paginator';
