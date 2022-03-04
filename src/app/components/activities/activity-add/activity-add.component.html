@@ -72,35 +72,15 @@
         <mat-error *ngIf="selectedActivity.hasError('required')">Activité manquante</mat-error>
       </mat-form-field>
     </div>
-    <ng-container id="home-trainer-activity" *ngIf="selectedActivity.value === HOME_TRAINER">
-      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="40px">
-          <mat-form-field appearance="outline">
-            <mat-label>Puissance moyenne</mat-label>
-            <input matInput [formControl]="averagePower">
-            <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
-          </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Puissance max</mat-label>
-          <input matInput [formControl]="maxPower">
-          <mat-error *ngIf="maxPower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
-        </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Cadence moyenne</mat-label>
-            <input matInput [formControl]="averageCadence">
-            <mat-error *ngIf="averageCadence.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Cadence max</mat-label>
-            <input matInput [formControl]="maxCadence">
-            <mat-error *ngIf="maxCadence.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Puissance moyenne maximum</mat-label>
-            <input matInput [formControl]="maxAveragePower">
-            <mat-error *ngIf="averagePower.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
-          </mat-form-field>
-      </div>
-    </ng-container>
+    <div id="home-trainer-activity" *ngIf="selectedActivity.value === HOME_TRAINER">
+      <app-hometrainer-activity-form formGroupName="hometrainerForm"></app-hometrainer-activity-form>
+    </div>
+  <div id="vtt-activity" *ngIf="selectedActivity.value === VTT">
+    <app-vtt-activity-form formGroupName="vttForm"></app-vtt-activity-form>
+  </div>
+  <div id="rower-activity" *ngIf="selectedActivity.value === ROWER">
+  <app-rower-activity-form formGroupName="rowerForm"></app-rower-activity-form>
+</div>
 </div>
 <div fxLayout="row" fxLayoutAlign="end">
   <button mat-raised-button color="accent" (click)="addNewActivity()" [disabled]="addActivityFormGroup.invalid">Ajouter</button>
