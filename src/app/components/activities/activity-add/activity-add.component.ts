@@ -55,9 +55,16 @@ export class ActivityAddComponent implements OnInit {
   maxAveragePower: FormControl;
   averageCadence: FormControl;
   maxCadence: FormControl;
+  constance: FormControl;
+  difficulty: FormControl;
+  averageStrokesfrequency: FormControl;
+  maxStrokesFrequency: FormControl;
+  averagePace: FormControl;
+  strokes: FormControl;
+
   matcher: MyErrorStateMatcher = new MyErrorStateMatcher();
   addActivityFormGroup: FormGroup;
-  hometrainerActivityFormGroup: FormGroup;
+  hometrainerFormGroup: FormGroup;
   vttActivityFormGroup: FormGroup;
   rowerActivityFormGroup: FormGroup;
   activitiesList: MyActivity[] = [
@@ -68,6 +75,7 @@ export class ActivityAddComponent implements OnInit {
 
   HOME_TRAINER: string = ActivitiesType.VELO_INSIDE;
   VTT: string = ActivitiesType.VTT;
+  ROWER: string = ActivitiesType.RAMEUR;
   userEmail: string;
 
   constructor(
@@ -88,19 +96,13 @@ export class ActivityAddComponent implements OnInit {
     });
 
     this.initFormGroup();
-
-    this.selectedActivity.valueChanges.subscribe({
-      next: (value) => {
-        console.log('selectedActivity: ', value);
-      },
-    });
   }
 
   /**
    * Initialize the activity form group
    */
   initFormGroup = (): void => {
-    this.selectedActivity = new FormControl('VELO_INSIDE', [
+    this.selectedActivity = new FormControl('', [
       Validators.required,
     ]);
     this.activityDate = new FormControl('', [Validators.required]);
@@ -122,19 +124,19 @@ export class ActivityAddComponent implements OnInit {
       Validators.pattern(twoDecimalsRegex),
       Validators.max(50)
     ]);
-    this.averageFc = new FormControl('', [
+    this.averageFc = new FormControl( '', [
       Validators.required,
       Validators.pattern(numberWithNoDecimals),
       Validators.max(150),
       Validators.min(100)
     ]);
-    this.maxFc = new FormControl('', [
+    this.maxFc = new FormControl( '', [
       Validators.required,
       Validators.pattern(numberWithNoDecimals),
       Validators.min(130),
       Validators.max(200)
     ]);
-    this.aerobie = new FormControl('', [
+    this.aerobie = new FormControl( '', [
       Validators.required,
       Validators.pattern(twoDecimalsRegex),
       Validators.max(5)
@@ -144,81 +146,141 @@ export class ActivityAddComponent implements OnInit {
       Validators.pattern(twoDecimalsRegex),
       Validators.max(5)
     ]);
-    this.exerciceLoad = new FormControl('', [
+    this.exerciceLoad = new FormControl( '', [
       Validators.required,
       Validators.pattern(numberWithNoDecimals),
     ]);
-    this.averagePower = new FormControl('', [
-      Validators.required,
+    this.averagePower = new FormControl( '', [
       Validators.pattern(numberWithNoDecimals),
     ]);
-    this.maxPower = new FormControl('', [
-      Validators.required,
+    this.maxPower = new FormControl( '', [
       Validators.pattern(numberWithNoDecimals),
     ]);
     this.maxAveragePower = new FormControl('', [
-      Validators.required,
       Validators.pattern(numberWithNoDecimals),
     ]);
-    this.averageCadence = new FormControl('', [
-      Validators.required,
+    this.averageCadence = new FormControl( '', [
       Validators.pattern(numberWithNoDecimals),
     ]);
-    this.maxCadence = new FormControl('', [
-      Validators.required,
+    this.maxCadence = new FormControl( '', [
       Validators.pattern(numberWithNoDecimals),
     ]);
-    this.hometrainerActivityFormGroup = this.fb.group([
-      this.averagePower,
-      this.maxPower,
-      this.maxAveragePower,
-      this.averageCadence,
-      this.maxCadence
-    ]);
-    this.addActivityFormGroup = this.fb.group([
-      this.activityDate,
-      this.duration,
-      this.distance,
-      this.averageSpeed,
-      this.maxSpeed,
-      this.averageFc,
-      this.maxFc,
-      this.aerobie,
-      this.anaerobique,
-      this.exerciceLoad,
-      this.selectedActivity,
-      this.hometrainerActivityFormGroup,
-    ]);
+    this.constance = new FormControl('', [Validators.pattern(twoDecimalsRegex)]);
+    this.difficulty = new FormControl('', [Validators.pattern(twoDecimalsRegex)]);
+    this.averageStrokesfrequency = new FormControl('', [Validators.pattern(numberWithNoDecimals)]);
+    this.maxStrokesFrequency = new FormControl('', [Validators.pattern(numberWithNoDecimals)]);
+    this.averagePace = new FormControl('', [Validators.pattern(twoDecimalsRegex)]);
+    this.strokes = new FormControl('', [Validators.pattern(numberWithNoDecimals)]);
+    this.hometrainerFormGroup = this.fb.group({
+      averagePower: this.averagePower,
+      maxPower: this.maxPower,
+      maxAveragePower: this.maxAveragePower,
+      averageCadence: this.averageCadence,
+      maxCadence: this.maxCadence
+    });
+    this.vttActivityFormGroup = this.fb.group({
+      constance: this.constance,
+      difficulty: this.difficulty
+    });
+    this.rowerActivityFormGroup = this.fb.group({
+      averageStrokesfrequency: this.averageStrokesfrequency,
+      maxStrokesFrequency: this.maxStrokesFrequency,
+      averagePace: this.averagePace,
+      strokes: this.strokes
+    });
+    this.addActivityFormGroup = this.fb.group({
+      activityDate: this.activityDate,
+      duration: this.duration,
+      distance: this.distance,
+      averageSpeed: this.averageSpeed,
+      maxSpeed: this.maxSpeed,
+      averageFc: this.averageFc,
+      maxFc: this.maxFc,
+      aerobie: this.aerobie,
+      anaerobique: this.anaerobique,
+      exerciceLoad: this.exerciceLoad,
+      selectedActivity: this.selectedActivity,
+      hometrainerForm: this.hometrainerFormGroup,
+      vttForm: this.vttActivityFormGroup,
+      rowerForm: this.rowerActivityFormGroup
+    });
   }
 
   /**
    * Save new activity
    */
   addNewActivity = (): void => {
+    let Payload: Activity;
     const isActivityValid = this.checkActivityValidity();
     const convertedActivityDate = this.convertActivityDate(this.activityDate.value);
     if (isActivityValid) {
-      const Payload: Activity = {
-        userEmail : this.userEmail,
-        activityDate : convertedActivityDate,
-        activityName : this.selectedActivity.value,
-        duration : this.duration.value,
-        distance : this.distance.value,
-        maxSpeed : this.maxSpeed.value,
-        averageSpeed : this.averageSpeed.value,
-        averageFc : this.averageFc.value,
-        maxFc : this.maxFc.value,
-        aerobie : this.aerobie.value,
-        anaerobique : this.anaerobique.value,
-        exerciceLoad : this.exerciceLoad.value,
-        hometrainerData : {
-          averagePower : this.averagePower.value,
-          maxPower : this.maxPower.value,
-          averageCadence : this.averageCadence.value,
-          maxCadence : this.maxCadence.value,
-          maxAveragePower: this.maxAveragePower.value,
-        },
-      };
+      switch (this.selectedActivity.value) {
+        case ActivitiesType.VELO_INSIDE:
+          Payload = {
+            userEmail : this.userEmail,
+            activityDate : convertedActivityDate,
+            activityName : this.selectedActivity.value,
+            duration : this.duration.value,
+            distance : Number(this.distance.value),
+            maxSpeed : Number(this.maxSpeed.value),
+            averageSpeed : Number(this.averageSpeed.value),
+            averageFc : Number(this.averageFc.value),
+            maxFc : Number(this.maxFc.value),
+            aerobie : Number(this.aerobie.value),
+            anaerobique : Number(this.anaerobique.value),
+            exerciceLoad : Number(this.exerciceLoad.value),
+            hometrainerData : {
+              averagePower : Number(this.averagePower.value),
+              maxPower : Number(this.maxPower.value),
+              averageCadence : Number(this.averageCadence.value),
+              maxCadence : Number(this.maxCadence.value),
+              maxAveragePower: Number(this.maxAveragePower.value)
+            }
+          };
+          break;
+        case ActivitiesType.VTT:
+          Payload = {
+            userEmail : this.userEmail,
+            activityDate : convertedActivityDate,
+            activityName : this.selectedActivity.value,
+            duration : this.duration.value,
+            distance : Number(this.distance.value),
+            maxSpeed : Number(this.maxSpeed.value),
+            averageSpeed : Number(this.averageSpeed.value),
+            averageFc : Number(this.averageFc.value),
+            maxFc : Number(this.maxFc.value),
+            aerobie : Number(this.aerobie.value),
+            anaerobique : Number(this.anaerobique.value),
+            exerciceLoad : Number(this.exerciceLoad.value),
+            vttData : {
+              constance : Number(this.constance.value),
+              difficulty : Number(this.difficulty.value),
+            }
+          };
+          break;
+        case ActivitiesType.RAMEUR:
+          Payload = {
+            userEmail : this.userEmail,
+            activityDate : convertedActivityDate,
+            activityName : this.selectedActivity.value,
+            duration : this.duration.value,
+            distance : Number(this.distance.value),
+            maxSpeed : Number(this.maxSpeed.value),
+            averageSpeed : Number(this.averageSpeed.value),
+            averageFc : Number(this.averageFc.value),
+            maxFc : Number(this.maxFc.value),
+            aerobie : Number(this.aerobie.value),
+            anaerobique : Number(this.anaerobique.value),
+            exerciceLoad : Number(this.exerciceLoad.value),
+            rowerData : {
+              averageStrokesfrequency: Number(this.averageStrokesfrequency.value),
+              maxStrokesFrequency: Number(this.maxStrokesFrequency.value),
+              averagePace: Number(this.averagePace.value),
+              strokes: Number(this.strokes.value)
+            }
+          };
+          break;
+      }
       this.generalService.sendLoadingActivityChangeInformation(true);
       this.activityService.addActivity(Payload).then(
         (newActivity) => {
@@ -229,13 +291,24 @@ export class ActivityAddComponent implements OnInit {
         }
       );
     }
+    else {
+      this.generalService.sendLoadingActivityChangeInformation(false);
+      this.notificationService.failure('Impossible de sauvegarder');
+    }
   }
 
   checkActivityValidity = (): boolean => {
     const speedCheck = Number(this.averageSpeed.value) < Number(this.maxSpeed.value);
     const freqCheck = Number(this.averageFc.value) < Number(this.maxFc.value);
-    const cadenceCheck = Number(this.averageCadence.value) < Number(this.maxCadence.value);
-    const powerCheck = Number(this.averagePower.value) < Number(this.maxPower.value);
+    const cadenceCheck =
+      this.averageCadence.value && this.maxCadence.value
+        ? Number(this.averageCadence.value) < Number(this.maxCadence.value)
+        : true;
+    const powerCheck =
+      this.averagePower.value && this.maxPower.value
+        ? Number(this.averagePower.value) < Number(this.maxPower.value)
+        : true;
+    console.log('activity validity: ', speedCheck && freqCheck && cadenceCheck && powerCheck);
     return (speedCheck && freqCheck && cadenceCheck && powerCheck);
   }
 

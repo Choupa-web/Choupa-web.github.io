@@ -1,0 +1,18 @@
+<div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="40px" [formGroup]="rowerActivityForm" >
+  <mat-form-field appearance="outline">
+    <mat-label>Fréquence moyenne de coups</mat-label>
+    <input matInput formControlName="averageStrokesfrequency">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Fréquence max de coups</mat-label>
+    <input matInput formControlName="maxStrokesFrequency">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Allure moyenne</mat-label>
+    <input appReplaceCommaByDotInCtrl matInput formControlName="averagePace">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Nombre de coups</mat-label>
+    <input appReplaceCommaByDotInCtrl matInput formControlName="strokes">
+  </mat-form-field>
+</div>

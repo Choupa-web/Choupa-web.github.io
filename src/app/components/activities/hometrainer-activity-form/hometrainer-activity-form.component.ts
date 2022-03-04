@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {FormArray, FormGroup, FormGroupDirective} from '@angular/forms';
 
 @Component({
   selector: 'app-hometrainer-activity-form',
@@ -7,12 +7,13 @@ import {FormGroup} from '@angular/forms';
   styleUrls: ['./hometrainer-activity-form.component.scss']
 })
 export class HometrainerActivityFormComponent implements OnInit {
-  @Input() activityFormGroup: FormGroup;
+  @Input() formGroupName: string;
+  hometrainerActivityForm: FormGroup;
 
-  constructor() { }
+  constructor(private activityForm: FormGroupDirective) { }
 
   ngOnInit(): void {
-    console.log('formgroup: ', this.activityFormGroup)
+    this.hometrainerActivityForm = this.activityForm.control.get(this.formGroupName) as FormGroup;
   }
 
 }

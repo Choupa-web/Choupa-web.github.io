@@ -14,7 +14,6 @@ export class AuthNavComponent implements OnInit {
 
   ngOnInit(): void {
     this.auth.user$.subscribe( (userInfo) => {
-      console.log('user: ', userInfo);
       if (userInfo) {
         this.userName = userInfo.given_name;
       }

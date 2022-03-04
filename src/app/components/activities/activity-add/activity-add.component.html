@@ -73,8 +73,14 @@
       </mat-form-field>
     </div>
     <div id="home-trainer-activity" *ngIf="selectedActivity.value === HOME_TRAINER">
-      <app-hometrainer-activity-form [activityFormGroup]="hometrainerActivityFormGroup"></app-hometrainer-activity-form>
+      <app-hometrainer-activity-form formGroupName="hometrainerForm"></app-hometrainer-activity-form>
     </div>
+  <div id="vtt-activity" *ngIf="selectedActivity.value === VTT">
+    <app-vtt-activity-form formGroupName="vttForm"></app-vtt-activity-form>
+  </div>
+  <div id="rower-activity" *ngIf="selectedActivity.value === ROWER">
+  <app-rower-activity-form formGroupName="rowerForm"></app-rower-activity-form>
+</div>
 </div>
 <div fxLayout="row" fxLayoutAlign="end">
   <button mat-raised-button color="accent" (click)="addNewActivity()" [disabled]="addActivityFormGroup.invalid">Ajouter</button>
