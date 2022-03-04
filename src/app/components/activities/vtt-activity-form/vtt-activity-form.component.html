@@ -1,0 +1,10 @@
+<div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="40px" [formGroup]="vttActivityForm" >
+  <mat-form-field appearance="outline">
+    <mat-label>Constance</mat-label>
+    <input matInput formControlName="constance">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Difficulté</mat-label>
+    <input appReplaceCommaByDotInCtrl matInput formControlName="difficulty">
+  </mat-form-field>
+</div>

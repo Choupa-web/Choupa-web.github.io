@@ -23,7 +23,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.generalService.activityLoadingStatuschange.subscribe({
       next: (loadingStatus) => {
         this.loading = loadingStatus;
-        console.log('progress bar update');
       }
     });
   }
