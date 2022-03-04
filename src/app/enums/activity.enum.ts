@@ -35,8 +35,21 @@ export enum ActivityFieldsLabel {
   maxCadence = 'Cadence max',
   maxAveragePower = 'Puissance moy max(20mn)'
 }
+
 export enum FirebaseCollections {
   ACTIVITY = 'activities',
 }
+
+export enum ActivityFieldsMax {
+  DISTANCE = 30,
+  AVERAGE_SPEED = 40,
+  MAX_SPEED = 50,
+  AVERAGE_FC = 140,
+  MAX_FC = 210,
+  AEROBIE = 5,
+  ANAEROBIQUE = 5,
+  EXERCICE_LOAD = 50
+}
+
 
 
