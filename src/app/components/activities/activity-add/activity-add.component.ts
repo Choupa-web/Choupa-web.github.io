@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {DateAdapter, ErrorStateMatcher, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {ActivitiesNameLabel, ActivitiesType, ActivityFieldsMax} from '../../../enums/activity.enum';
+import {ActivitiesNameLabel, ActivitiesType, ActivityFieldsMax, ActivityUnities} from '../../../enums/activity.enum';
 import {Activity, MyActivity} from '../../../models/activities.model';
 import {AuthService} from '@auth0/auth0-angular';
 import {numberWithNoDecimals, threeDecimalsRegex, twoDecimalsRegex} from '../../../utils/Regex.utils';
@@ -314,5 +314,9 @@ export class ActivityAddComponent implements OnInit {
 
   convertActivityDate = (dateToBeConverted: Moment): string => {
     return dateToBeConverted.format('DD/MM/YYYY');
+  }
+
+  getUnity(fieldName: string): string {
+    return 'km;';
   }
 }

@@ -31,7 +31,7 @@ export enum ActivityFieldsLabel {
   exerciceLoad = 'Exercice load',
   averagePower = 'Puissance moy',
   maxPower = 'Puissance max',
-  averageCadence = 'Cqdence moy',
+  averageCadence = 'Cadence moy',
   maxCadence = 'Cadence max',
   maxAveragePower = 'Puissance moy max(20mn)'
 }
@@ -51,5 +51,12 @@ export enum ActivityFieldsMax {
   EXERCICE_LOAD = 50
 }
 
+export enum ActivityUnities {
+  DISTANCE = 'km',
+  SPEED = 'km/h',
+  CADENCE = 'rpm',
+  PACE = '500m/mn',
+  FC = 'bpm'
+}
 
 

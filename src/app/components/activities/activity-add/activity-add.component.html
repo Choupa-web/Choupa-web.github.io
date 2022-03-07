@@ -18,6 +18,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Distance</mat-label>
       <input appReplaceCommaByDotInCtrl matInput [formControl]="distance">
+      <span matSuffix>{{ getUnity('DISTANCE') }}</span>
       <mat-error *ngIf="distance.hasError('required')">Distance de l'activité manquante</mat-error>
       <mat-error *ngIf="distance.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
     </mat-form-field>
