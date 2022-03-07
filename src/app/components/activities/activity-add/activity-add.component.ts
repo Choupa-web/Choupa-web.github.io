@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {DateAdapter, ErrorStateMatcher, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {ActivitiesNameLabel, ActivitiesType} from '../../../enums/activity.enum';
+import {ActivitiesNameLabel, ActivitiesType, ActivityFieldsMax, ActivityUnities} from '../../../enums/activity.enum';
 import {Activity, MyActivity} from '../../../models/activities.model';
 import {AuthService} from '@auth0/auth0-angular';
-import {numberWithNoDecimals, twoDecimalsRegex} from '../../../utils/Regex.utils';
+import {numberWithNoDecimals, threeDecimalsRegex, twoDecimalsRegex} from '../../../utils/Regex.utils';
 import {ActivitiesService} from '../../../services/activities.service';
 import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
@@ -15,6 +15,7 @@ import 'moment/locale/fr';
 import {GeneralService} from '../../../services/general.service';
 import {Moment} from 'moment';
 import {NotificationService} from '../../../services/notification.service';
+import {Router} from '@angular/router';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -84,7 +85,8 @@ export class ActivityAddComponent implements OnInit {
     private activityService: ActivitiesService,
     private adapter: DateAdapter<any>,
     private generalService: GeneralService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private route: Router
   ) {}
 
   ngOnInit(): void {
@@ -94,7 +96,6 @@ export class ActivityAddComponent implements OnInit {
         this.userEmail = userInfo.email;
       }
     });
-
     this.initFormGroup();
   }
 
@@ -111,40 +112,38 @@ export class ActivityAddComponent implements OnInit {
     ]);
     this.distance = new FormControl('', [
       Validators.required,
-      Validators.pattern(twoDecimalsRegex),
-      Validators.max(30)
+      Validators.pattern(threeDecimalsRegex),
+      Validators.max(ActivityFieldsMax.DISTANCE)
     ]);
     this.averageSpeed = new FormControl('', [
       Validators.required,
       Validators.pattern(twoDecimalsRegex),
-      Validators.max(40)
+      Validators.max(ActivityFieldsMax.AVERAGE_SPEED)
     ]);
     this.maxSpeed = new FormControl('', [
       Validators.required,
       Validators.pattern(twoDecimalsRegex),
-      Validators.max(50)
+      Validators.max(ActivityFieldsMax.MAX_SPEED)
     ]);
     this.averageFc = new FormControl( '', [
       Validators.required,
       Validators.pattern(numberWithNoDecimals),
-      Validators.max(150),
-      Validators.min(100)
+      Validators.max(ActivityFieldsMax.AVERAGE_FC)
     ]);
     this.maxFc = new FormControl( '', [
       Validators.required,
       Validators.pattern(numberWithNoDecimals),
-      Validators.min(130),
-      Validators.max(200)
+      Validators.max(ActivityFieldsMax.MAX_FC)
     ]);
     this.aerobie = new FormControl( '', [
       Validators.required,
       Validators.pattern(twoDecimalsRegex),
-      Validators.max(5)
+      Validators.max(ActivityFieldsMax.AEROBIE)
     ]);
     this.anaerobique = new FormControl('', [
       Validators.required,
       Validators.pattern(twoDecimalsRegex),
-      Validators.max(5)
+      Validators.max(ActivityFieldsMax.ANAEROBIQUE)
     ]);
     this.exerciceLoad = new FormControl( '', [
       Validators.required,
@@ -287,6 +286,7 @@ export class ActivityAddComponent implements OnInit {
           if (newActivity.id) {
             this.generalService.sendLoadingActivityChangeInformation(false);
             this.notificationService.success('Nouvelle activité ajoutée');
+            this.route.navigateByUrl('/activities');
           }
         }
       );
@@ -314,5 +314,9 @@ export class ActivityAddComponent implements OnInit {
 
   convertActivityDate = (dateToBeConverted: Moment): string => {
     return dateToBeConverted.format('DD/MM/YYYY');
+  }
+
+  getUnity(fieldName: string): string {
+    return 'km;';
   }
 }
