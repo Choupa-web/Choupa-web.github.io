@@ -9,8 +9,8 @@ import {FormGroup} from '@angular/forms';
 })
 export class SportFieldFormComponent implements OnInit{
 
-  @Input() question: SportFieldBase<string>;
-  @Input() form: FormGroup;
+  @Input() question!: SportFieldBase<string>;
+  @Input() form!: FormGroup;
 
   ngOnInit(): void {
     console.log('question: ', this.question);

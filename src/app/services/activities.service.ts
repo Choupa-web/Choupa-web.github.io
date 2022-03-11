@@ -23,13 +23,14 @@ export class ActivitiesService {
       group[sportField.key] = sportField.required ? new FormControl(sportField.value || '', Validators.required)
         : new FormControl(sportField.value || '');
     });
+    console.log('formgroup: ', new FormGroup(group));
     return new FormGroup(group);
   }
 
-  getSportFields = (): SportFieldBase<any>[] => {
+  getSportFields = (): Observable<SportFieldBase<any>[]> => {
     const sportFields: SportFieldBase<any>[] = [
       new SportFieldTextbox(
-        { key: 'duration', label: 'Durée de l\'activité', order: 2, required: true, type: 'time' }),
+        { key: 'duration', label: 'Durée de l\'activité', order: 2, required: true, type: 'time' })/*,
       new SportFieldDatePicker({ key: 'activityDate', label: 'Date de l\'activité', order: 1, required: true }),
       new SportFieldTextbox({ key: 'distance', label: 'Distance', order: 3, required: true, unity: 'km' }),
       new SportFieldTextbox({ key: 'averageSpeed', label: 'Vitesse moy', order: 4, required: true, unity: 'km/h' }),
@@ -38,10 +39,11 @@ export class ActivitiesService {
       new SportFieldTextbox({ key: 'maxFc', label: 'FC max', order: 7, required: true, unity: 'bpm' }),
       new SportFieldTextbox({ key: 'aerobie', label: 'Aérobie', order: 8, required: true }),
       new SportFieldTextbox({ key: 'anaerobique', label: 'Anaérobique', order: 9, required: true }),
-      new SportFieldTextbox({ key: 'exerciceLoad', label: 'Exercice Load', order: 10, required: true }),
+      new SportFieldTextbox({ key: 'exerciceLoad', label: 'Exercice Load', order: 10, required: true }),*/
     ];
     console.log('sport fields: ', sportFields);
-    return sportFields.sort((a, b) => a.order - b.order);
+    const tempo = sportFields.sort((a, b) => a.order - b.order);
+    return of(tempo);
   }
 
   getAllActivities(): Observable<any> {

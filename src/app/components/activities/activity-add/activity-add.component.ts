@@ -16,6 +16,7 @@ import {GeneralService} from '../../../services/general.service';
 import {Moment} from 'moment';
 import {NotificationService} from '../../../services/notification.service';
 import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -107,15 +108,19 @@ export class ActivityAddComponent implements OnInit {
         this.userEmail = userInfo.email;
       }
     });
-    this.sportFields = this.activityService.getSportFields();
-    this.initFormGroup();
+    this.activityService.getSportFields().subscribe({
+      next: sportFields => {
+        this.sportFields = sportFields;
+        this.initFormGroup();
+      }
+    });
   }
 
   /**
    * Initialize the activity form group
    */
   initFormGroup = (): void => {
-    this.addActivityFormGroup = this.activityService.toFormGroup(this.sportFields as SportFieldBase<any>[]);
+    this.addActivityFormGroup = this.activityService.toFormGroup(this.sportFields);
     /*this.selectedActivity = new FormControl('', [
       Validators.required,
     ]);
