@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {DateAdapter, ErrorStateMatcher, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {ActivitiesNameLabel, ActivitiesType, ActivityFieldsMax, ActivityUnities} from '../../../enums/activity.enum';
-import {Activity, MyActivity} from '../../../models/activities.model';
+import {ActivitiesNameLabel, ActivitiesType, ActivityFieldsMax} from '../../../enums/activity.enum';
+import {Activity, MyActivity, SportFieldBase, UnityType} from '../../../models/activities.model';
 import {AuthService} from '@auth0/auth0-angular';
 import {numberWithNoDecimals, threeDecimalsRegex, twoDecimalsRegex} from '../../../utils/Regex.utils';
 import {ActivitiesService} from '../../../services/activities.service';
@@ -16,6 +16,7 @@ import {GeneralService} from '../../../services/general.service';
 import {Moment} from 'moment';
 import {NotificationService} from '../../../services/notification.service';
 import {Router} from '@angular/router';
+
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -40,7 +41,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   ],
 })
 export class ActivityAddComponent implements OnInit {
-  selectedActivity: FormControl;
+  sportFields: SportFieldBase<any>[];
+  /*selectedActivity: FormControl;
   activityDate: FormControl;
   duration: FormControl;
   distance: FormControl;
@@ -61,23 +63,32 @@ export class ActivityAddComponent implements OnInit {
   averageStrokesfrequency: FormControl;
   maxStrokesFrequency: FormControl;
   averagePace: FormControl;
-  strokes: FormControl;
+  strokes: FormControl;*/
 
   matcher: MyErrorStateMatcher = new MyErrorStateMatcher();
   addActivityFormGroup: FormGroup;
-  hometrainerFormGroup: FormGroup;
+ /* hometrainerFormGroup: FormGroup;
   vttActivityFormGroup: FormGroup;
-  rowerActivityFormGroup: FormGroup;
-  activitiesList: MyActivity[] = [
+  rowerActivityFormGroup: FormGroup;*/
+ /* activitiesList: MyActivity[] = [
     { key: ActivitiesType.VTT, name: ActivitiesNameLabel.VTT },
     { key: ActivitiesType.VELO_INSIDE, name: ActivitiesNameLabel.VELO_INSIDE },
     { key: ActivitiesType.RAMEUR, name: ActivitiesNameLabel.RAMEUR }
-  ];
+  ];*/
 
-  HOME_TRAINER: string = ActivitiesType.VELO_INSIDE;
+ // HOME_TRAINER: string = ActivitiesType.VELO_INSIDE;
   VTT: string = ActivitiesType.VTT;
   ROWER: string = ActivitiesType.RAMEUR;
   userEmail: string;
+
+
+ /* ActivityUnities: Array<UnityType> = [
+    { label: 'distance', unity: 'km'},
+    { label: 'speed', unity: 'km/h'},
+    { label: 'cadence', unity: 'rpm'},
+    { label: 'pace', unity: '500m/mn'},
+    { label: 'fc', unity: 'bpm'}
+  ];*/
 
   constructor(
     private fb: FormBuilder,
@@ -96,6 +107,7 @@ export class ActivityAddComponent implements OnInit {
         this.userEmail = userInfo.email;
       }
     });
+    this.sportFields = this.activityService.getSportFields();
     this.initFormGroup();
   }
 
@@ -103,7 +115,8 @@ export class ActivityAddComponent implements OnInit {
    * Initialize the activity form group
    */
   initFormGroup = (): void => {
-    this.selectedActivity = new FormControl('', [
+    this.addActivityFormGroup = this.activityService.toFormGroup(this.sportFields as SportFieldBase<any>[]);
+    /*this.selectedActivity = new FormControl('', [
       Validators.required,
     ]);
     this.activityDate = new FormControl('', [Validators.required]);
@@ -202,14 +215,14 @@ export class ActivityAddComponent implements OnInit {
       hometrainerForm: this.hometrainerFormGroup,
       vttForm: this.vttActivityFormGroup,
       rowerForm: this.rowerActivityFormGroup
-    });
+    });*/
   }
 
   /**
    * Save new activity
    */
   addNewActivity = (): void => {
-    let Payload: Activity;
+    /*let Payload: Activity;
     const isActivityValid = this.checkActivityValidity();
     const convertedActivityDate = this.convertActivityDate(this.activityDate.value);
     if (isActivityValid) {
@@ -294,11 +307,11 @@ export class ActivityAddComponent implements OnInit {
     else {
       this.generalService.sendLoadingActivityChangeInformation(false);
       this.notificationService.failure('Impossible de sauvegarder');
-    }
+    }*/
   }
 
   checkActivityValidity = (): boolean => {
-    const speedCheck = Number(this.averageSpeed.value) < Number(this.maxSpeed.value);
+   /* const speedCheck = Number(this.averageSpeed.value) < Number(this.maxSpeed.value);
     const freqCheck = Number(this.averageFc.value) < Number(this.maxFc.value);
     const cadenceCheck =
       this.averageCadence.value && this.maxCadence.value
@@ -309,14 +322,11 @@ export class ActivityAddComponent implements OnInit {
         ? Number(this.averagePower.value) < Number(this.maxPower.value)
         : true;
     console.log('activity validity: ', speedCheck && freqCheck && cadenceCheck && powerCheck);
-    return (speedCheck && freqCheck && cadenceCheck && powerCheck);
+    return (speedCheck && freqCheck && cadenceCheck && powerCheck);*/
+    return true;
   }
 
   convertActivityDate = (dateToBeConverted: Moment): string => {
     return dateToBeConverted.format('DD/MM/YYYY');
-  }
-
-  getUnity(fieldName: string): string {
-    return 'km;';
   }
 }
