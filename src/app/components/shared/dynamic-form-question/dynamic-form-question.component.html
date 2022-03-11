@@ -1,0 +1,23 @@
+<div [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>{{ question.label }}</mat-label>
+    <div [ngSwitch]="question.ctrlType">
+      <input *ngSwitchCase="'textbox'" matInput [formControlName]="question.key"
+             [id]="question.key" [type]="question.type">
+      <input *ngSwitchCase="'time'" matInput [formControlName]="question.key"
+             [id]="question.key" [type]="question.type">
+      <span *ngIf="question.unity" matSuffix>{{ question.unity }}</span>
+
+      <ng-container *ngSwitchCase="'datepicker'">
+        <input  matInput [matDatepicker]="picker" [formControlName]="question.key">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </ng-container>
+
+      <mat-select [id]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key">
+        <mat-option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</mat-option>
+      </mat-select>
+    </div>
+  </mat-form-field>
+  <div class="errorMessage" *ngIf="!isValid">{{question.label}} is required</div>
+</div>
