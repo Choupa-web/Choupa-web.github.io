@@ -1,13 +1,5 @@
 <h2>Nouvelle activité</h2>
-<form [formGroup]="addActivityFormGroup" fxLayout="row wrap">
-  <div *ngFor="let sportField of sportFields">
-    <app-sport-field-form [question]="sportField" [formGroup]="addActivityFormGroup"></app-sport-field-form>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="end">
-    <button mat-raised-button color="accent" (click)="addNewActivity()" [disabled]="addActivityFormGroup.invalid">Ajouter</button>
-  </div>
-</form>
-<!--<form [formGroup]="addActivityFormGroup">
+<form [formGroup]="addActivityFormGroup">
 <div id="common-info" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap="20px">
   <div fxLayout="row wrap" fxLayoutGap="15px" fxLayout.md="column" fxLayout.sm="column" fxLayout.xs="column">
     <mat-form-field appearance="outline">
@@ -26,34 +18,34 @@
     <mat-form-field appearance="outline">
       <mat-label>Distance</mat-label>
       <input appReplaceCommaByDotInCtrl matInput [formControl]="distance">
-      <span matSuffix>{{ getUnity('distance') }}</span>
+      <span matSuffix>{{DISTANCE}}</span>
       <mat-error *ngIf="distance.hasError('required')">Distance de l'activité manquante</mat-error>
       <mat-error *ngIf="distance.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Vitesse moyenne</mat-label>
       <input appReplaceCommaByDotInCtrl matInput [formControl]="averageSpeed">
-      <span matSuffix>{{ getUnity('speed') }}</span>
+      <span matSuffix>{{SPEED}}</span>
       <mat-error *ngIf="averageSpeed.hasError('required')">Vitesse moyenne de l'activité manquante</mat-error>
       <mat-error *ngIf="averageSpeed.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Vitesse max</mat-label>
       <input appReplaceCommaByDotInCtrl matInput [formControl]="maxSpeed">
-      <span matSuffix>{{ getUnity('speed') }}</span>
+      <span matSuffix>{{SPEED}}</span>
       <mat-error *ngIf="maxSpeed.hasError('required')">Vitesse maximum de l'activité manquante</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>FC moyenne</mat-label>
       <input matInput [formControl]="averageFc">
-      <span matSuffix>{{ getUnity('fc') }}</span>
+      <span matSuffix>{{FC}}</span>
       <mat-error *ngIf="averageFc.hasError('required')">Fréquence cardiaque moyenne de l'activité manquante</mat-error>
       <mat-error *ngIf="averageFc.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>FC max</mat-label>
       <input matInput [formControl]="maxFc">
-      <span matSuffix>{{ getUnity('fc') }}</span>
+      <span matSuffix>{{FC}}</span>
       <mat-error *ngIf="maxFc.hasError('required')">Fréquence cardiaque maximum de l'activité manquante</mat-error>
       <mat-error *ngIf="maxFc.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
     </mat-form-field>
@@ -98,5 +90,5 @@
 <div fxLayout="row" fxLayoutAlign="end">
   <button mat-raised-button color="accent" (click)="addNewActivity()" [disabled]="addActivityFormGroup.invalid">Ajouter</button>
 </div>
-</form>-->
+</form>
 
