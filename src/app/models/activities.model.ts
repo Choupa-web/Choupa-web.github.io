@@ -37,3 +37,8 @@ export class MyActivity {
   key: string;
   name: ActivitiesNameLabel;
 }
+
+export interface UnityType {
+  label: string;
+  unity: string;
+}

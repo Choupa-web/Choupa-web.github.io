@@ -1,12 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {AngularFirestore, DocumentReference, QuerySnapshot} from '@angular/fire/compat/firestore';
-import {FirebaseCollections} from '../enums/activity.enum';
-import {getDocs, query, where} from '@angular/fire/firestore';
+import {AngularFirestore, DocumentReference} from '@angular/fire/compat/firestore';
+import {ActivitiesType, FirebaseCollections} from '../enums/activity.enum';
 import {Activity} from '../models/activities.model';
-
-
 
 @Injectable({
   providedIn: 'root'

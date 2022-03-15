@@ -75,7 +75,7 @@ registerLocaleData(localeFr, 'fr');
     ActivityEditComponent,
     HometrainerActivityFormComponent,
     VttActivityFormComponent,
-    RowerActivityFormComponent,
+    RowerActivityFormComponent
   ],
   imports: [
     BrowserModule,

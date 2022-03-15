@@ -2,14 +2,17 @@
   <mat-form-field appearance="outline">
     <mat-label>Fréquence moyenne de coups</mat-label>
     <input matInput formControlName="averageStrokesfrequency">
+    <span matSuffix>{{FREQUENCE_COUPS}}</span>
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Fréquence max de coups</mat-label>
     <input matInput formControlName="maxStrokesFrequency">
+    <span matSuffix>{{FREQUENCE_COUPS}}</span>
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Allure moyenne</mat-label>
     <input appReplaceCommaByDotInCtrl matInput formControlName="averagePace">
+    <span matSuffix>{{ALLURE}}</span>
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Nombre de coups</mat-label>
