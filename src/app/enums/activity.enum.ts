@@ -16,6 +16,9 @@ export enum ActivitiesNameLabel {
   RAMEUR = 'Rameur'
 }
 
+/**
+ * Nom des activités dans el tableau
+ */
 export enum ActivityFieldsLabel {
   userEmail = 'Utilisateur',
   activityDate = 'Date de l\'activité',
@@ -50,6 +53,17 @@ export enum ActivityFieldsMax {
   ANAEROBIQUE = 5,
   EXERCICE_LOAD = 50
 }
+
+export enum ActivityUnities {
+  DISTANCE = 'km',
+  SPEED = 'km/h',
+  FC = 'bpm',
+  CADENCE = 'rpm',
+  POWER = 'w',
+  ALLURE = 'mn/500m',
+  FREQUENCE_COUPS = 'cps/mn'
+}
+
 
 
 

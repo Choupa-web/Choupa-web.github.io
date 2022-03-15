@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {DateAdapter, ErrorStateMatcher, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {ActivitiesNameLabel, ActivitiesType, ActivityFieldsMax} from '../../../enums/activity.enum';
-import {Activity, MyActivity, SportFieldBase, UnityType} from '../../../models/activities.model';
+import {ActivitiesNameLabel, ActivitiesType, ActivityFieldsMax, ActivityUnities} from '../../../enums/activity.enum';
 import {AuthService} from '@auth0/auth0-angular';
 import {numberWithNoDecimals, threeDecimalsRegex, twoDecimalsRegex} from '../../../utils/Regex.utils';
 import {ActivitiesService} from '../../../services/activities.service';
@@ -16,7 +15,7 @@ import {GeneralService} from '../../../services/general.service';
 import {Moment} from 'moment';
 import {NotificationService} from '../../../services/notification.service';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
+import {Activity, MyActivity} from '../../../models/activities.model';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -42,8 +41,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   ],
 })
 export class ActivityAddComponent implements OnInit {
-  sportFields: SportFieldBase<any>[];
-  /*selectedActivity: FormControl;
+  selectedActivity: FormControl;
   activityDate: FormControl;
   duration: FormControl;
   distance: FormControl;
@@ -64,32 +62,27 @@ export class ActivityAddComponent implements OnInit {
   averageStrokesfrequency: FormControl;
   maxStrokesFrequency: FormControl;
   averagePace: FormControl;
-  strokes: FormControl;*/
+  strokes: FormControl;
 
   matcher: MyErrorStateMatcher = new MyErrorStateMatcher();
   addActivityFormGroup: FormGroup;
- /* hometrainerFormGroup: FormGroup;
+  hometrainerFormGroup: FormGroup;
   vttActivityFormGroup: FormGroup;
-  rowerActivityFormGroup: FormGroup;*/
- /* activitiesList: MyActivity[] = [
+  rowerActivityFormGroup: FormGroup;
+  activitiesList: MyActivity[] = [
     { key: ActivitiesType.VTT, name: ActivitiesNameLabel.VTT },
     { key: ActivitiesType.VELO_INSIDE, name: ActivitiesNameLabel.VELO_INSIDE },
     { key: ActivitiesType.RAMEUR, name: ActivitiesNameLabel.RAMEUR }
-  ];*/
+  ];
 
- // HOME_TRAINER: string = ActivitiesType.VELO_INSIDE;
+  HOME_TRAINER: string = ActivitiesType.VELO_INSIDE;
   VTT: string = ActivitiesType.VTT;
   ROWER: string = ActivitiesType.RAMEUR;
+  DISTANCE: string = ActivityUnities.DISTANCE;
+  SPEED: string = ActivityUnities.SPEED;
+  FC: string = ActivityUnities.FC;
+
   userEmail: string;
-
-
- /* ActivityUnities: Array<UnityType> = [
-    { label: 'distance', unity: 'km'},
-    { label: 'speed', unity: 'km/h'},
-    { label: 'cadence', unity: 'rpm'},
-    { label: 'pace', unity: '500m/mn'},
-    { label: 'fc', unity: 'bpm'}
-  ];*/
 
   constructor(
     private fb: FormBuilder,
@@ -108,20 +101,14 @@ export class ActivityAddComponent implements OnInit {
         this.userEmail = userInfo.email;
       }
     });
-    this.activityService.getSportFields().subscribe({
-      next: sportFields => {
-        this.sportFields = sportFields;
-        this.initFormGroup();
-      }
-    });
+    this.initFormGroup();
   }
 
   /**
    * Initialize the activity form group
    */
   initFormGroup = (): void => {
-    this.addActivityFormGroup = this.activityService.toFormGroup(this.sportFields);
-    /*this.selectedActivity = new FormControl('', [
+    this.selectedActivity = new FormControl('', [
       Validators.required,
     ]);
     this.activityDate = new FormControl('', [Validators.required]);
@@ -168,26 +155,31 @@ export class ActivityAddComponent implements OnInit {
       Validators.pattern(numberWithNoDecimals),
     ]);
     this.averagePower = new FormControl( '', [
+      Validators.required,
       Validators.pattern(numberWithNoDecimals),
     ]);
     this.maxPower = new FormControl( '', [
+      Validators.required,
       Validators.pattern(numberWithNoDecimals),
     ]);
     this.maxAveragePower = new FormControl('', [
+      Validators.required,
       Validators.pattern(numberWithNoDecimals),
     ]);
     this.averageCadence = new FormControl( '', [
+      Validators.required,
       Validators.pattern(numberWithNoDecimals),
     ]);
     this.maxCadence = new FormControl( '', [
+      Validators.required,
       Validators.pattern(numberWithNoDecimals),
     ]);
-    this.constance = new FormControl('', [Validators.pattern(twoDecimalsRegex)]);
-    this.difficulty = new FormControl('', [Validators.pattern(twoDecimalsRegex)]);
-    this.averageStrokesfrequency = new FormControl('', [Validators.pattern(numberWithNoDecimals)]);
-    this.maxStrokesFrequency = new FormControl('', [Validators.pattern(numberWithNoDecimals)]);
-    this.averagePace = new FormControl('', [Validators.pattern(twoDecimalsRegex)]);
-    this.strokes = new FormControl('', [Validators.pattern(numberWithNoDecimals)]);
+    this.constance = new FormControl('', [Validators.required, Validators.pattern(twoDecimalsRegex)]);
+    this.difficulty = new FormControl('', [Validators.required, Validators.pattern(twoDecimalsRegex)]);
+    this.averageStrokesfrequency = new FormControl('', [Validators.required, Validators.pattern(numberWithNoDecimals)]);
+    this.maxStrokesFrequency = new FormControl('', [Validators.required, Validators.pattern(numberWithNoDecimals)]);
+    this.averagePace = new FormControl('', [Validators.required, Validators.pattern(twoDecimalsRegex)]);
+    this.strokes = new FormControl('', [Validators.required, Validators.pattern(numberWithNoDecimals)]);
     this.hometrainerFormGroup = this.fb.group({
       averagePower: this.averagePower,
       maxPower: this.maxPower,
@@ -220,16 +212,76 @@ export class ActivityAddComponent implements OnInit {
       hometrainerForm: this.hometrainerFormGroup,
       vttForm: this.vttActivityFormGroup,
       rowerForm: this.rowerActivityFormGroup
-    });*/
+    });
+
+    this.selectedActivity.valueChanges.subscribe({
+      next: value => {
+        switch (value) {
+          case ActivitiesType.RAMEUR:
+            this.removeVttValidators();
+            this.removeHometrainerValidators();
+            break;
+          case ActivitiesType.VELO_INSIDE:
+            this.removeRowerValidators();
+            this.removeVttValidators();
+            break;
+          case ActivitiesType.VTT:
+            this.removeRowerValidators();
+            this.removeHometrainerValidators();
+            break;
+          default: break;
+        }
+      }
+    });
+  }
+
+  private removeHometrainerValidators = (): void => {
+    this.averagePower.removeValidators([Validators.required]);
+    this.averagePower.updateValueAndValidity();
+
+    this.maxPower.removeValidators([Validators.required]);
+    this.maxPower.updateValueAndValidity();
+
+    this.averageCadence.removeValidators([Validators.required]);
+    this.averageCadence.updateValueAndValidity();
+
+    this.maxCadence.removeValidators([Validators.required]);
+    this.maxCadence.updateValueAndValidity();
+
+    this.maxAveragePower.removeValidators([Validators.required]);
+    this.maxAveragePower.updateValueAndValidity();
+
+  }
+
+  private removeVttValidators = (): void => {
+    this.constance.removeValidators([Validators.required]);
+    this.constance.updateValueAndValidity();
+    this.difficulty.removeValidators([Validators.required]);
+    this.difficulty.updateValueAndValidity();
+  }
+
+  private removeRowerValidators = (): void => {
+    this.averageStrokesfrequency.removeValidators([Validators.required]);
+    this.averageStrokesfrequency.updateValueAndValidity();
+
+    this.maxStrokesFrequency.removeValidators([Validators.required]);
+    this.maxStrokesFrequency.updateValueAndValidity();
+
+    this.averagePace.removeValidators([Validators.required]);
+    this.averagePace.updateValueAndValidity();
+
+    this.strokes.removeValidators([Validators.required]);
+    this.strokes.updateValueAndValidity();
   }
 
   /**
    * Save new activity
    */
   addNewActivity = (): void => {
-    /*let Payload: Activity;
+    let Payload: Activity;
     const isActivityValid = this.checkActivityValidity();
     const convertedActivityDate = this.convertActivityDate(this.activityDate.value);
+    console.log('form activity: ', this.addActivityFormGroup.getRawValue());
     if (isActivityValid) {
       switch (this.selectedActivity.value) {
         case ActivitiesType.VELO_INSIDE:
@@ -312,23 +364,28 @@ export class ActivityAddComponent implements OnInit {
     else {
       this.generalService.sendLoadingActivityChangeInformation(false);
       this.notificationService.failure('Impossible de sauvegarder');
-    }*/
+    }
   }
 
   checkActivityValidity = (): boolean => {
-   /* const speedCheck = Number(this.averageSpeed.value) < Number(this.maxSpeed.value);
+    const speedCheck = Number(this.averageSpeed.value) < Number(this.maxSpeed.value);
     const freqCheck = Number(this.averageFc.value) < Number(this.maxFc.value);
-    const cadenceCheck =
-      this.averageCadence.value && this.maxCadence.value
-        ? Number(this.averageCadence.value) < Number(this.maxCadence.value)
-        : true;
-    const powerCheck =
-      this.averagePower.value && this.maxPower.value
-        ? Number(this.averagePower.value) < Number(this.maxPower.value)
-        : true;
-    console.log('activity validity: ', speedCheck && freqCheck && cadenceCheck && powerCheck);
-    return (speedCheck && freqCheck && cadenceCheck && powerCheck);*/
-    return true;
+    let cadenceCheck = false;
+    let powerCheck = false;
+
+    if (this.selectedActivity.value === ActivitiesType.VELO_INSIDE) {
+      cadenceCheck =
+        this.averageCadence.value && this.maxCadence.value
+          ? Number(this.averageCadence.value) < Number(this.maxCadence.value)
+          : true;
+      powerCheck =
+        this.averagePower.value && this.maxPower.value
+          ? Number(this.averagePower.value) < Number(this.maxPower.value)
+          : true;
+    }
+    return this.selectedActivity.value === ActivitiesType.VELO_INSIDE
+      ? speedCheck && freqCheck && cadenceCheck && powerCheck
+      : speedCheck && freqCheck;
   }
 
   convertActivityDate = (dateToBeConverted: Moment): string => {
