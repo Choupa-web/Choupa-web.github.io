@@ -17,7 +17,7 @@ import {Activity} from '../../../models/activities.model';
 })
 export class ActivitiesListComponent implements OnInit {
   userEmail: string;
-  dataSource: MatTableDataSource<Activity>;
+  dataSource: MatTableDataSource<Activity> = new MatTableDataSource<Activity>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -46,10 +46,9 @@ export class ActivitiesListComponent implements OnInit {
         this.userEmail = userInfo.email;
         this.activitiesService.getAllActivities().subscribe({
           next: (response) => {
-            this.dataSource = response.map(item => Object.assign({id: item.payload.doc.id}, item.payload.doc.data()));
+            this.dataSource.data = response.map(item => Object.assign({id: item.payload.doc.id}, item.payload.doc.data()));
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
-            console.log('myActivities: ', this.dataSource);
             this.generalService.sendLoadingActivityChangeInformation(false);
           }
         });
