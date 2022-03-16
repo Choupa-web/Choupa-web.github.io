@@ -1,6 +1,7 @@
 import {AfterContentInit, AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
 import {GeneralService} from './services/general.service';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -15,15 +16,14 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('sidenav') sidenav: MatSidenav;
 
   constructor(private generalService: GeneralService) {
-    this.generalService.sendLoadingActivityChangeInformation(false);
+    this.menuOpened = false;
+    this.loading = false;
   }
 
   ngOnInit(): void {
-    this.menuOpened = false;
     this.generalService.activityLoadingStatuschange.subscribe({
       next: (loadingStatus) => {
         this.loading = loadingStatus;
-        console.log('progress bar update');
       }
     });
   }
