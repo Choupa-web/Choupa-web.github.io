@@ -9,6 +9,7 @@ import {NotificationService} from '../../../services/notification.service';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {ActivityEditComponent} from '../activity-edit/activity-edit.component';
 import {Activity} from '../../../models/activities.model';
+import {ActivityUnities} from '../../../enums/activity.enum';
 
 @Component({
   selector: 'app-activities-list',
@@ -31,6 +32,9 @@ export class ActivitiesListComponent implements OnInit {
     'aerobie',
     'anaerobique',
   ];
+
+  DISTANCE: string = ActivityUnities.DISTANCE;
+
   constructor(
     private activitiesService: ActivitiesService,
     private generalService: GeneralService,

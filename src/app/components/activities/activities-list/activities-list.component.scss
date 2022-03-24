@@ -10,6 +10,12 @@ a {
 .mat-column-actions {
   width: 15%;
 }
+
+.mat-header-cell {
+  color: #3F51B5 ;
+  font-weight: bold;
+  text-transform: uppercase;
+}
 /*.mat-row .mat-cell {
   border-bottom: 1px solid transparent;
   border-top: 1px solid transparent;
