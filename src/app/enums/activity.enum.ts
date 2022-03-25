@@ -1,6 +1,8 @@
 /**
  * Liste des types d'activités possible
  */
+import {MyActivity} from '../models/activities.model';
+
 export enum ActivitiesType {
   VTT = 'VTT',
   VELO_INSIDE = 'VELO_INSIDE',

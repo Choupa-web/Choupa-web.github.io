@@ -1,4 +1,5 @@
 import {ActivitiesNameLabel} from '../enums/activity.enum';
+import {ButtonAction} from '../enums/buttons.enum';
 
 export interface Activity {
   id?: string;
@@ -41,4 +42,9 @@ export class MyActivity {
 export interface UnityType {
   label: string;
   unity: string;
+}
+
+export interface ModalFeedback {
+  action: ButtonAction;
+  data: Activity;
 }
