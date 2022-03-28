@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
+$links: #ff784c;
+$secondary: #3f5790;
+
 html { height: 100%; }
 body {
          margin: 0;
@@ -42,9 +45,6 @@ section#content {
     padding-left: 15px;
 
 }
-.mat-h1, .mat-h2 {
-    color: #673ab7;
-}
 
 .mat-snack-bar-container {
   background-color: white;
@@ -52,6 +52,14 @@ section#content {
   border: 1px solid #F0F0F0;
 }
 
+.mat-raised-button {
+  background-color: $links !important;
+}
+
+h1, h2, h3 {
+  text-transform: uppercase;
+  color: $secondary;
+}
 
 /* Responsive */
 @media (max-width: 640px){

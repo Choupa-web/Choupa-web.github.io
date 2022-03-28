@@ -1,3 +1,9 @@
+$primary: #004c6d;
+$secondary: #3f5790;
+$links: #ff784c;
+$text-color: white;
+$link-active: #ffa600;
+
 #sidebar {
   padding-top: 50px;
 }
@@ -6,11 +12,12 @@ a {
   text-decoration: none;
   font-weight: 500 !important;
   color: white !important;
+  text-transform: uppercase;
 }
 
 
 .active {
-    color: #E9527E !important;
+    color: $link-active !important;
 }
 
 fa-icon {
@@ -18,10 +25,11 @@ fa-icon {
 }
 
 mat-list {
-  background-color: #3F51B5;
+
   margin-left: 20px;
   padding: 20px 10px;
   border-radius: 8px;
 }
+
 
 
