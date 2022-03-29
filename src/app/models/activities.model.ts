@@ -1,4 +1,5 @@
-import {ActivitiesNameLabel} from '../enums/activity.enum';
+import {ActivitiesNameLabel, ActivityFormScope} from '../enums/activity.enum';
+import {ControlType} from '../enums/forms.enum';
 
 export interface Activity {
   id?: string;
@@ -41,4 +42,35 @@ export class MyActivity {
 export interface UnityType {
   label: string;
   unity: string;
+}
+
+export class ActivityFormControl<T> {
+  controlName: string;
+  label: string;
+  order: number;
+  required?: boolean;
+  validationPattern?: string;
+  controlType: ControlType;
+  value: T | undefined;
+  scope: ActivityFormScope;
+
+  constructor(options: {
+    value?: T;
+    controlName: string;
+    order: number;
+    required: boolean;
+    validationPattern: string;
+    controltype: ControlType;
+    label: string;
+    scope: ActivityFormScope;
+  }) {
+    this.value = options.value;
+    this.controlName = options.controlName;
+    this.order = options.order;
+    this.required = options.required;
+    this.validationPattern = options.validationPattern;
+    this.controlType = options.controltype;
+    this.label = options.label;
+    this.scope = options.scope;
+  }
 }

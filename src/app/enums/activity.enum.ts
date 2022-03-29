@@ -64,6 +64,11 @@ export enum ActivityUnities {
   FREQUENCE_COUPS = 'cps/mn'
 }
 
+export enum ActivityFormScope {
+  COMMON = 'COMMON',
+  SPECIFIC = 'SPECIFIC'
+}
+
 
 
 

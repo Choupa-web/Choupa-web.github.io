@@ -51,6 +51,7 @@ import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import { HometrainerActivityFormComponent } from './components/activities/hometrainer-activity-form/hometrainer-activity-form.component';
 import { VttActivityFormComponent } from './components/activities/vtt-activity-form/vtt-activity-form.component';
 import { RowerActivityFormComponent } from './components/activities/rower-activity-form/rower-activity-form.component';
+import { ActivitiesDynamicFormComponent } from './components/activities/activities-dynamic-form/activities-dynamic-form.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -75,7 +76,8 @@ registerLocaleData(localeFr, 'fr');
     ActivityEditComponent,
     HometrainerActivityFormComponent,
     VttActivityFormComponent,
-    RowerActivityFormComponent
+    RowerActivityFormComponent,
+    ActivitiesDynamicFormComponent
   ],
   imports: [
     BrowserModule,
