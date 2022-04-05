@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ActivityFormControl} from '../../../models/activities.model';
-import {FormArray, FormGroup} from '@angular/forms';
-import {ActivityFormScope} from '../../../enums/activity.enum';
-import {GeneralService} from '../../../services/general.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormsService} from '../../../services/forms.service';
+import {ControlType} from '../../../enums/forms.enum';
 
 @Component({
   selector: 'app-activities-dynamic-form',
@@ -11,19 +11,21 @@ import {GeneralService} from '../../../services/general.service';
 })
 export class ActivitiesDynamicFormComponent implements OnInit {
   @Input() controlsList: ActivityFormControl<any>[];
+  @Output() submitForm: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   globalForm: FormGroup;
-  commonForm: FormGroup;
-  specificForm: FormGroup;
+  activityIcon: ActivityFormControl<any>;
 
-  constructor(private gs: GeneralService) { }
+  GRAPHICAL = ControlType.GRAPHICAL;
+
+  constructor(private formsService: FormsService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    const commonControlsList = this.controlsList.filter(element => element.scope === ActivityFormScope.COMMON);
-    const specificControlsList = this.controlsList.filter(element => element.scope === ActivityFormScope.SPECIFIC);
-    this.globalForm = this.gs.toFormGroup(commonControlsList);
-    this.specificForm = this.gs.toFormGroup(specificControlsList);
-
-    this.globalForm.addControl('datas', this.specificForm);
+    this.activityIcon = this.controlsList.filter(element => element.controlType === ControlType.GRAPHICAL)[0];
+    console.log('activity graphic: ', this.activityIcon);
+    this.globalForm = this.formsService.toFormGroup(this.controlsList);
   }
 
+  saveForm = (): void => {
+    this.submitForm.emit(this.globalForm);
+  }
 }

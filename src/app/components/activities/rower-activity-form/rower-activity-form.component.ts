@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup, FormGroupDirective} from '@angular/forms';
-import {ActivitiesType, ActivityUnities} from '../../../enums/activity.enum';
+import {ActivitiesType, ActivityUnits} from '../../../enums/activity.enum';
 
 @Component({
   selector: 'app-rower-activity-form',
@@ -11,8 +11,8 @@ export class RowerActivityFormComponent implements OnInit {
   @Input() formGroupName: string;
   rowerActivityForm: FormGroup;
 
-  ALLURE: string = ActivityUnities.ALLURE;
-  FREQUENCE_COUPS = ActivityUnities.FREQUENCE_COUPS;
+  ALLURE: string = ActivityUnits.ALLURE;
+  FREQUENCE_COUPS = ActivityUnits.FREQUENCE_COUPS;
 
   constructor(private activityForm: FormGroupDirective) { }
 

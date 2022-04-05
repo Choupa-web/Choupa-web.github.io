@@ -1,96 +1,37 @@
-<form [formGroup]="addActivityFormGroup">
-  <div id="common-info" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap="20px">
-    <div *ngfor="let field of controlsList" fxLayout="row wrap" fxLayoutGap="15px" fxLayout.md="column" fxLayout.sm="column" fxLayout.xs="column">
-      <mat-form-field appearance="outline">
-        <mat-label>field.label</mat-label>
-        <ng-container [ngSwitch]="field.controlType">
-          <input *ngSwitchCase="'textboxdate'" matInput [matDatepicker]="picker" [formControlName]="field.controlName">
+<div id="container" [formGroup]="globalForm" fxLayout="row">
+  <div class="left" fxLayout="row" fxLayoutAlign="center center" fxFlex="30" [id]="'ctrl-' + activityIcon.order" *ngIf="activityIcon.controlType == GRAPHICAL">
+    {{ activityIcon.value }}
+  </div>
+  <div class="right" fxLayout="column">
+    <h2>Entrez les informations de votre nouvelle activité {{ activityIcon.value }}</h2>
+    <div fxLayout="row wrap" fxLayoutGap="30px" fxLayoutAlign="start">
+    <ng-container *ngFor="let control of controlsList">
+        <div [ngSwitch]="control.controlType" *ngIf="control.controlType !== GRAPHICAL">
+          <mat-form-field [id]="'ctrl-' + control.order" appearance="outline">
+            <mat-label>{{ control.label }}</mat-label>
+            <div  *ngSwitchCase="'textboxdate'">
+              <input matInput [matDatepicker]="picker" [formControlName]="control.controlName">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </div>
+            <div *ngSwitchCase="'textboxtime'">
+              <input type="time" matInput [formControlName]="control.controlName">
+            </div>
+            <div *ngSwitchCase="'textbox-decimal'">
+              <input appReplaceCommaByDotInCtrl matInput [formControlName]="control.controlName">
+            </div>
+            <div *ngSwitchCase="'textbox-nodecimal'">
+              <input matInput [formControlName]="control.controlName">
+            </div>
+          </mat-form-field>
+          <span *ngIf="control.controlUnit" matSuffix>{{ control.controlUnit }}</span>
+          <!--<mat-error *ngIf="control.controlName.hasError('required')">{{ control.label}} manquante</mat-error>-->
+        </div>
+    </ng-container>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end">
+      <button mat-raised-button color="accent" (click)="saveForm()" [disabled]="globalForm.invalid">Ajouter</button>
+    </div>
+  </div>
 
-        </ng-container>
-
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="field.controlName.hasError('required')">{{ field.label}} manquante</mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Durée de l'activité</mat-label>
-        <input type="time" matInput [formControl]="duration">
-        <mat-error *ngIf="duration.hasError('required')">Durée de l'activité manquante</mat-error>
-        <mat-error *ngIf="duration.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Distance</mat-label>
-        <input appReplaceCommaByDotInCtrl matInput [formControl]="distance">
-        <span matSuffix>{{DISTANCE}}</span>
-        <mat-error *ngIf="distance.hasError('required')">Distance de l'activité manquante</mat-error>
-        <mat-error *ngIf="distance.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Vitesse moyenne</mat-label>
-        <input appReplaceCommaByDotInCtrl matInput [formControl]="averageSpeed">
-        <span matSuffix>{{SPEED}}</span>
-        <mat-error *ngIf="averageSpeed.hasError('required')">Vitesse moyenne de l'activité manquante</mat-error>
-        <mat-error *ngIf="averageSpeed.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Vitesse max</mat-label>
-        <input appReplaceCommaByDotInCtrl matInput [formControl]="maxSpeed">
-        <span matSuffix>{{SPEED}}</span>
-        <mat-error *ngIf="maxSpeed.hasError('required')">Vitesse maximum de l'activité manquante</mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>FC moyenne</mat-label>
-        <input matInput [formControl]="averageFc">
-        <span matSuffix>{{FC}}</span>
-        <mat-error *ngIf="averageFc.hasError('required')">Fréquence cardiaque moyenne de l'activité manquante</mat-error>
-        <mat-error *ngIf="averageFc.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>FC max</mat-label>
-        <input matInput [formControl]="maxFc">
-        <span matSuffix>{{FC}}</span>
-        <mat-error *ngIf="maxFc.hasError('required')">Fréquence cardiaque maximum de l'activité manquante</mat-error>
-        <mat-error *ngIf="maxFc.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Aérobie</mat-label>
-        <input appReplaceCommaByDotInCtrl matInput [formControl]="aerobie">
-        <mat-error *ngIf="aerobie.hasError('required')">Aérobie de l'activité manquante</mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Anaérobique</mat-label>
-        <input appReplaceCommaByDotInCtrl matInput [formControl]="anaerobique">
-        <mat-error *ngIf="anaerobique.hasError('required')">La valeur anaérobique de votre activité est manquante</mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Exercice Load</mat-label>
-        <input matInput [formControl]="exerciceLoad">
-        <mat-error *ngIf="exerciceLoad.hasError('required')">Exercice load de l'activité manquant</mat-error>
-        <mat-error *ngIf="exerciceLoad.hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
-      </mat-form-field>
-    </div>
-  </div>
-  <div id="activity-info" fxLayout="row" fxLayoutGap="20px" fxLayout.md="column" fxLayout.sm="column" fxLayout.xs="column">
-    <div id="select-activity">
-      <mat-form-field appearance="outline">
-        <mat-label>Sélectionnez une activité</mat-label>
-        <mat-select [formControl]="selectedActivity" [errorStateMatcher]="matcher">
-          <mat-option *ngFor="let activity of activitiesList" [value]="activity.key">{{ activity.name }}</mat-option>
-        </mat-select>
-        <mat-error *ngIf="selectedActivity.hasError('required')">Activité manquante</mat-error>
-      </mat-form-field>
-    </div>
-    <div id="home-trainer-activity" *ngIf="selectedActivity.value === HOME_TRAINER">
-      <app-hometrainer-activity-form formGroupName="hometrainerForm"></app-hometrainer-activity-form>
-    </div>
-    <div id="vtt-activity" *ngIf="selectedActivity.value === VTT">
-      <app-vtt-activity-form formGroupName="vttForm"></app-vtt-activity-form>
-    </div>
-    <div id="rower-activity" *ngIf="selectedActivity.value === ROWER">
-      <app-rower-activity-form formGroupName="rowerForm"></app-rower-activity-form>
-    </div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="end">
-    <button mat-raised-button color="accent" (click)="addNewActivity()" [disabled]="addActivityFormGroup.invalid">Ajouter</button>
-  </div>
-</form>
+</div>

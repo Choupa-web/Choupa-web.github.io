@@ -18,17 +18,4 @@ export class GeneralService {
   sendLoadingActivityChangeInformation = (status: boolean): void => {
     this.loadingActivityDetected.next(status);
   }
-
-  toFormGroup = (controlsList: ActivityFormControl<any>[]): FormGroup => {
-  const group: any = {};
-
-  controlsList.forEach(question => {
-      group[question.controlName] = question.required
-        ? new FormControl(question.value || '', [Validators.required])
-        : new FormControl(question.value || '');
-  });
-  return new FormGroup(group);
-  }
-
-
 }

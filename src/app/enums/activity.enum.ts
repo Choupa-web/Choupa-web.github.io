@@ -1,6 +1,8 @@
 /**
  * Liste des types d'activités possible
  */
+import {MyActivity} from '../models/activities.model';
+
 export enum ActivitiesType {
   VTT = 'VTT',
   VELO_INSIDE = 'VELO_INSIDE',
@@ -11,9 +13,9 @@ export enum ActivitiesType {
  * Nom des activités
  */
 export enum ActivitiesNameLabel {
-  VTT = 'Vtt',
-  VELO_INSIDE = 'Vélo home trainer',
-  RAMEUR = 'Rameur'
+  VTT = 'VTT',
+  VELO_INSIDE = 'HOME TRAINER',
+  RAMEUR = 'RAMEUR'
 }
 
 /**
@@ -54,7 +56,7 @@ export enum ActivityFieldsMax {
   EXERCICE_LOAD = 50
 }
 
-export enum ActivityUnities {
+export enum ActivityUnits {
   DISTANCE = 'km',
   SPEED = 'km/h',
   FC = 'bpm',

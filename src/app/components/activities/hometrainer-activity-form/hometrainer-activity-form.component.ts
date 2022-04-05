@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup, FormGroupDirective} from '@angular/forms';
-import {ActivityUnities} from '../../../enums/activity.enum';
+import {ActivityUnits} from '../../../enums/activity.enum';
 
 @Component({
   selector: 'app-hometrainer-activity-form',
@@ -11,8 +11,8 @@ export class HometrainerActivityFormComponent implements OnInit {
   @Input() formGroupName: string;
   hometrainerActivityForm: FormGroup;
 
-  CADENCE: string = ActivityUnities.CADENCE;
-  POWER: string = ActivityUnities.POWER;
+  CADENCE: string = ActivityUnits.CADENCE;
+  POWER: string = ActivityUnits.POWER;
 
   constructor(private activityForm: FormGroupDirective) { }
 

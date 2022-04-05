@@ -1,6 +1,8 @@
 export enum ControlType {
-  TEXTBOX = 'textbox',
   DROPDOWN = 'dropdown',
   TEXTBOXDATE = 'textboxdate',
-  TEXTBOXTIME = 'textboxtime'
+  TEXTBOXTIME = 'textboxtime',
+  TEXTBOX_NODECIMAL = 'textbox-nodecimal',
+  TEXTBOX_DECIMAL = 'textbox-decimal',
+  GRAPHICAL = 'graphical'
 }

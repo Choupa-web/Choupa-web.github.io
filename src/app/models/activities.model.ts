@@ -1,4 +1,4 @@
-import {ActivitiesNameLabel, ActivityFormScope} from '../enums/activity.enum';
+import {ActivitiesNameLabel, ActivitiesType, ActivityFormScope, ActivityUnits} from '../enums/activity.enum';
 import {ControlType} from '../enums/forms.enum';
 
 export interface Activity {
@@ -15,23 +15,17 @@ export interface Activity {
   aerobie: number;
   anaerobique: number;
   exerciceLoad: number;
-  hometrainerData?: {
-    averagePower: number;
-    maxPower: number;
-    averageCadence: number;
-    maxCadence: number;
-    maxAveragePower: number;
-  };
-  vttData?: {
-    constance: number;
-    difficulty: number;
-  };
-  rowerData?: {
-    averageStrokesfrequency: number;
-    maxStrokesFrequency: number;
-    averagePace: number;
-    strokes: number;
-  };
+  averagePower?: number;
+  maxPower?: number;
+  averageCadence?: number;
+  maxCadence?: number;
+  maxAveragePower?: number;
+  constance?: number;
+  difficulty?: number;
+  averageStrokesfrequency?: number;
+  maxStrokesFrequency?: number;
+  averagePace?: number;
+  strokes?: number;
 }
 
 export class MyActivity {
@@ -39,10 +33,11 @@ export class MyActivity {
   name: ActivitiesNameLabel;
 }
 
-export interface UnityType {
+export interface UnitType {
   label: string;
   unity: string;
 }
+
 
 export class ActivityFormControl<T> {
   controlName: string;
@@ -53,16 +48,20 @@ export class ActivityFormControl<T> {
   controlType: ControlType;
   value: T | undefined;
   scope: ActivityFormScope;
+  controlUnit?: ActivityUnits;
+  disabled?: boolean;
 
   constructor(options: {
     value?: T;
     controlName: string;
     order: number;
-    required: boolean;
-    validationPattern: string;
+    required?: boolean;
+    validationPattern?: string;
     controltype: ControlType;
     label: string;
     scope: ActivityFormScope;
+    controlUnit?: ActivityUnits;
+    disabled: boolean;
   }) {
     this.value = options.value;
     this.controlName = options.controlName;
@@ -72,5 +71,7 @@ export class ActivityFormControl<T> {
     this.controlType = options.controltype;
     this.label = options.label;
     this.scope = options.scope;
+    this.controlUnit = options.controlUnit;
+    this.disabled = options.disabled;
   }
 }

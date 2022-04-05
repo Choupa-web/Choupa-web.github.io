@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {DateAdapter, ErrorStateMatcher, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {ActivitiesNameLabel, ActivitiesType, ActivityFieldsMax, ActivityUnities} from '../../../enums/activity.enum';
+import {FormBuilder} from '@angular/forms';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {ActivitiesNameLabel, ActivitiesType, ActivityFormScope, ActivityUnits} from '../../../enums/activity.enum';
 import {AuthService} from '@auth0/auth0-angular';
-import {numberWithNoDecimals, threeDecimalsRegex, twoDecimalsRegex} from '../../../utils/Regex.utils';
 import {ActivitiesService} from '../../../services/activities.service';
 import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
@@ -11,20 +10,21 @@ import {
   MomentDateAdapter,
 } from '@angular/material-moment-adapter';
 import 'moment/locale/fr';
+import {Activity, ActivityFormControl, MyActivity} from '../../../models/activities.model';
+import {ControlType} from '../../../enums/forms.enum';
 import {GeneralService} from '../../../services/general.service';
-import {Moment} from 'moment';
 import {NotificationService} from '../../../services/notification.service';
 import {Router} from '@angular/router';
-import {Activity, MyActivity} from '../../../models/activities.model';
+import {Moment} from 'moment/moment';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
-export class MyErrorStateMatcher implements ErrorStateMatcher {
+/*export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
-}
+}*/
 
 @Component({
   selector: 'app-activity-add',
@@ -41,7 +41,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   ],
 })
 export class ActivityAddComponent implements OnInit {
-  selectedActivity: FormControl;
+  /*selectedActivity: FormControl;
   activityDate: FormControl;
   duration: FormControl;
   distance: FormControl;
@@ -62,25 +62,157 @@ export class ActivityAddComponent implements OnInit {
   averageStrokesfrequency: FormControl;
   maxStrokesFrequency: FormControl;
   averagePace: FormControl;
-  strokes: FormControl;
+  strokes: FormControl;*/
+  controlsList: ActivityFormControl<any>[] = [
+    {
+      controlName: 'activityDate',
+      required: true,
+      label: 'Date de l\'activité',
+      controlType: ControlType.TEXTBOXDATE,
+      order: 1,
+      scope: ActivityFormScope.COMMON,
+      value: '',
+      disabled: false
+    },
+    {
+      controlName: 'duration',
+      required: true,
+      label: 'Durée de l\'activité',
+      controlType: ControlType.TEXTBOXTIME,
+      order: 2,
+      scope: ActivityFormScope.COMMON,
+      value: '',
+      disabled: false
+    },
+    {
+      controlName: 'averageSpeed',
+      required: true,
+      label: 'Vitesse moyenne',
+      controlType: ControlType.TEXTBOX_DECIMAL,
+      order: 4,
+      scope: ActivityFormScope.COMMON,
+      value: '',
+      disabled: false
+    },
+    {
+      controlName: 'maxSpeed',
+      required: true,
+      label: 'Vitesse maximum',
+      controlType: ControlType.TEXTBOX_DECIMAL,
+      order: 5,
+      scope: ActivityFormScope.COMMON,
+      value: '',
+      disabled: false
+    },
+    {
+      controlName: 'distance',
+      required: true,
+      label: 'Distance',
+      controlType: ControlType.TEXTBOX_DECIMAL,
+      order: 3,
+      scope: ActivityFormScope.COMMON,
+      value: '',
+      disabled: false
+    },
+    {
+      controlName: 'averageFc',
+      required: true,
+      label: 'Fréquence moyenne',
+      controlType: ControlType.TEXTBOX_NODECIMAL,
+      order: 6,
+      scope: ActivityFormScope.COMMON,
+      value: '',
+      disabled: false
+    },
+    {
+      controlName: 'exerciceLoad',
+      required: true,
+      label: 'Exercice load',
+      controlType: ControlType.TEXTBOX_NODECIMAL,
+      order: 10,
+      scope: ActivityFormScope.COMMON,
+      value: '',
+      disabled: false
+    },
+    {
+      controlName: 'maxFc',
+      required: true,
+      label: 'Fréquence maximum',
+      controlType: ControlType.TEXTBOX_NODECIMAL,
+      order: 7,
+      scope: ActivityFormScope.COMMON,
+      value: '',
+      disabled: false
+    },
+    {
+      controlName: 'aerobie',
+      required: true,
+      label: 'Aérobie',
+      controlType: ControlType.TEXTBOX_DECIMAL,
+      order: 8,
+      scope: ActivityFormScope.COMMON,
+      value: '',
+      disabled: false
+    },
+    {
+      controlName: 'anaerobique',
+      required: true,
+      label: 'Anaérobique',
+      controlType: ControlType.TEXTBOX_DECIMAL,
+      order: 9,
+      scope: ActivityFormScope.COMMON,
+      value: '',
+      disabled: false
+    },
+    {
+      controlName: 'activityName',
+      required: true,
+      label: 'Activité',
+      controlType: ControlType.GRAPHICAL,
+      order: 0,
+      scope: ActivityFormScope.COMMON,
+      value: ActivitiesNameLabel.VTT,
+      disabled: true
+    },
+    {
+      controlName: 'constance',
+      required: true,
+      label: 'Constance',
+      controlType: ControlType.TEXTBOX_NODECIMAL,
+      order: 11,
+      scope: ActivityFormScope.SPECIFIC,
+      value: '',
+      disabled: false
+    },
+    {
+      controlName: 'difficulty',
+      required: true,
+      label: 'Difficulté',
+      controlType: ControlType.TEXTBOX_NODECIMAL,
+      order: 12,
+      scope: ActivityFormScope.SPECIFIC,
+      value: '',
+      disabled: false
+    },
+  ];
 
-  matcher: MyErrorStateMatcher = new MyErrorStateMatcher();
-  addActivityFormGroup: FormGroup;
+  // matcher: MyErrorStateMatcher = new MyErrorStateMatcher();
+  /*addActivityFormGroup: FormGroup;
   hometrainerFormGroup: FormGroup;
   vttActivityFormGroup: FormGroup;
-  rowerActivityFormGroup: FormGroup;
+  rowerActivityFormGroup: FormGroup;*/
   activitiesList: MyActivity[] = [
     { key: ActivitiesType.VTT, name: ActivitiesNameLabel.VTT },
     { key: ActivitiesType.VELO_INSIDE, name: ActivitiesNameLabel.VELO_INSIDE },
     { key: ActivitiesType.RAMEUR, name: ActivitiesNameLabel.RAMEUR }
   ];
 
-  HOME_TRAINER: string = ActivitiesType.VELO_INSIDE;
+  // HOME_TRAINER: string = ActivitiesType.VELO_INSIDE;
   VTT: string = ActivitiesType.VTT;
   ROWER: string = ActivitiesType.RAMEUR;
-  DISTANCE: string = ActivityUnities.DISTANCE;
-  SPEED: string = ActivityUnities.SPEED;
-  FC: string = ActivityUnities.FC;
+  DISTANCE: string = ActivityUnits.DISTANCE;
+  SPEED: string = ActivityUnits.SPEED;
+  FC: string = ActivityUnits.FC;
 
   userEmail: string;
 
@@ -101,13 +233,40 @@ export class ActivityAddComponent implements OnInit {
         this.userEmail = userInfo.email;
       }
     });
-    this.initFormGroup();
+    this.controlsList.sort((a, b) => a.order < b.order ? -1 : a.order > b.order ? 1 : 0);
+    // this.initFormGroup();
   }
 
   /**
+   * Save new activity
+   * @param $event - activity formgroup
+   */
+  saveActivity = ($event): void => {
+    const activityDate = $event.get('activityDate').value;
+    const payload: Activity = $event.getRawValue();
+    payload.activityDate = activityDate.format('DD/MM/YYYY');
+    this.generalService.sendLoadingActivityChangeInformation(true);
+    this.activityService.addActivity(payload).then(
+      (newActivity) => {
+        if (newActivity.id) {
+          this.generalService.sendLoadingActivityChangeInformation(false);
+          this.notificationService.success('Nouvelle activité ajoutée');
+          this.route.navigateByUrl('/activities');
+        }
+      }
+    ).catch((err) => {
+      this.notificationService.failure(err);
+      this.generalService.sendLoadingActivityChangeInformation(false);
+    });
+  }
+
+  convertActivityDate = (dateToBeConverted: Moment): string => {
+    return dateToBeConverted.format('DD/MM/YYYY');
+  }
+  /**
    * Initialize the activity form group
    */
-  initFormGroup = (): void => {
+  /*initFormGroup = (): void => {
     this.selectedActivity = new FormControl('', [
       Validators.required,
     ]);
@@ -233,51 +392,12 @@ export class ActivityAddComponent implements OnInit {
         }
       }
     });
-  }
-
-  private removeHometrainerValidators = (): void => {
-    this.averagePower.removeValidators([Validators.required]);
-    this.averagePower.updateValueAndValidity();
-
-    this.maxPower.removeValidators([Validators.required]);
-    this.maxPower.updateValueAndValidity();
-
-    this.averageCadence.removeValidators([Validators.required]);
-    this.averageCadence.updateValueAndValidity();
-
-    this.maxCadence.removeValidators([Validators.required]);
-    this.maxCadence.updateValueAndValidity();
-
-    this.maxAveragePower.removeValidators([Validators.required]);
-    this.maxAveragePower.updateValueAndValidity();
-
-  }
-
-  private removeVttValidators = (): void => {
-    this.constance.removeValidators([Validators.required]);
-    this.constance.updateValueAndValidity();
-    this.difficulty.removeValidators([Validators.required]);
-    this.difficulty.updateValueAndValidity();
-  }
-
-  private removeRowerValidators = (): void => {
-    this.averageStrokesfrequency.removeValidators([Validators.required]);
-    this.averageStrokesfrequency.updateValueAndValidity();
-
-    this.maxStrokesFrequency.removeValidators([Validators.required]);
-    this.maxStrokesFrequency.updateValueAndValidity();
-
-    this.averagePace.removeValidators([Validators.required]);
-    this.averagePace.updateValueAndValidity();
-
-    this.strokes.removeValidators([Validators.required]);
-    this.strokes.updateValueAndValidity();
-  }
+  }*/
 
   /**
    * Save new activity
    */
-  addNewActivity = (): void => {
+  /*addNewActivity = (): void => {
     let Payload: Activity;
     const isActivityValid = this.checkActivityValidity();
     const convertedActivityDate = this.convertActivityDate(this.activityDate.value);
@@ -365,30 +485,5 @@ export class ActivityAddComponent implements OnInit {
       this.generalService.sendLoadingActivityChangeInformation(false);
       this.notificationService.failure('Impossible de sauvegarder');
     }
-  }
-
-  checkActivityValidity = (): boolean => {
-    const speedCheck = Number(this.averageSpeed.value) < Number(this.maxSpeed.value);
-    const freqCheck = Number(this.averageFc.value) < Number(this.maxFc.value);
-    let cadenceCheck = false;
-    let powerCheck = false;
-
-    if (this.selectedActivity.value === ActivitiesType.VELO_INSIDE) {
-      cadenceCheck =
-        this.averageCadence.value && this.maxCadence.value
-          ? Number(this.averageCadence.value) < Number(this.maxCadence.value)
-          : true;
-      powerCheck =
-        this.averagePower.value && this.maxPower.value
-          ? Number(this.averagePower.value) < Number(this.maxPower.value)
-          : true;
-    }
-    return this.selectedActivity.value === ActivitiesType.VELO_INSIDE
-      ? speedCheck && freqCheck && cadenceCheck && powerCheck
-      : speedCheck && freqCheck;
-  }
-
-  convertActivityDate = (dateToBeConverted: Moment): string => {
-    return dateToBeConverted.format('DD/MM/YYYY');
-  }
+  }*/
 }
