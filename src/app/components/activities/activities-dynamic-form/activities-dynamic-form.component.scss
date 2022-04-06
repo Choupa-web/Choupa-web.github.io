@@ -4,16 +4,18 @@ $text-color: white;
 $radius: 20px;
 
 .mat-form-field-suffix {
-  color: $secondary;
+    color: $secondary;
 }
 
 .left {
   background-color: $primary;
   color: $secondary;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  min-width: 50px;
+  padding: 30px 10px;
 }
-.right {
 
-}
 #container {
   border: 2px solid $primary;
   border-radius: $radius;
@@ -25,6 +27,6 @@ $radius: 20px;
   .right {
     border-bottom-right-radius: $radius;
     border-top-right-radius: $radius;
-    padding: 20px 80px;
+    padding: 20px 50px;
   }
 }

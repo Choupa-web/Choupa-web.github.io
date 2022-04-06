@@ -49,6 +49,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {AngularFireModule} from '@angular/fire/compat';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import { ActivitiesDynamicFormComponent } from './components/activities/activities-dynamic-form/activities-dynamic-form.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -105,7 +106,8 @@ registerLocaleData(localeFr, 'fr');
     MatIconModule,
     MatDialogModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    MatMenuModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },

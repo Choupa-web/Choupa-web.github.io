@@ -47,7 +47,6 @@ export class ActivityFormControl<T> {
   validationPattern?: string;
   controlType: ControlType;
   value: T | undefined;
-  scope: ActivityFormScope;
   controlUnit?: ActivityUnits;
   disabled?: boolean;
 
@@ -59,7 +58,6 @@ export class ActivityFormControl<T> {
     validationPattern?: string;
     controltype: ControlType;
     label: string;
-    scope: ActivityFormScope;
     controlUnit?: ActivityUnits;
     disabled: boolean;
   }) {
@@ -70,7 +68,6 @@ export class ActivityFormControl<T> {
     this.validationPattern = options.validationPattern;
     this.controlType = options.controltype;
     this.label = options.label;
-    this.scope = options.scope;
     this.controlUnit = options.controlUnit;
     this.disabled = options.disabled;
   }

@@ -4,7 +4,7 @@
   </div>
   <div class="right" fxLayout="column">
     <h2>Entrez les informations de votre nouvelle activité {{ activityIcon.value }}</h2>
-    <div fxLayout="row wrap" fxLayoutGap="30px" fxLayoutAlign="start">
+    <div fxLayout="row wrap" fxLayoutGap="40px" fxLayoutAlign="start">
     <ng-container *ngFor="let control of controlsList">
         <div [ngSwitch]="control.controlType" *ngIf="control.controlType !== GRAPHICAL">
           <mat-form-field [id]="'ctrl-' + control.order" appearance="outline">
@@ -23,13 +23,14 @@
             <div *ngSwitchCase="'textbox-nodecimal'">
               <input matInput [formControlName]="control.controlName">
             </div>
+            <span *ngIf="control.controlUnit" matSuffix>{{ control.controlUnit }}</span>
           </mat-form-field>
-          <span *ngIf="control.controlUnit" matSuffix>{{ control.controlUnit }}</span>
+
           <!--<mat-error *ngIf="control.controlName.hasError('required')">{{ control.label}} manquante</mat-error>-->
         </div>
     </ng-container>
     </div>
-    <div fxLayout="row" fxLayoutAlign="end">
+    <div fxLayout="row" fxLayoutAlign="start">
       <button mat-raised-button color="accent" (click)="saveForm()" [disabled]="globalForm.invalid">Ajouter</button>
     </div>
   </div>
