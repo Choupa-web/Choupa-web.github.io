@@ -2,6 +2,7 @@ import {ActivitiesNameLabel, ActivitiesType, ActivityFormScope, ActivityUnits} f
 import {ControlType} from '../enums/forms.enum';
 
 export interface Activity {
+  date?: string;
   id?: string;
   userEmail: string;
   activityDate: string;

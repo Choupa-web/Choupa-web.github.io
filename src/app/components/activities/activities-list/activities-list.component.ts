@@ -56,8 +56,14 @@ export class ActivitiesListComponent implements OnInit {
         this.userEmail = userInfo.email;
         this.activitiesService.getAllActivities().subscribe({
           next: (response) => {
-            this.dataSource.data = response.map(item => Object.assign({id: item.payload.doc.id}, item.payload.doc.data()));
+            const datas = response.map(item => Object.assign({id: item.payload.doc.id}, item.payload.doc.data()));
+            this.dataSource.data = datas.map((obj) => ({...obj, date: new Date(obj.activityDate)}));
             this.dataSource.data.forEach(element => element.activityDate = this.datePipe.transform(element.activityDate, 'dd-MM-yyyy'));
+            this.dataSource.data = this.dataSource.data.sort(
+              (a, b) =>
+                new Date(b.date).getTime() -
+                new Date(a.date).getTime()
+            );
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
             this.generalService.sendLoadingActivityChangeInformation(false);
