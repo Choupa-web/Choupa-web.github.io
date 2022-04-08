@@ -1,5 +1,5 @@
 <div>
-  <app-activities-dynamic-form [controlsList]="controlsList" (submitForm)="saveActivity($event)"></app-activities-dynamic-form>
+  <app-activities-dynamic-form [controlsList]="controlsList" [formAction]="ADD" (submitForm)="saveActivity($event)"></app-activities-dynamic-form>
 </div>
 <!--<form [formGroup]="addActivityFormGroup">
 <div id="common-info" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap="20px">

@@ -6,3 +6,8 @@ export enum ControlType {
   TEXTBOX_DECIMAL = 'textbox-decimal',
   GRAPHICAL = 'graphical'
 }
+export enum FormActions {
+  ADD = 'ADD',
+  EDIT = 'EDIT',
+  CANCEL = 'CANCEL'
+}

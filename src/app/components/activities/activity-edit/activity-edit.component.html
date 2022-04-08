@@ -1,1 +1,3 @@
-<h2>Modification de l'activité {{ data.id }}</h2>
+<div>
+  <app-activities-dynamic-form [controlsList]="controlsList" [formAction]="EDIT" (submitForm)="updateActivity($event)"></app-activities-dynamic-form>
+</div>

@@ -9,7 +9,11 @@ import {NotificationService} from '../../../services/notification.service';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {ActivityEditComponent} from '../activity-edit/activity-edit.component';
 import {Activity} from '../../../models/activities.model';
+import {ButtonAction} from '../../../enums/buttons.enum';
+import {Router} from '@angular/router';
 import {ActivityUnits} from '../../../enums/activity.enum';
+import {DatePipe} from '@angular/common';
+
 
 @Component({
   selector: 'app-activities-list',
@@ -40,7 +44,9 @@ export class ActivitiesListComponent implements OnInit {
     private generalService: GeneralService,
     public auth: AuthService,
     private notificationService: NotificationService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private route: Router,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -51,6 +57,7 @@ export class ActivitiesListComponent implements OnInit {
         this.activitiesService.getAllActivities().subscribe({
           next: (response) => {
             this.dataSource.data = response.map(item => Object.assign({id: item.payload.doc.id}, item.payload.doc.data()));
+            this.dataSource.data.forEach(element => element.activityDate = this.datePipe.transform(element.activityDate, 'dd-MM-yyyy'));
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
             this.generalService.sendLoadingActivityChangeInformation(false);
@@ -85,8 +92,11 @@ export class ActivitiesListComponent implements OnInit {
    */
   editActivity = (id: string): void => {
     const activityToEdit = this.dataSource.data.filter(element => element.id === id);
-    this.dialog.open(ActivityEditComponent, {
-      data: activityToEdit[0]
-    });
+    const url = '/activity/edit/' + activityToEdit[0].id;
+    this.route.navigateByUrl(url);
+  }
+
+  saveActivity = (activityToBeSaved: Activity): void => {
+
   }
 }

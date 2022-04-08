@@ -1,9 +1,9 @@
-<div id="container" [formGroup]="globalForm" fxLayout="row">
+<div *ngIf="controlsList.length > 0" id="container" [formGroup]="globalForm" fxLayout="row">
   <div class="left" fxLayout="row" fxLayoutAlign="center center" fxFlex="30" [id]="'ctrl-' + activityIcon.order" *ngIf="activityIcon.controlType == GRAPHICAL">
     {{ activityIcon.value }}
   </div>
   <div class="right" fxLayout="column">
-    <h2>Entrez les informations de votre nouvelle activité {{ activityIcon.value }}</h2>
+    <h2>{{ title }} {{ activityIcon.value }}</h2>
     <div fxLayout="row wrap" fxLayoutGap="40px" fxLayoutAlign="start">
     <ng-container *ngFor="let control of controlsList">
         <div [ngSwitch]="control.controlType" *ngIf="control.controlType !== GRAPHICAL">
@@ -30,8 +30,10 @@
         </div>
     </ng-container>
     </div>
-    <div fxLayout="row" fxLayoutAlign="start">
-      <button mat-raised-button color="accent" (click)="saveForm()" [disabled]="globalForm.invalid">Ajouter</button>
+    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+      <button *ngIf="formAction == ADD" mat-raised-button color="accent" (click)="saveForm()" [disabled]="globalForm.invalid">Ajouter</button>
+      <button *ngIf="formAction == EDIT" mat-raised-button color="accent" (click)="updateForm()" [disabled]="globalForm.invalid">Mettre à jour</button>
+      <button mat-raised-button color="accent" (click)="cancelForm()">Annuler</button>
     </div>
   </div>
 

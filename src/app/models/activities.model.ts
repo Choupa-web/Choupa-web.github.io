@@ -33,12 +33,6 @@ export class MyActivity {
   name: ActivitiesNameLabel;
 }
 
-export interface UnitType {
-  label: string;
-  unity: string;
-}
-
-
 export class ActivityFormControl<T> {
   controlName: string;
   label: string;
