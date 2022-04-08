@@ -30,11 +30,9 @@
         </div>
     </ng-container>
     </div>
-    <div *ngIf="formAction == ADD" fxLayout="row" fxLayoutAlign="start">
-      <button mat-raised-button color="accent" (click)="saveForm()" [disabled]="globalForm.invalid">Ajouter</button>
-    </div>
-    <div *ngIf="formAction == EDIT" fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-      <button mat-raised-button color="accent" (click)="updateForm()" [disabled]="globalForm.invalid">Mettre à jour</button>
+    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+      <button *ngIf="formAction == ADD" mat-raised-button color="accent" (click)="saveForm()" [disabled]="globalForm.invalid">Ajouter</button>
+      <button *ngIf="formAction == EDIT" mat-raised-button color="accent" (click)="updateForm()" [disabled]="globalForm.invalid">Mettre à jour</button>
       <button mat-raised-button color="accent" (click)="cancelForm()">Annuler</button>
     </div>
   </div>

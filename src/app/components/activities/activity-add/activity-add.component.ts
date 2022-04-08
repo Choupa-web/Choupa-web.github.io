@@ -79,6 +79,7 @@ export class ActivityAddComponent implements OnInit {
    * @param $event - activity formgroup
    */
   saveActivity = ($event): void => {
+    if ($event.action !== FormActions.CANCEL) {
       const activityDate = $event.activityForm.get('activityDate').value;
       const payload: Activity = $event.activityForm.getRawValue();
       payload.activityDate = activityDate.toISOString();
@@ -96,6 +97,10 @@ export class ActivityAddComponent implements OnInit {
         this.notificationService.failure(err);
         this.generalService.sendLoadingActivityChangeInformation(false);
       });
+    }
+    else {
+      this.route.navigateByUrl('activities');
+    }
   }
 
   convertActivityDate = (dateToBeConverted: Moment): string => {

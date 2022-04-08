@@ -12,7 +12,6 @@ import {Activity} from '../../../models/activities.model';
 import {ButtonAction} from '../../../enums/buttons.enum';
 import {Router} from '@angular/router';
 import {ActivityUnits} from '../../../enums/activity.enum';
-import {Router} from '@angular/router';
 import {DatePipe} from '@angular/common';
 
 
