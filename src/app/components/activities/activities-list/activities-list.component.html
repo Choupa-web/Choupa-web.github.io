@@ -22,7 +22,7 @@
     <td mat-cell *matCellDef="let element">{{element.activityName}}</td>
   </ng-container>
   <ng-container matColumnDef="activityDate">
-    <th mat-header-cell *matHeaderCellDef> Date </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
     <td mat-cell *matCellDef="let element">{{element.activityDate}}</td>
   </ng-container>
   <ng-container matColumnDef="duration">
