@@ -2,8 +2,12 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 import {ActivityFormControl} from '../../../models/activities.model';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {FormsService} from '../../../services/forms.service';
-import {ControlType} from '../../../enums/forms.enum';
+import {ControlType, FormActions} from '../../../enums/forms.enum';
 
+interface PageAction {
+  action: string;
+  activityForm?: FormGroup;
+}
 @Component({
   selector: 'app-activities-dynamic-form',
   templateUrl: './activities-dynamic-form.component.html',
@@ -11,25 +15,40 @@ import {ControlType} from '../../../enums/forms.enum';
 })
 export class ActivitiesDynamicFormComponent implements OnInit, OnChanges {
   @Input() controlsList: ActivityFormControl<any>[];
-  @Output() submitForm: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Input() formAction: FormActions;
+  @Output() submitForm: EventEmitter<PageAction> = new EventEmitter<PageAction>();
   globalForm: FormGroup;
   activityIcon: ActivityFormControl<any>;
+  title: string;
 
   GRAPHICAL = ControlType.GRAPHICAL;
+  ADD = FormActions.ADD;
+  EDIT = FormActions.EDIT;
 
   constructor(private formsService: FormsService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.activityIcon = this.controlsList.filter(element => element.controlType === ControlType.GRAPHICAL)[0];
     console.log('activity graphic: ', this.activityIcon);
+    this.title = this.formAction === FormActions.ADD ? 'Entrez les informations de votre nouvelle activité' : 'Modification de l\'activité';
     this.globalForm = this.formsService.toFormGroup(this.controlsList);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('onchanges: ', changes);
+    this.globalForm = this.formsService.toFormGroup(this.controlsList);
     this.activityIcon = this.controlsList.filter(element => element.controlType === ControlType.GRAPHICAL)[0];
   }
 
   saveForm = (): void => {
-    this.submitForm.emit(this.globalForm);
+    this.submitForm.emit( { action: FormActions.ADD, activityForm: this.globalForm});
+  }
+
+  updateForm = (): void => {
+    this.submitForm.emit( { action: FormActions.EDIT, activityForm: this.globalForm});
+  }
+
+  cancelForm = (): void => {
+    this.submitForm.emit({ action: FormActions.CANCEL});
   }
 }

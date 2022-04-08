@@ -38,7 +38,7 @@ import { ReplaceCommaByDotInCtrlDirective } from './directives/replace-comma-byd
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
-import { registerLocaleData } from '@angular/common';
+import {DatePipe, registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { AlertComponent } from './components/shared/alert/alert.component';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar';
@@ -119,6 +119,7 @@ registerLocaleData(localeFr, 'fr');
         verticalPosition: 'bottom',
       },
     },
+    DatePipe
   ],
   bootstrap: [AppComponent],
 })

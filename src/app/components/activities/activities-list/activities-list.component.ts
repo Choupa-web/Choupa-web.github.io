@@ -13,6 +13,7 @@ import {ButtonAction} from '../../../enums/buttons.enum';
 import {Router} from '@angular/router';
 import {ActivityUnits} from '../../../enums/activity.enum';
 import {Router} from '@angular/router';
+import {DatePipe} from '@angular/common';
 
 
 @Component({
@@ -45,7 +46,8 @@ export class ActivitiesListComponent implements OnInit {
     public auth: AuthService,
     private notificationService: NotificationService,
     public dialog: MatDialog,
-    private route: Router
+    private route: Router,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -56,6 +58,7 @@ export class ActivitiesListComponent implements OnInit {
         this.activitiesService.getAllActivities().subscribe({
           next: (response) => {
             this.dataSource.data = response.map(item => Object.assign({id: item.payload.doc.id}, item.payload.doc.data()));
+            this.dataSource.data.forEach(element => element.activityDate = this.datePipe.transform(element.activityDate, 'dd-MM-yyyy'));
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
             this.generalService.sendLoadingActivityChangeInformation(false);
