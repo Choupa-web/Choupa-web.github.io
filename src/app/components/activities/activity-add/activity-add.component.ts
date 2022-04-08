@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {DateAdapter, ErrorStateMatcher, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {ActivitiesNameLabel, ActivitiesType, ActivityFieldsMax, ActivityUnities} from '../../../enums/activity.enum';
+import {FormBuilder} from '@angular/forms';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {ActivitiesNameLabel, ActivitiesType, ActivityUnits} from '../../../enums/activity.enum';
 import {AuthService} from '@auth0/auth0-angular';
-import {numberWithNoDecimals, threeDecimalsRegex, twoDecimalsRegex} from '../../../utils/Regex.utils';
 import {ActivitiesService} from '../../../services/activities.service';
 import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
@@ -11,20 +10,21 @@ import {
   MomentDateAdapter,
 } from '@angular/material-moment-adapter';
 import 'moment/locale/fr';
+import {Activity, ActivityFormControl, MyActivity} from '../../../models/activities.model';
+import {ControlType} from '../../../enums/forms.enum';
 import {GeneralService} from '../../../services/general.service';
-import {Moment} from 'moment';
 import {NotificationService} from '../../../services/notification.service';
-import {Router} from '@angular/router';
-import {Activity, MyActivity} from '../../../models/activities.model';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Moment} from 'moment/moment';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
-export class MyErrorStateMatcher implements ErrorStateMatcher {
+/*export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
-}
+}*/
 
 @Component({
   selector: 'app-activity-add',
@@ -41,46 +41,25 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   ],
 })
 export class ActivityAddComponent implements OnInit {
-  selectedActivity: FormControl;
-  activityDate: FormControl;
-  duration: FormControl;
-  distance: FormControl;
-  averageSpeed: FormControl;
-  maxSpeed: FormControl;
-  averageFc: FormControl;
-  maxFc: FormControl;
-  aerobie: FormControl;
-  anaerobique: FormControl;
-  exerciceLoad: FormControl;
-  averagePower: FormControl;
-  maxPower: FormControl;
-  maxAveragePower: FormControl;
-  averageCadence: FormControl;
-  maxCadence: FormControl;
-  constance: FormControl;
-  difficulty: FormControl;
-  averageStrokesfrequency: FormControl;
-  maxStrokesFrequency: FormControl;
-  averagePace: FormControl;
-  strokes: FormControl;
+  controlsList: ActivityFormControl<any>[];
 
-  matcher: MyErrorStateMatcher = new MyErrorStateMatcher();
-  addActivityFormGroup: FormGroup;
+  // matcher: MyErrorStateMatcher = new MyErrorStateMatcher();
+  /*addActivityFormGroup: FormGroup;
   hometrainerFormGroup: FormGroup;
   vttActivityFormGroup: FormGroup;
-  rowerActivityFormGroup: FormGroup;
+  rowerActivityFormGroup: FormGroup;*/
   activitiesList: MyActivity[] = [
     { key: ActivitiesType.VTT, name: ActivitiesNameLabel.VTT },
     { key: ActivitiesType.VELO_INSIDE, name: ActivitiesNameLabel.VELO_INSIDE },
     { key: ActivitiesType.RAMEUR, name: ActivitiesNameLabel.RAMEUR }
   ];
 
-  HOME_TRAINER: string = ActivitiesType.VELO_INSIDE;
-  VTT: string = ActivitiesType.VTT;
+  // HOME_TRAINER: string = ActivitiesType.VELO_INSIDE;
+  /*VTT: string = ActivitiesType.VTT;
   ROWER: string = ActivitiesType.RAMEUR;
-  DISTANCE: string = ActivityUnities.DISTANCE;
-  SPEED: string = ActivityUnities.SPEED;
-  FC: string = ActivityUnities.FC;
+  DISTANCE: string = ActivityUnits.DISTANCE;
+  SPEED: string = ActivityUnits.SPEED;
+  FC: string = ActivityUnits.FC;*/
 
   userEmail: string;
 
@@ -91,7 +70,8 @@ export class ActivityAddComponent implements OnInit {
     private adapter: DateAdapter<any>,
     private generalService: GeneralService,
     private notificationService: NotificationService,
-    private route: Router
+    private route: Router,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -101,13 +81,277 @@ export class ActivityAddComponent implements OnInit {
         this.userEmail = userInfo.email;
       }
     });
-    this.initFormGroup();
+
+    this.activatedRoute.params.subscribe(activity => {
+      this.controlsList = [
+        {
+          controlName: 'activityDate',
+          required: true,
+          label: 'Date de l\'activité',
+          controlType: ControlType.TEXTBOXDATE,
+          order: 1,
+          value: '',
+          disabled: false
+        },
+        {
+          controlName: 'duration',
+          required: true,
+          label: 'Durée de l\'activité',
+          controlType: ControlType.TEXTBOXTIME,
+          order: 2,
+          value: '',
+          disabled: false
+        },
+        {
+          controlName: 'averageSpeed',
+          required: true,
+          label: 'Vitesse moyenne',
+          controlType: ControlType.TEXTBOX_DECIMAL,
+          order: 4,
+          value: '',
+          disabled: false,
+          controlUnit: ActivityUnits.SPEED
+        },
+        {
+          controlName: 'maxSpeed',
+          required: true,
+          label: 'Vitesse maximum',
+          controlType: ControlType.TEXTBOX_DECIMAL,
+          order: 5,
+          value: '',
+          disabled: false,
+          controlUnit: ActivityUnits.SPEED
+        },
+        {
+          controlName: 'distance',
+          required: true,
+          label: 'Distance',
+          controlType: ControlType.TEXTBOX_DECIMAL,
+          order: 3,
+          value: '',
+          disabled: false,
+          controlUnit: ActivityUnits.DISTANCE
+        },
+        {
+          controlName: 'averageFc',
+          required: true,
+          label: 'Fréquence moyenne',
+          controlType: ControlType.TEXTBOX_NODECIMAL,
+          order: 6,
+          value: '',
+          disabled: false,
+          controlUnit: ActivityUnits.FC
+        },
+        {
+          controlName: 'exerciceLoad',
+          required: true,
+          label: 'Exercice load',
+          controlType: ControlType.TEXTBOX_NODECIMAL,
+          order: 10,
+          value: '',
+          disabled: false
+        },
+        {
+          controlName: 'maxFc',
+          required: true,
+          label: 'Fréquence maximum',
+          controlType: ControlType.TEXTBOX_NODECIMAL,
+          order: 7,
+          value: '',
+          disabled: false,
+          controlUnit: ActivityUnits.FC
+        },
+        {
+          controlName: 'aerobie',
+          required: true,
+          label: 'Aérobie',
+          controlType: ControlType.TEXTBOX_DECIMAL,
+          order: 8,
+          value: '',
+          disabled: false
+        },
+        {
+          controlName: 'anaerobique',
+          required: true,
+          label: 'Anaérobique',
+          controlType: ControlType.TEXTBOX_DECIMAL,
+          order: 9,
+          value: '',
+          disabled: false
+        }
+      ];
+      switch (activity.name) {
+        case ActivitiesNameLabel.VTT:
+          this.addVttControls();
+          break;
+        case ActivitiesNameLabel.RAMEUR:
+          this.addRameurControls();
+          break;
+        case ActivitiesNameLabel.VELO_INSIDE:
+          this.addHometrainercontrols();
+          break;
+        default: break;
+      }
+      this.controlsList.push({
+        controlName: 'activityName',
+        required: true,
+        label: 'Activité',
+        controlType: ControlType.GRAPHICAL,
+        order: 0,
+        value: activity.name,
+        disabled: true
+      });
+    });
+    this.controlsList.sort((a, b) => a.order < b.order ? -1 : a.order > b.order ? 1 : 0);
+    // this.initFormGroup();
   }
 
+  addVttControls = (): void => {
+    this.controlsList.push({
+      controlName: 'constance',
+      required: true,
+      label: 'Constance',
+      controlType: ControlType.TEXTBOX_NODECIMAL,
+      order: 11,
+      value: '',
+      disabled: false
+    });
+    this.controlsList.push({
+      controlName: 'difficulty',
+      required: true,
+      label: 'Difficulté',
+      controlType: ControlType.TEXTBOX_NODECIMAL,
+      order: 12,
+      value: '',
+      disabled: false
+    });
+  }
+
+  addHometrainercontrols = (): void => {
+    this.controlsList.push({
+      controlName: 'averagePower',
+      required: true,
+      label: 'Puissance moyenne',
+      controlType: ControlType.TEXTBOX_NODECIMAL,
+      order: 11,
+      value: '',
+      disabled: false,
+      controlUnit: ActivityUnits.POWER
+    });
+    this.controlsList.push({
+      controlName: 'maxPower',
+      required: true,
+      label: 'Puissance maximum',
+      controlType: ControlType.TEXTBOX_NODECIMAL,
+      order: 12,
+      value: '',
+      disabled: false,
+      controlUnit: ActivityUnits.POWER
+    });
+    this.controlsList.push({
+      controlName: 'averageCadence',
+      required: true,
+      label: 'Cadence moyenne',
+      controlType: ControlType.TEXTBOX_NODECIMAL,
+      order: 13,
+      value: '',
+      disabled: false,
+      controlUnit: ActivityUnits.CADENCE
+    });
+    this.controlsList.push({
+      controlName: 'maxCadence',
+      required: true,
+      label: 'Cadence maximum',
+      controlType: ControlType.TEXTBOX_NODECIMAL,
+      order: 14,
+      value: '',
+      disabled: false,
+      controlUnit: ActivityUnits.CADENCE
+    });
+    this.controlsList.push({
+      controlName: 'maxAveragePower',
+      required: true,
+      label: 'Puissance moyenne maximum',
+      controlType: ControlType.TEXTBOX_NODECIMAL,
+      order: 15,
+      value: '',
+      disabled: false,
+      controlUnit: ActivityUnits.POWER
+    });
+  }
+
+  addRameurControls = (): void => {
+    this.controlsList.push({
+      controlName: 'averageStrokesfrequency',
+      required: true,
+      label: 'Fréquence moyenne de coups',
+      controlType: ControlType.TEXTBOX_NODECIMAL,
+      order: 11,
+      value: '',
+      disabled: false,
+      controlUnit: ActivityUnits.FREQUENCE_COUPS
+    });
+    this.controlsList.push({
+      controlName: 'maxStrokesFrequency',
+      required: true,
+      label: 'Fréquence max de coups',
+      controlType: ControlType.TEXTBOX_NODECIMAL,
+      order: 12,
+      value: '',
+      disabled: false,
+      controlUnit: ActivityUnits.FREQUENCE_COUPS
+    });
+    this.controlsList.push({
+      controlName: 'averagePace',
+      required: true,
+      label: 'Allure moyenne',
+      controlType: ControlType.TEXTBOX_DECIMAL,
+      order: 13,
+      value: '',
+      disabled: false,
+      controlUnit: ActivityUnits.ALLURE
+    });
+    this.controlsList.push({
+      controlName: 'strokes',
+      required: true,
+      label: 'Nombre de coups ',
+      controlType: ControlType.TEXTBOX_NODECIMAL,
+      order: 14,
+      value: '',
+      disabled: false,
+      controlUnit: ActivityUnits.FREQUENCE_COUPS
+    });
+  }
+  /**
+   * Save new activity
+   * @param $event - activity formgroup
+   */
+  saveActivity = ($event): void => {
+    const activityDate = $event.get('activityDate').value;
+    const payload: Activity = $event.getRawValue();
+    payload.activityDate = activityDate.format('DD/MM/YYYY');
+    this.generalService.sendLoadingActivityChangeInformation(true);
+    this.activityService.addActivity(payload).then(
+      (newActivity) => {
+        if (newActivity.id) {
+          this.generalService.sendLoadingActivityChangeInformation(false);
+          this.notificationService.success('Nouvelle activité ajoutée');
+          this.route.navigateByUrl('/activities');
+        }
+      }
+    ).catch((err) => {
+      this.notificationService.failure(err);
+      this.generalService.sendLoadingActivityChangeInformation(false);
+    });
+  }
+
+  convertActivityDate = (dateToBeConverted: Moment): string => {
+    return dateToBeConverted.format('DD/MM/YYYY');
+  }
   /**
    * Initialize the activity form group
    */
-  initFormGroup = (): void => {
+  /*initFormGroup = (): void => {
     this.selectedActivity = new FormControl('', [
       Validators.required,
     ]);
@@ -233,51 +477,12 @@ export class ActivityAddComponent implements OnInit {
         }
       }
     });
-  }
-
-  private removeHometrainerValidators = (): void => {
-    this.averagePower.removeValidators([Validators.required]);
-    this.averagePower.updateValueAndValidity();
-
-    this.maxPower.removeValidators([Validators.required]);
-    this.maxPower.updateValueAndValidity();
-
-    this.averageCadence.removeValidators([Validators.required]);
-    this.averageCadence.updateValueAndValidity();
-
-    this.maxCadence.removeValidators([Validators.required]);
-    this.maxCadence.updateValueAndValidity();
-
-    this.maxAveragePower.removeValidators([Validators.required]);
-    this.maxAveragePower.updateValueAndValidity();
-
-  }
-
-  private removeVttValidators = (): void => {
-    this.constance.removeValidators([Validators.required]);
-    this.constance.updateValueAndValidity();
-    this.difficulty.removeValidators([Validators.required]);
-    this.difficulty.updateValueAndValidity();
-  }
-
-  private removeRowerValidators = (): void => {
-    this.averageStrokesfrequency.removeValidators([Validators.required]);
-    this.averageStrokesfrequency.updateValueAndValidity();
-
-    this.maxStrokesFrequency.removeValidators([Validators.required]);
-    this.maxStrokesFrequency.updateValueAndValidity();
-
-    this.averagePace.removeValidators([Validators.required]);
-    this.averagePace.updateValueAndValidity();
-
-    this.strokes.removeValidators([Validators.required]);
-    this.strokes.updateValueAndValidity();
-  }
+  }*/
 
   /**
    * Save new activity
    */
-  addNewActivity = (): void => {
+  /*addNewActivity = (): void => {
     let Payload: Activity;
     const isActivityValid = this.checkActivityValidity();
     const convertedActivityDate = this.convertActivityDate(this.activityDate.value);
@@ -365,30 +570,5 @@ export class ActivityAddComponent implements OnInit {
       this.generalService.sendLoadingActivityChangeInformation(false);
       this.notificationService.failure('Impossible de sauvegarder');
     }
-  }
-
-  checkActivityValidity = (): boolean => {
-    const speedCheck = Number(this.averageSpeed.value) < Number(this.maxSpeed.value);
-    const freqCheck = Number(this.averageFc.value) < Number(this.maxFc.value);
-    let cadenceCheck = false;
-    let powerCheck = false;
-
-    if (this.selectedActivity.value === ActivitiesType.VELO_INSIDE) {
-      cadenceCheck =
-        this.averageCadence.value && this.maxCadence.value
-          ? Number(this.averageCadence.value) < Number(this.maxCadence.value)
-          : true;
-      powerCheck =
-        this.averagePower.value && this.maxPower.value
-          ? Number(this.averagePower.value) < Number(this.maxPower.value)
-          : true;
-    }
-    return this.selectedActivity.value === ActivitiesType.VELO_INSIDE
-      ? speedCheck && freqCheck && cadenceCheck && powerCheck
-      : speedCheck && freqCheck;
-  }
-
-  convertActivityDate = (dateToBeConverted: Moment): string => {
-    return dateToBeConverted.format('DD/MM/YYYY');
-  }
+  }*/
 }

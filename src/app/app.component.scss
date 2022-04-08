@@ -1,3 +1,8 @@
+$primary: #004c6d;
+$secondary: #3f5790;
+$links: #ff784c;
+$text-color: white;
+$link-active: #ffa600;
 
 .container {
   position: absolute;
@@ -24,5 +29,5 @@
   background-color: #fff;
 }
 .left-sidenav {
-  background-color: white;
+  background-color: $primary !important;
 }

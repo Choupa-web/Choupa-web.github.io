@@ -13,9 +13,9 @@ export enum ActivitiesType {
  * Nom des activités
  */
 export enum ActivitiesNameLabel {
-  VTT = 'Vtt',
-  VELO_INSIDE = 'Vélo home trainer',
-  RAMEUR = 'Rameur'
+  VTT = 'VTT',
+  VELO_INSIDE = 'HOME TRAINER',
+  RAMEUR = 'RAMEUR'
 }
 
 /**
@@ -56,7 +56,7 @@ export enum ActivityFieldsMax {
   EXERCICE_LOAD = 50
 }
 
-export enum ActivityUnities {
+export enum ActivityUnits {
   DISTANCE = 'km',
   SPEED = 'km/h',
   FC = 'bpm',
@@ -64,6 +64,11 @@ export enum ActivityUnities {
   POWER = 'w',
   ALLURE = 'mn/500m',
   FREQUENCE_COUPS = 'cps/mn'
+}
+
+export enum ActivityFormScope {
+  COMMON = 'COMMON',
+  SPECIFIC = 'SPECIFIC'
 }
 
 

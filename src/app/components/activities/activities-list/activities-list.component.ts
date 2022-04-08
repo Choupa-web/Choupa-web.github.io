@@ -11,6 +11,8 @@ import {ActivityEditComponent} from '../activity-edit/activity-edit.component';
 import {Activity} from '../../../models/activities.model';
 import {ButtonAction} from '../../../enums/buttons.enum';
 import {Router} from '@angular/router';
+import {ActivityUnits} from '../../../enums/activity.enum';
+
 
 @Component({
   selector: 'app-activities-list',
@@ -33,6 +35,9 @@ export class ActivitiesListComponent implements OnInit {
     'aerobie',
     'anaerobique',
   ];
+
+  DISTANCE: string = ActivityUnits.DISTANCE;
+
   constructor(
     private activitiesService: ActivitiesService,
     private generalService: GeneralService,

@@ -12,8 +12,9 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'activities', component: ActivitiesListComponent},
-  { path: 'activity/add', component: ActivityAddComponent},
+  { path: 'activity/add/:name', component: ActivityAddComponent},
   { path: 'activity/edit/:id', component: ActivityEditComponent},
+
   { path: '', component: HomeComponent},
   { path: '**', component: HomeComponent }
 ];

@@ -48,9 +48,8 @@ import { ActivityEditComponent } from './components/activities/activity-edit/act
 import {MatDialogModule} from '@angular/material/dialog';
 import {AngularFireModule} from '@angular/fire/compat';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
-import { HometrainerActivityFormComponent } from './components/activities/hometrainer-activity-form/hometrainer-activity-form.component';
-import { VttActivityFormComponent } from './components/activities/vtt-activity-form/vtt-activity-form.component';
-import { RowerActivityFormComponent } from './components/activities/rower-activity-form/rower-activity-form.component';
+import { ActivitiesDynamicFormComponent } from './components/activities/activities-dynamic-form/activities-dynamic-form.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -73,9 +72,7 @@ registerLocaleData(localeFr, 'fr');
     ReplaceCommaByDotInCtrlDirective,
     AlertComponent,
     ActivityEditComponent,
-    HometrainerActivityFormComponent,
-    VttActivityFormComponent,
-    RowerActivityFormComponent
+    ActivitiesDynamicFormComponent
   ],
   imports: [
     BrowserModule,
@@ -109,7 +106,8 @@ registerLocaleData(localeFr, 'fr');
     MatIconModule,
     MatDialogModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    MatMenuModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },

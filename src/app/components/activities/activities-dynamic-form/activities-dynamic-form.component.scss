@@ -1,0 +1,32 @@
+$primary: #004c6d;
+$secondary: #ff784c;
+$text-color: white;
+$radius: 20px;
+
+.mat-form-field-suffix {
+    color: $secondary;
+}
+
+.left {
+  background-color: $primary;
+  color: $secondary;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  min-width: 50px;
+  padding: 30px 10px;
+}
+
+#container {
+  border: 2px solid $primary;
+  border-radius: $radius;
+  .left {
+    border-bottom-left-radius: $radius;
+    border-top-left-radius: $radius;
+    font-size: 100px;
+  }
+  .right {
+    border-bottom-right-radius: $radius;
+    border-top-right-radius: $radius;
+    padding: 20px 50px;
+  }
+}
