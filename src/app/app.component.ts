@@ -45,19 +45,19 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     this.screenDefinition = new ResponsiveUi(this.breakpointObserver);
     this.screenDefinition.getScreensize().pipe(takeUntil(this.destroyed)).subscribe(
       result => {
-        console.log('screen result: ', result);
         for (const query of Object.keys(result.breakpoints)) {
           if (result.breakpoints[query]) {
             const currentScreenSize =
               this.displayNameMap.get(query) ?? 'Unknown';
             if (
-              currentScreenSize === ScreenSize.SMALL ||
               currentScreenSize === ScreenSize.XLARGE ||
               currentScreenSize === ScreenSize.LARGE ||
               currentScreenSize === ScreenSize.MEDIUM
             ) {
               this.screenIsBig = true;
-            } else if (currentScreenSize === ScreenSize.XSMALL) {
+            } else if (
+              currentScreenSize === ScreenSize.SMALL ||
+              currentScreenSize === ScreenSize.XSMALL) {
               this.screenIsBig = false;
             }
             this.screenIsSmall = !this.screenIsBig;

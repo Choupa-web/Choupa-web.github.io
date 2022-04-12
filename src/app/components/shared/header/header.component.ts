@@ -40,11 +40,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
             if (
               currentScreenSize === ScreenSize.XLARGE ||
               currentScreenSize === ScreenSize.LARGE ||
-              currentScreenSize === ScreenSize.MEDIUM ||
-              currentScreenSize === ScreenSize.SMALL
+              currentScreenSize === ScreenSize.MEDIUM
             ) {
               this.screenIsBig = true;
             } else if (
+              currentScreenSize === ScreenSize.SMALL ||
               currentScreenSize === ScreenSize.XSMALL
             ) {
               this.screenIsBig = false;
