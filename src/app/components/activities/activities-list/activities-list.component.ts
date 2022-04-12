@@ -28,13 +28,16 @@ export class ActivitiesListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   displayedColumns: string[] = [
-    'actions',
+    'actions1',
     'activityName',
     'activityDate',
     'duration',
     'distance',
     'aerobie',
     'anaerobique',
+    'averageFc',
+    'maxFc',
+    'action2',
   ];
 
   DISTANCE: string = ActivityUnits.DISTANCE;
