@@ -29,7 +29,7 @@ import { MatToolbarModule} from '@angular/material/toolbar';
 import { MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { AuthNavComponent } from './components/auth-nav/auth-nav.component';
 import {environment, environment as env} from '../environments/environment';
-import { FlexModule } from '@angular/flex-layout';
+import {ExtendedModule, FlexModule} from '@angular/flex-layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ActivityAddComponent } from './components/activities/activity-add/activity-add.component';
 import { ActivitiesListComponent } from './components/activities/activities-list/activities-list.component';
@@ -50,6 +50,8 @@ import {AngularFireModule} from '@angular/fire/compat';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import { ActivitiesDynamicFormComponent } from './components/activities/activities-dynamic-form/activities-dynamic-form.component';
 import {MatMenuModule} from '@angular/material/menu';
+import {LayoutModule} from '@angular/cdk/layout';
+
 
 
 registerLocaleData(localeFr, 'fr');
@@ -78,7 +80,7 @@ registerLocaleData(localeFr, 'fr');
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AuthModule.forRoot({ ...env.auth }),
+    AuthModule.forRoot({...env.auth}),
     MatButtonModule,
     MatIconModule,
     MatListModule,
@@ -107,7 +109,9 @@ registerLocaleData(localeFr, 'fr');
     MatDialogModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    MatMenuModule
+    MatMenuModule,
+    LayoutModule,
+    ExtendedModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
