@@ -38,14 +38,11 @@ export class ActivityEditComponent implements OnInit {
         next: activityFromWS => {
           this.activityToEdit = Object.assign({id: activityFromWS.id}, activityFromWS.data());
           this.controlsList = this.formsService.getControlsList(this.activityToEdit.activityName, this.activityToEdit);
-          console.log('activitytoedit: ', this.activityToEdit);
-          console.log('controlsList out: ', this.controlsList);
         }
       });
   }
 
   updateActivity = ($event): void => {
-    console.log('event: ', $event);
     switch ($event.action) {
       case FormActions.CANCEL:
         this.router.navigateByUrl('activities');

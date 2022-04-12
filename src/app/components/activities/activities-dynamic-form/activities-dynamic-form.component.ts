@@ -29,13 +29,11 @@ export class ActivitiesDynamicFormComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.activityIcon = this.controlsList.filter(element => element.controlType === ControlType.GRAPHICAL)[0];
-    console.log('activity graphic: ', this.activityIcon);
     this.title = this.formAction === FormActions.ADD ? 'Entrez les informations de votre nouvelle activité' : 'Modification de l\'activité';
     this.globalForm = this.formsService.toFormGroup(this.controlsList);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('onchanges: ', changes);
     this.globalForm = this.formsService.toFormGroup(this.controlsList);
     this.activityIcon = this.controlsList.filter(element => element.controlType === ControlType.GRAPHICAL)[0];
   }
