@@ -4,9 +4,18 @@ $links: #ff784c;
 $text-color: white;
 $link-active: #ffa600;
 
-.container {
+.container-big-screen {
   position: absolute;
   top: 60px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  z-index: 0;
+}
+.container-small-screen {
+  position: absolute;
+  top: 112px;
   bottom: 0;
   left: 0;
   right: 0;
