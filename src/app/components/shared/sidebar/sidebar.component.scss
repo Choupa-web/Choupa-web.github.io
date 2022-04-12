@@ -1,6 +1,7 @@
 $primary: #004c6d;
 $secondary: #3f5790;
 $links: #ff784c;
+$darker-links: #c23e14;
 $text-color: white;
 $link-active: #ffa600;
 
@@ -17,7 +18,9 @@ a {
 
 
 .active {
-    color: $link-active !important;
+  color: white !important;
+  background-color: $links;
+  border-left: 10px solid $darker-links ;
 }
 
 fa-icon {
@@ -25,10 +28,10 @@ fa-icon {
 }
 
 mat-list {
-
-  margin-left: 20px;
-  padding: 20px 10px;
   border-radius: 8px;
+}
+.mat-list-base .mat-list-item .mat-list-item-content {
+  padding: 0 !important;
 }
 
 

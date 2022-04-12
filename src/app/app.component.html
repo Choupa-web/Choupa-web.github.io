@@ -5,7 +5,7 @@
   <mat-sidenav class="left-sidenav" #sidenav mode="side" [opened]="menuOpened">
     <app-sidebar></app-sidebar>
   </mat-sidenav>
-  <mat-sidenav #sidenav2 opened mode="side" position="end">
+  <mat-sidenav #sidenav2 [opened]="screenIsBig" mode="side" position="end">
     <app-aside></app-aside>
   </mat-sidenav>
   <mat-sidenav-content class="main" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px">
