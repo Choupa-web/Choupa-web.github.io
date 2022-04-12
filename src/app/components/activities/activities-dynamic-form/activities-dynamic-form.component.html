@@ -4,7 +4,7 @@
   </div>
   <div class="right" fxLayout="column">
     <h2>{{ title }} {{ activityIcon.value }}</h2>
-    <div fxLayout="row wrap" fxLayoutGap="40px" fxLayoutAlign="start">
+    <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">
     <ng-container *ngFor="let control of controlsList">
         <div [ngSwitch]="control.controlType" *ngIf="control.controlType !== GRAPHICAL">
           <mat-form-field [id]="'ctrl-' + control.order" appearance="outline">
@@ -13,17 +13,21 @@
               <input matInput [matDatepicker]="picker" [formControlName]="control.controlName">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
+             <!-- <span class="unitColor" *ngIf="control.controlUnit" matSuffix>{{ control.controlUnit }}</span>-->
             </div>
             <div *ngSwitchCase="'textboxtime'">
               <input type="time" matInput [formControlName]="control.controlName">
+              <span class="unitColor" *ngIf="control.controlUnit" matSuffix>{{ control.controlUnit }}</span>
             </div>
             <div *ngSwitchCase="'textbox-decimal'">
               <input appReplaceCommaByDotInCtrl matInput [formControlName]="control.controlName">
+              <span class="unitColor" *ngIf="control.controlUnit" matSuffix>{{ control.controlUnit }}</span>
             </div>
             <div *ngSwitchCase="'textbox-nodecimal'">
               <input matInput [formControlName]="control.controlName">
+              <span class="unitColor" *ngIf="control.controlUnit" matSuffix>{{ control.controlUnit }}</span>
             </div>
-            <span *ngIf="control.controlUnit" matSuffix>{{ control.controlUnit }}</span>
+
           </mat-form-field>
 
           <!--<mat-error *ngIf="control.controlName.hasError('required')">{{ control.label}} manquante</mat-error>-->
