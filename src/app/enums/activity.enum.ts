@@ -63,7 +63,8 @@ export enum ActivityUnits {
   CADENCE = 'rpm',
   POWER = 'w',
   ALLURE = 'mn/500m',
-  FREQUENCE_COUPS = 'cps/mn'
+  FREQUENCE_COUPS = 'cps/mn',
+  TIME = 'hh:mm'
 }
 
 export enum ActivityFormScope {
