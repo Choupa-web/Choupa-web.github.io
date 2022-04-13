@@ -1,15 +1,15 @@
 <header>
   <mat-toolbar class="header-content" *ngIf="screenIsBig">
-    <button mat-icon-button aria-label="Ouvrir/Fermer Menu" (click)="openMenu($event)">
+    <button mat-icon-button aria-label="Ouvrir/Fermer Menu" (click)="openMenu()">
       <mat-icon>menu</mat-icon>
     </button>
     <span class="title">The Garmin Experience...</span>
     <span class="spacer"></span>
     <app-auth-nav></app-auth-nav>
   </mat-toolbar>
-  <mat-toolbar class="header-content" *ngIf="screenIsSmall">
+  <mat-toolbar class="header-content" *ngIf="!screenIsBig">
     <mat-toolbar-row>
-      <button mat-icon-button aria-label="Ouvrir/Fermer Menu" (click)="openMenu($event)">
+      <button mat-icon-button aria-label="Ouvrir/Fermer Menu" (click)="openMenu()">
         <mat-icon>menu</mat-icon>
       </button>
       <span class="title">The Garmin Experience...</span>

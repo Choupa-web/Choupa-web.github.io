@@ -1,7 +1,7 @@
 
 
 <app-header [menuOpened]="menuOpened" (openCloseMenu)="openCloseMenu()"></app-header>
-<mat-sidenav-container [ngClass]="{'container-big-screen': screenIsBig, 'container-small-screen': screenIsSmall}">
+<mat-sidenav-container [ngClass]="{'container-big-screen': screenIsBig, 'container-small-screen': !screenIsBig}">
   <mat-sidenav class="left-sidenav" #sidenav mode="side" [opened]="menuOpened">
     <app-sidebar></app-sidebar>
   </mat-sidenav>
@@ -18,4 +18,3 @@
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
-<!--<app-footer></app-footer>-->

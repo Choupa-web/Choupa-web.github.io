@@ -3,7 +3,6 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {ResponsiveUi} from '../../../models/responsive.model';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
-import {ScreenSize} from '../../../enums/responsive.enum';
 
 @Component({
   selector: 'app-header',
@@ -24,7 +23,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     [Breakpoints.XLarge, 'XLarge'],
   ]);
   screenIsBig: boolean;
-  screenIsSmall: boolean;
 
   constructor(private breakpointObserver: BreakpointObserver) { }
 
@@ -37,25 +35,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
           if (result.breakpoints[query]) {
             const currentScreenSize =
               this.displayNameMap.get(query) ?? 'Unknown';
-            if (
-              currentScreenSize === ScreenSize.XLARGE ||
-              currentScreenSize === ScreenSize.LARGE ||
-              currentScreenSize === ScreenSize.MEDIUM
-            ) {
-              this.screenIsBig = true;
-            } else if (
-              currentScreenSize === ScreenSize.SMALL ||
-              currentScreenSize === ScreenSize.XSMALL
-            ) {
-              this.screenIsBig = false;
-            }
-            this.screenIsSmall = !this.screenIsBig;
+            this.screenIsBig = this.screenDefinition.isScreenIsBig(currentScreenSize);
           }
         }
     });
   }
 
-  openMenu = ($event): void => {
+  openMenu = (): void => {
     this.openCloseMenu.emit(!this.menuOpened);
   }
 
