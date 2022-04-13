@@ -11,9 +11,9 @@ import {ActivityEditComponent} from './components/activities/activity-edit/activ
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'activities', component: ActivitiesListComponent},
-  { path: 'activity/add/:name', component: ActivityAddComponent},
-  { path: 'activity/edit/:id', component: ActivityEditComponent},
+  { path: 'activities', component: ActivitiesListComponent, canActivate: [AuthGuard]},
+  { path: 'activity/add/:name', component: ActivityAddComponent, canActivate: [AuthGuard]},
+  { path: 'activity/edit/:id', component: ActivityEditComponent, canActivate: [AuthGuard]},
 
   { path: '', component: HomeComponent},
   { path: '**', component: HomeComponent }
