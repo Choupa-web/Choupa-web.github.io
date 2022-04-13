@@ -56,7 +56,7 @@ export class ActivityEditComponent implements OnInit {
         this.activitiesService.updateActivity(this.activityToEdit.id, payload).then(
           () => {
             this.generalService.sendLoadingActivityChangeInformation(false);
-            this.notificationService.success('Activité `${this.activityToEdit.id}` mise à jour');
+            this.notificationService.success('Activité ' + this.activityToEdit.id + ' mise à jour');
             this.router.navigateByUrl('/activities');
           }
         ).catch((err) => {

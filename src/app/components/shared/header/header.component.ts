@@ -30,7 +30,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.screenDefinition = new ResponsiveUi(this.breakpointObserver);
     this.screenDefinition.getScreensize().pipe(takeUntil(this.destroyed)).subscribe(
       result => {
-        console.log('screen result: ', result);
         for (const query of Object.keys(result.breakpoints)) {
           if (result.breakpoints[query]) {
             const currentScreenSize =

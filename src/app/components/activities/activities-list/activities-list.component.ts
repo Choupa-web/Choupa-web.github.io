@@ -102,7 +102,6 @@ export class ActivitiesListComponent implements OnInit, OnDestroy {
           if (result.breakpoints[query]) {
             const currentScreenSize =
               this.displayNameMap.get(query) ?? 'Unknown';
-            console.log('current screen size: ', currentScreenSize);
             this.screenIsBig = this.screenDefinition.isScreenIsBig(currentScreenSize);
           }
         }

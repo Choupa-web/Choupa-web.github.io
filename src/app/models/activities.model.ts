@@ -1,4 +1,4 @@
-import {ActivitiesNameLabel, ActivitiesType, ActivityFormScope, ActivityUnits} from '../enums/activity.enum';
+import {ActivityUnits} from '../enums/activity.enum';
 import {ControlType} from '../enums/forms.enum';
 
 export interface Activity {
@@ -29,17 +29,14 @@ export interface Activity {
   strokes?: number;
 }
 
-export class MyActivity {
-  key: string;
-  name: ActivitiesNameLabel;
-}
-
 export class ActivityFormControl<T> {
   controlName: string;
   label: string;
   order: number;
   required?: boolean;
-  validationPattern?: string;
+  validationPattern?: RegExp;
+  min?: number;
+  max?: number;
   controlType: ControlType;
   value: T | undefined;
   controlUnit?: ActivityUnits;
@@ -50,7 +47,7 @@ export class ActivityFormControl<T> {
     controlName: string;
     order: number;
     required?: boolean;
-    validationPattern?: string;
+    validationPattern?: RegExp;
     controltype: ControlType;
     label: string;
     controlUnit?: ActivityUnits;

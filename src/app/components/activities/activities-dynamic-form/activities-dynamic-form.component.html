@@ -26,10 +26,12 @@
               <input matInput [formControlName]="control.controlName">
               <span class="unitColor" *ngIf="control.controlUnit" matSuffix>{{ control.controlUnit }}</span>
             </div>
-
+            <mat-error *ngIf="globalForm.get(control.controlName).hasError('required')">{{ control.label}} manquante</mat-error>
+            <mat-error *ngIf="globalForm.get(control.controlName).hasError('pattern')">Erreur dans le format de votre saisie</mat-error>
+            <mat-error *ngIf="globalForm.get(control.controlName).hasError('max')">La valeur renseignée est trop grande</mat-error>
+            <mat-error *ngIf="globalForm.get(control.controlName).hasError('min')">La valeur renseignée est trop petite</mat-error>
           </mat-form-field>
 
-          <!--<mat-error *ngIf="control.controlName.hasError('required')">{{ control.label}} manquante</mat-error>-->
         </div>
     </ng-container>
     </div>

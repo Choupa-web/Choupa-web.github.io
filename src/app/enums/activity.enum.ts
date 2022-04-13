@@ -1,8 +1,6 @@
 /**
  * Liste des types d'activités possible
  */
-import {MyActivity} from '../models/activities.model';
-
 export enum ActivitiesType {
   VTT = 'VTT',
   VELO_INSIDE = 'VELO_INSIDE',
@@ -48,13 +46,26 @@ export enum FirebaseCollections {
 export enum ActivityFieldsMax {
   DISTANCE = 30,
   AVERAGE_SPEED = 40,
-  MAX_SPEED = 50,
+  MAX_SPEED = 60,
   AVERAGE_FC = 140,
   MAX_FC = 210,
   AEROBIE = 5,
   ANAEROBIQUE = 5,
-  EXERCICE_LOAD = 50
+  CONSTANCE = 40,
+  DIFFICULTY = 60
 }
+
+export enum ActivityFieldsMin {
+  DISTANCE = 1,
+  SPEED = 1,
+  CADENCE = 1,
+  AEROBIE = 0,
+  ANAEROBIQUE = 0,
+  CONSTANCE = 0,
+  DIFFICULTY = 0,
+  POWER = 0
+}
+
 
 export enum ActivityUnits {
   DISTANCE = 'km',
@@ -64,6 +75,7 @@ export enum ActivityUnits {
   POWER = 'w',
   ALLURE = 'mn/500m',
   FREQUENCE_COUPS = 'cps/mn',
+  STROKES = 'cps',
   TIME = 'hh:mm'
 }
 
