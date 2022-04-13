@@ -1,20 +1,15 @@
-
-
 <app-header [menuOpened]="menuOpened" (openCloseMenu)="openCloseMenu()"></app-header>
 <mat-sidenav-container [ngClass]="{'container-big-screen': screenIsBig, 'container-small-screen': !screenIsBig}">
   <mat-sidenav class="left-sidenav" #sidenav mode="side" [opened]="menuOpened">
     <app-sidebar></app-sidebar>
   </mat-sidenav>
-  <mat-sidenav #sidenav2 [opened]="screenIsBig" mode="side" position="end">
-    <app-aside></app-aside>
-  </mat-sidenav>
   <mat-sidenav-content class="main" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px">
-    <div fxLayout="row" fxLayoutAlign="end center">
-      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
-      <button mat-icon-button class="btnCollapseMenu" (click)="sidenav2.toggle()" color="primary" aria-label="Menu">
-        <mat-icon>menu</mat-icon>
-      </button>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    <div fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap.lt-lg="50px">
+      <div fxFlex="80">
+        <router-outlet></router-outlet>
+      </div>
+      <app-aside></app-aside>
     </div>
-    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
