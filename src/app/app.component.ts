@@ -5,7 +5,6 @@ import {Subject} from 'rxjs';
 import {ResponsiveUi} from './models/responsive.model';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {takeUntil} from 'rxjs/operators';
-import {ScreenSize} from './enums/responsive.enum';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +26,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     [Breakpoints.XLarge, 'XLarge'],
   ]);
   screenIsBig: boolean;
-  screenIsSmall: boolean;
 
   @ViewChild('sidenav') sidenav: MatSidenav;
 
@@ -49,18 +47,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
           if (result.breakpoints[query]) {
             const currentScreenSize =
               this.displayNameMap.get(query) ?? 'Unknown';
-            if (
-              currentScreenSize === ScreenSize.XLARGE ||
-              currentScreenSize === ScreenSize.LARGE ||
-              currentScreenSize === ScreenSize.MEDIUM
-            ) {
-              this.screenIsBig = true;
-            } else if (
-              currentScreenSize === ScreenSize.SMALL ||
-              currentScreenSize === ScreenSize.XSMALL) {
-              this.screenIsBig = false;
-            }
-            this.screenIsSmall = !this.screenIsBig;
+            this.screenIsBig = this.screenDefinition.isScreenIsBig(currentScreenSize);
           }
         }
       });

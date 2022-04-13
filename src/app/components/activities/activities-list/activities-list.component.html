@@ -5,8 +5,8 @@
                showFirstLastButtons
                aria-label="Choisissez une page">
 </mat-paginator>
-<table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z2" aria-label="Liste des activités" aria-describedby="Choupa">
-  <ng-container matColumnDef="actions1">
+<table *ngIf="screenIsBig" mat-table matSort [dataSource]="dataSource" class="mat-elevation-z2" aria-label="Liste des activités" aria-describedby="Choupa">
+  <ng-container matColumnDef="action1">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element">
       <button mat-icon-button (click)="deleteActivity(element.id)" aria-label="Supprimer une activité">
@@ -22,7 +22,7 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
     <td mat-cell *matCellDef="let element">{{element.activityDate}}</td>
   </ng-container>
-  <ng-container matColumnDef="duration">
+  <ng-container *ngIf="screenIsBig" matColumnDef="duration">
     <th mat-header-cell *matHeaderCellDef> Durée </th>
     <td mat-cell *matCellDef="let element">{{element.duration}}</td>
   </ng-container>
@@ -42,7 +42,7 @@
     <th mat-header-cell *matHeaderCellDef> FC moyenne </th>
     <td mat-cell *matCellDef="let element">{{element.averageFc}}</td>
   </ng-container>
-  <ng-container matColumnDef="maxFc">
+  <ng-container *ngIf="screenIsBig" matColumnDef="maxFc">
     <th mat-header-cell *matHeaderCellDef> FC max </th>
     <td mat-cell *matCellDef="let element">{{element.averageFc}}</td>
   </ng-container>
@@ -54,7 +54,47 @@
       </button>
     </td>
   </ng-container>
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedColumnsBigScreen"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumnsBigScreen;"></tr>
 </table>
+  <table *ngIf="!screenIsBig" mat-table matSort [dataSource]="dataSource" class="mat-elevation-z2" aria-label="Liste des activités" aria-describedby="Choupa">
+    <ng-container matColumnDef="action1">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button (click)="deleteActivity(element.id)" aria-label="Supprimer une activité">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="activityName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Activité </th>
+      <td mat-cell *matCellDef="let element">{{element.activityName}}</td>
+    </ng-container>
+    <ng-container matColumnDef="activityDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+      <td mat-cell *matCellDef="let element">{{element.activityDate}}</td>
+    </ng-container>
+    <ng-container matColumnDef="distance">
+      <th mat-header-cell *matHeaderCellDef> Distance </th>
+      <td mat-cell *matCellDef="let element"> {{element.distance}} {{ DISTANCE}} </td>
+    </ng-container>
+    <ng-container matColumnDef="aerobie">
+      <th mat-header-cell *matHeaderCellDef> Aérobie </th>
+      <td mat-cell *matCellDef="let element">{{element.aerobie}}</td>
+    </ng-container>
+    <ng-container matColumnDef="averageFc">
+      <th mat-header-cell *matHeaderCellDef> FC moyenne </th>
+      <td mat-cell *matCellDef="let element">{{element.averageFc}}</td>
+    </ng-container>
+    <ng-container matColumnDef="action2">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button (click)="editActivity(element.id)" aria-label="Modifier une activité">
+          <mat-icon>exit_to_app</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsSmallScreen"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsSmallScreen;"></tr>
+  </table>
 </div>

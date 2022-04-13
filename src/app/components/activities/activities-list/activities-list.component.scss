@@ -20,15 +20,59 @@ a {
 .mat-header-cell {
   color: $secondary ;
   font-weight: bold;
-  font-size: 14px;
   text-transform: uppercase;
 }
-/*.mat-row .mat-cell {
-  border-bottom: 1px solid transparent;
-  border-top: 1px solid transparent;
-  cursor: pointer;
+@media only screen and (max-width : 480px) {
+  .mat-header-cell {
+    font-size: 10px;
+  }
+  .mat-cell {
+    font-size: 10px;
+  }
 }
 
-.mat-row:hover .mat-cell {
-  border-color: currentColor;
-}*/
+@media only screen and (min-width : 481px) {
+  .mat-header-cell {
+    font-size: 10px;
+  }
+  .mat-cell {
+    font-size: 10px;
+  }
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 768px) {
+  .mat-header-cell {
+    font-size: 14px;
+  }
+  .mat-cell {
+    font-size: 14px;
+  }
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (min-width : 1024px) {
+  .mat-header-cell {
+    font-size: 14px;
+  }
+}
+
+/* Desktops and laptops ----------- */
+@media only screen and (min-width : 1224px) {
+  .mat-header-cell {
+    font-size: 14px;
+  }
+  .mat-cell {
+    font-size: 14px;
+  }
+}
+
+/* Large screens ----------- */
+@media only screen and (min-width : 1824px) {
+  .mat-header-cell {
+    font-size: 14px;
+  }
+  .mat-cell {
+    font-size: 14px;
+  }
+}

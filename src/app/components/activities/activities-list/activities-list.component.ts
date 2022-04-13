@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivitiesService} from '../../../services/activities.service';
 import {GeneralService} from '../../../services/general.service';
 import {MatPaginator} from '@angular/material/paginator';
@@ -6,13 +6,14 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {AuthService} from '@auth0/auth0-angular';
 import {NotificationService} from '../../../services/notification.service';
-import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {ActivityEditComponent} from '../activity-edit/activity-edit.component';
 import {Activity} from '../../../models/activities.model';
-import {ButtonAction} from '../../../enums/buttons.enum';
 import {Router} from '@angular/router';
 import {ActivityUnits} from '../../../enums/activity.enum';
 import {DatePipe} from '@angular/common';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {ResponsiveUi} from '../../../models/responsive.model';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 
 @Component({
@@ -20,15 +21,16 @@ import {DatePipe} from '@angular/common';
   templateUrl: './activities-list.component.html',
   styleUrls: ['./activities-list.component.scss'],
 })
-export class ActivitiesListComponent implements OnInit {
+export class ActivitiesListComponent implements OnInit, OnDestroy {
   userEmail: string;
   dataSource: MatTableDataSource<Activity> = new MatTableDataSource<Activity>();
+  destroyed = new Subject<void>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns: string[] = [
-    'actions1',
+  displayedColumnsBigScreen: string[] = [
+    'action1',
     'activityName',
     'activityDate',
     'duration',
@@ -39,17 +41,36 @@ export class ActivitiesListComponent implements OnInit {
     'maxFc',
     'action2',
   ];
+  displayedColumnsSmallScreen: string[] = [
+    'action1',
+    'activityName',
+    'activityDate',
+    'distance',
+    'aerobie',
+    'averageFc',
+    'action2',
+  ];
 
   DISTANCE: string = ActivityUnits.DISTANCE;
+
+  displayNameMap = new Map([
+    [Breakpoints.XSmall, 'XSmall'],
+    [Breakpoints.Small, 'Small'],
+    [Breakpoints.Medium, 'Medium'],
+    [Breakpoints.Large, 'Large'],
+    [Breakpoints.XLarge, 'XLarge'],
+  ]);
+  screenIsBig: boolean;
+  screenDefinition: ResponsiveUi;
 
   constructor(
     private activitiesService: ActivitiesService,
     private generalService: GeneralService,
     public auth: AuthService,
     private notificationService: NotificationService,
-    public dialog: MatDialog,
     private route: Router,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private breakpointObserver: BreakpointObserver
   ) {}
 
   ngOnInit(): void {
@@ -74,8 +95,24 @@ export class ActivitiesListComponent implements OnInit {
         });
       }
     });
+    this.screenDefinition = new ResponsiveUi(this.breakpointObserver);
+    this.screenDefinition.getScreensize().pipe(takeUntil(this.destroyed)).subscribe(
+      result => {
+        for (const query of Object.keys(result.breakpoints)) {
+          if (result.breakpoints[query]) {
+            const currentScreenSize =
+              this.displayNameMap.get(query) ?? 'Unknown';
+            console.log('current screen size: ', currentScreenSize);
+            this.screenIsBig = this.screenDefinition.isScreenIsBig(currentScreenSize);
+          }
+        }
+      });
   }
 
+  ngOnDestroy(): void {
+    this.destroyed.next();
+    this.destroyed.complete();
+  }
 
   /**
    * Suppression d'une activité
@@ -103,9 +140,5 @@ export class ActivitiesListComponent implements OnInit {
     const activityToEdit = this.dataSource.data.filter(element => element.id === id);
     const url = '/activity/edit/' + activityToEdit[0].id;
     this.route.navigateByUrl(url);
-  }
-
-  saveActivity = (activityToBeSaved: Activity): void => {
-
   }
 }
