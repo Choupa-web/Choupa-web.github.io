@@ -34,22 +34,25 @@ $link-active: #ffa600;
   border-right : none;
 }
 .main {
-  padding: 0 40px;
+  padding: 10px 40px;
   background-color: #fff;
 }
 .left-sidenav {
   background-color: $primary !important;
 }
+.mat-progress-bar {
+  fill: $primary;
+}
 
 @media only screen and (max-width : 480px) {
   .main {
-    padding: 0 10px;
+    padding: 10px 10px;
   }
 }
 
 @media only screen and (min-width : 481px) {
   .main {
-    padding: 0 10px;
+    padding: 10px 10px;
   }
 }
 
@@ -63,20 +66,20 @@ $link-active: #ffa600;
 /* Smartphones (portrait) ----------- */
 @media only screen and (min-width : 1024px) {
   .main {
-    padding: 0 30px;
+    padding: 10px 30px;
   }
 }
 
 /* Desktops and laptops ----------- */
 @media only screen and (min-width : 1224px) {
   .main {
-    padding: 0 30px;
+    padding: 10px 30px;
   }
 }
 
 /* Large screens ----------- */
 @media only screen and (min-width : 1824px) {
   .main {
-    padding: 0 40px;
+    padding: 10px 40px;
   }
 }
