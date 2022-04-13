@@ -1,5 +1,5 @@
 <div *ngIf="controlsList.length > 0" id="container" [formGroup]="globalForm" fxLayout="row">
-  <div class="left" fxLayout="row" fxLayoutAlign="center center" fxFlex="30" [id]="'ctrl-' + activityIcon.order" *ngIf="activityIcon.controlType == GRAPHICAL">
+  <div class="left" fxLayoutAlign="center center" fxFlex="30" [id]="'ctrl-' + activityIcon.order" *ngIf="activityIcon.controlType == GRAPHICAL">
     {{ activityIcon.value }}
   </div>
   <div class="right" fxLayout="column">
@@ -13,7 +13,6 @@
               <input matInput [matDatepicker]="picker" [formControlName]="control.controlName">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
-             <!-- <span class="unitColor" *ngIf="control.controlUnit" matSuffix>{{ control.controlUnit }}</span>-->
             </div>
             <div *ngSwitchCase="'textboxtime'">
               <input type="time" matInput [formControlName]="control.controlName">
