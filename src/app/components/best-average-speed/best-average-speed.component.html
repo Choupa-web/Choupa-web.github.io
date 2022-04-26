@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-subtitle>Meilleure vitesse moyenne</mat-card-subtitle>
+  <mat-card-content fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-between">
+    <div *ngIf="bestAverageSpeed.vtt !== 0" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+      <span>VTT:</span>
+      <span> {{ bestAverageSpeed?.vtt }} {{ unit }}</span>
+    </div>
+    <div *ngIf="bestAverageSpeed.ht !== 0" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+      <span>HT:</span>
+      <span> {{ bestAverageSpeed?.ht }} {{ unit }}</span>
+    </div>
+    <div *ngIf="bestAverageSpeed.rower !== 0" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+      <span>Rameur:</span>
+      <span> {{ bestAverageSpeed?.rower }} {{ unit }}</span>
+    </div>
+    <div *ngIf="bestAverageSpeed.walk !== 0" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+      <span>Marche:</span>
+      <span> {{ bestAverageSpeed?.walk }} {{ unit }}</span>
+    </div>
+  </mat-card-content>
+</mat-card>

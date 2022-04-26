@@ -10,7 +10,7 @@ import {ActivitiesNameLabel} from '../../enums/activity.enum';
 })
 export class AuthNavComponent implements OnInit {
 
-  activitiesList: ActivitiesNameLabel[] = [ActivitiesNameLabel.VTT, ActivitiesNameLabel.RAMEUR, ActivitiesNameLabel.VELO_INSIDE];
+  activitiesList: ActivitiesNameLabel[] = [ActivitiesNameLabel.VTT, ActivitiesNameLabel.ROWER, ActivitiesNameLabel.VELO_INSIDE];
   public userName: string;
   constructor(public auth: AuthService, private route: Router) {
   }

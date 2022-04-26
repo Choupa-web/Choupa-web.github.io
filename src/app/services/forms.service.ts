@@ -316,7 +316,7 @@ export class FormsService {
       case ActivitiesNameLabel.VTT:
         this.addVttControls(activityInfo);
         break;
-      case ActivitiesNameLabel.RAMEUR:
+      case ActivitiesNameLabel.ROWER:
         this.addRameurControls(activityInfo);
         break;
       case ActivitiesNameLabel.VELO_INSIDE:
