@@ -1,21 +1,25 @@
 <mat-card>
+  <div id="subtitle">
   <mat-card-subtitle>Meilleure vitesse moyenne</mat-card-subtitle>
+  </div>
+  <div id="content">
   <mat-card-content fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-between">
-    <div *ngIf="bestAverageSpeed.vtt !== 0" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+    <div *ngIf="bestAverageSpeed.vtt !== 0" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center">
       <span>VTT:</span>
       <span> {{ bestAverageSpeed?.vtt }} {{ unit }}</span>
     </div>
-    <div *ngIf="bestAverageSpeed.ht !== 0" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+    <div *ngIf="bestAverageSpeed.ht !== 0" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center">
       <span>HT:</span>
       <span> {{ bestAverageSpeed?.ht }} {{ unit }}</span>
     </div>
-    <div *ngIf="bestAverageSpeed.rower !== 0" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+    <div *ngIf="bestAverageSpeed.rower !== 0" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center">
       <span>Rameur:</span>
       <span> {{ bestAverageSpeed?.rower }} {{ unit }}</span>
     </div>
-    <div *ngIf="bestAverageSpeed.walk !== 0" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+    <div *ngIf="bestAverageSpeed.walk !== 0" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center">
       <span>Marche:</span>
       <span> {{ bestAverageSpeed?.walk }} {{ unit }}</span>
     </div>
   </mat-card-content>
+  </div>
 </mat-card>

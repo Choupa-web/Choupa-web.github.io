@@ -8,10 +8,10 @@
       <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
     </div>
     <div fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap.lt-lg="50px">
-      <div fxFlex="80" fxFlex.lt-lg="100">
+      <div fxFlex="80%" fxFlex.lt-lg="100">
         <router-outlet></router-outlet>
       </div>
-      <app-aside></app-aside>
+      <app-aside fxFlex="20%"></app-aside>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
