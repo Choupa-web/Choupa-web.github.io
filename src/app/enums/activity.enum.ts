@@ -13,7 +13,8 @@ export enum ActivitiesType {
 export enum ActivitiesNameLabel {
   VTT = 'VTT',
   VELO_INSIDE = 'HOME TRAINER',
-  RAMEUR = 'RAMEUR'
+  ROWER = 'RAMEUR',
+  WALK = 'WALK'
 }
 
 /**

@@ -51,6 +51,7 @@ import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import { ActivitiesDynamicFormComponent } from './components/activities/activities-dynamic-form/activities-dynamic-form.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {LayoutModule} from '@angular/cdk/layout';
+import { BestAverageSpeedComponent } from './components/best-average-speed/best-average-speed.component';
 
 
 
@@ -74,7 +75,8 @@ registerLocaleData(localeFr, 'fr');
     ReplaceCommaByDotInCtrlDirective,
     AlertComponent,
     ActivityEditComponent,
-    ActivitiesDynamicFormComponent
+    ActivitiesDynamicFormComponent,
+    BestAverageSpeedComponent
   ],
   imports: [
     BrowserModule,
@@ -111,7 +113,8 @@ registerLocaleData(localeFr, 'fr');
     AngularFirestoreModule,
     MatMenuModule,
     LayoutModule,
-    ExtendedModule
+    ExtendedModule,
+    MatCardModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },

@@ -64,3 +64,10 @@ export class ActivityFormControl<T> {
     this.disabled = options.disabled;
   }
 }
+
+export interface BestAverageSpeed {
+  vtt?: number;
+  ht?: number;
+  rower?: number;
+  walk?: number;
+}
