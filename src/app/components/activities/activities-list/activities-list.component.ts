@@ -78,7 +78,7 @@ export class ActivitiesListComponent implements OnInit, OnDestroy {
     this.auth.user$.subscribe((userInfo) => {
       if (userInfo) {
         this.userEmail = userInfo.email;
-        this.activitiesService.getAllActivities().subscribe({
+        this.activitiesService.getAllActivities(this.userEmail).subscribe({
           next: (response) => {
             const datas = response.map(item => Object.assign({id: item.payload.doc.id}, item.payload.doc.data()));
             this.dataSource.data = datas.map((obj) => ({...obj, date: new Date(obj.activityDate)}));

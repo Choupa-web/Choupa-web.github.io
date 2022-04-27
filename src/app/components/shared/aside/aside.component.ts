@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-aside',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./aside.component.scss']
 })
 export class AsideComponent implements OnInit {
-
-  constructor() { }
+  userEmail: string;
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
+    this.auth.user$.subscribe((userInfo) => {
+      if (userInfo) {
+        this.userEmail = userInfo.email;
+      }
+    });
   }
 
 }
