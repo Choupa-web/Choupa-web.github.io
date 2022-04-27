@@ -13,8 +13,8 @@ export class ActivitiesService {
   constructor(private http: HttpClient, private store: AngularFirestore) {
   }
 
-  getAllActivities(): Observable<any> {
-    return this.store.collection(FirebaseCollections.ACTIVITY).snapshotChanges();
+  getAllActivities(user: string): Observable<any> {
+    return this.store.collection(FirebaseCollections.ACTIVITY, ref => ref.where('userEmail', '==', user)).snapshotChanges();
   }
 
   getActivity(idActivity: string): Observable<any> {
