@@ -12,8 +12,9 @@ import {ActivityUnits} from '../../../enums/activity.enum';
 import {DatePipe} from '@angular/common';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {ResponsiveUi} from '../../../models/responsive.model';
-import {takeUntil} from 'rxjs/operators';
+import {mergeMap, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {firestoreDatasTransformation} from '../../../utils/Datas.utils';
 
 
 @Component({
@@ -75,26 +76,32 @@ export class ActivitiesListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.generalService.sendLoadingActivityChangeInformation(true);
-    this.auth.user$.subscribe((userInfo) => {
-      if (userInfo) {
-        this.userEmail = userInfo.email;
-        this.activitiesService.getAllActivities(this.userEmail).subscribe({
-          next: (response) => {
-            const datas = response.map(item => Object.assign({id: item.payload.doc.id}, item.payload.doc.data()));
-            this.dataSource.data = datas.map((obj) => ({...obj, date: new Date(obj.activityDate)}));
-            this.dataSource.data.forEach(element => element.activityDate = this.datePipe.transform(element.activityDate, 'dd-MM-yyyy'));
-            this.dataSource.data = this.dataSource.data.sort(
-              (a, b) =>
-                new Date(b.date).getTime() -
-                new Date(a.date).getTime()
-            );
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
-            this.generalService.sendLoadingActivityChangeInformation(false);
-          }
-        });
-      }
-    });
+    this.auth.user$
+      .pipe(
+        mergeMap((userInfo) => {
+          return this.activitiesService.getAllActivities(userInfo.email);
+        })
+      )
+      .subscribe((response) => {
+        const datas = firestoreDatasTransformation(response);
+        this.dataSource.data = datas.map((obj) => ({
+          ...obj,
+          date: new Date(obj.activityDate),
+        }));
+        this.dataSource.data.forEach(
+          (element) =>
+            (element.activityDate = this.datePipe.transform(
+              element.activityDate,
+              'dd-MM-yyyy'
+            ))
+        );
+        this.dataSource.data = this.dataSource.data.sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        );
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.generalService.sendLoadingActivityChangeInformation(false);
+      });
     this.screenDefinition = new ResponsiveUi(this.breakpointObserver);
     this.screenDefinition.getScreensize().pipe(takeUntil(this.destroyed)).subscribe(
       result => {
