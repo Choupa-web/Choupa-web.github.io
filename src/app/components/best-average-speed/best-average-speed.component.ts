@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { BestAverageSpeed} from '../../models/activities.model';
+import { BestAverageSpeed } from '../../models/activities.model';
 import {ActivitiesNameLabel, ActivityUnits} from '../../enums/activity.enum';
 import {ActivitiesService} from '../../services/activities.service';
 import {combineLatest, Observable} from 'rxjs';
+import {getMaximumValue} from '../../utils/Datas.utils';
 
 @Component({
   selector: 'app-best-average-speed',
@@ -39,19 +40,19 @@ export class BestAverageSpeedComponent implements OnInit {
          this.walkAverageSpeedDatas = this.getActivityAverageSpeedTransformedDatas(walk);
          this.bestAverageSpeed.vtt =
            this.vttAverageSpeedDatas.length > 0
-             ? this.getMaximumValue(this.vttAverageSpeedDatas)
+             ? getMaximumValue(this.vttAverageSpeedDatas)
              : 0;
          this.bestAverageSpeed.ht =
            this.htAverageSpeedDatas.length > 0
-             ? this.getMaximumValue(this.htAverageSpeedDatas)
+             ? getMaximumValue(this.htAverageSpeedDatas)
              : 0;
          this.bestAverageSpeed.rower =
            this.rowerAverageSpeedDatas.length > 0
-             ? this.getMaximumValue(this.rowerAverageSpeedDatas)
+             ? getMaximumValue(this.rowerAverageSpeedDatas)
              : 0;
          this.bestAverageSpeed.walk =
            this.walkAverageSpeedDatas.length > 0
-             ? this.getMaximumValue(this.walkAverageSpeedDatas)
+             ? getMaximumValue(this.walkAverageSpeedDatas)
              : 0;
        }
      });
@@ -66,11 +67,4 @@ export class BestAverageSpeedComponent implements OnInit {
     return transformedData.map(value => Number(value.averageSpeed));
   }
 
-  /**
-   * get maximum value of numbers array
-   * @param values - array of numbers
-   */
-  getMaximumValue(values: number[]): number {
-  return values.reduce((a, b) => (a > b ? a : b));
-  }
 }
