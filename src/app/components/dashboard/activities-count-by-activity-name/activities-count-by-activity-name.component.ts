@@ -1,5 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {ChartDataset} from 'chart.js';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {ActivitiesPieChart, CountByActivity} from '../../../models/dashboard.model';
 
 
@@ -8,26 +7,15 @@ import {ActivitiesPieChart, CountByActivity} from '../../../models/dashboard.mod
   templateUrl: './activities-count-by-activity-name.component.html',
   styleUrls: ['./activities-count-by-activity-name.component.scss']
 })
-export class ActivitiesCountByActivityNameComponent implements OnInit, OnChanges {
-
+export class ActivitiesCountByActivityNameComponent implements OnChanges {
   @Input() activitiesData: CountByActivity[];
-
   chart1: ActivitiesPieChart;
-  public labels: string[];
-  public chartData: ChartDataset[];
+  labels: string[];
 
-  constructor() { }
-
-  ngOnInit(): void {
-
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(_CHANGES: SimpleChanges): void {
     this.labels = this.activitiesData?.map((item) => item.activityName);
-    const dataCount = this.activitiesData?.map((item) => item.count);
-    this.chartData = [{data: dataCount }];
-    this.chart1 = new ActivitiesPieChart(this.labels, this.chartData);
-    console.log('charts1: ', this.chart1);
+    const chartData = this.activitiesData?.map((item) => item.count);
+    this.chart1 = new ActivitiesPieChart(this.labels, chartData);
   }
 
 }

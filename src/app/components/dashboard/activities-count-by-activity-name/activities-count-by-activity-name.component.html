@@ -1,8 +1,7 @@
 <div id="activities-count">
   <canvas baseChart
-          [datasets]="chart1?.activitiesChartDatas"
+          [data]="chart1?.activitiesChartDataset"
           [type]="chart1?.activitiesChartType"
-          [labels]="chart1?.activitiesChartLabels"
           [options]= "chart1?.activitiesChartOptions">
   </canvas>
 </div>
