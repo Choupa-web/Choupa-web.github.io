@@ -52,6 +52,8 @@ import { ActivitiesDynamicFormComponent } from './components/activities/activiti
 import {MatMenuModule} from '@angular/material/menu';
 import {LayoutModule} from '@angular/cdk/layout';
 import { BestAverageSpeedComponent } from './components/best-average-speed/best-average-speed.component';
+import { NgChartsModule } from 'ng2-charts';
+import { ActivitiesCountByActivityNameComponent } from './components/dashboard/activities-count-by-activity-name/activities-count-by-activity-name.component';
 
 
 
@@ -76,7 +78,8 @@ registerLocaleData(localeFr, 'fr');
     AlertComponent,
     ActivityEditComponent,
     ActivitiesDynamicFormComponent,
-    BestAverageSpeedComponent
+    BestAverageSpeedComponent,
+    ActivitiesCountByActivityNameComponent
   ],
   imports: [
     BrowserModule,
@@ -114,7 +117,8 @@ registerLocaleData(localeFr, 'fr');
     MatMenuModule,
     LayoutModule,
     ExtendedModule,
-    MatCardModule
+    MatCardModule,
+    NgChartsModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
