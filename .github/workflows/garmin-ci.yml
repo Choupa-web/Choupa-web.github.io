@@ -1,4 +1,4 @@
-name: CI-CD
+name: Merge on develop CI-CD
 on:
   push:
     branches:
@@ -13,7 +13,7 @@ jobs:
               node-version: '16.x'
           - run: yarn install
           - run: npm run build --prod
-          - uses: rlespinasse/github-slug-action@v2.x
+          - uses: rlespinasse/github-slug-action@v3.x
           - uses: actions/upload-artifact@v2
             with:
               name: ng9-github-actions-netlify-${{ github.ref }}-${{ github.run_id }}-${{ github.run_number }}
