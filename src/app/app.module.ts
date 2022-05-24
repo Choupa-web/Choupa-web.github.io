@@ -28,7 +28,7 @@ import { DragDropModule} from '@angular/cdk/drag-drop';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { AuthNavComponent } from './components/auth-nav/auth-nav.component';
-import {environment, environment as env} from '../environments/environment';
+import { environment } from '../environments/environment';
 import {ExtendedModule, FlexModule} from '@angular/flex-layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ActivityAddComponent } from './components/activities/activity-add/activity-add.component';
@@ -85,7 +85,7 @@ registerLocaleData(localeFr, 'fr');
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AuthModule.forRoot({...env.auth}),
+    AuthModule.forRoot({...environment.auth}),
     MatButtonModule,
     MatIconModule,
     MatListModule,
