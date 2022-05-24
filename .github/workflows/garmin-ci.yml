@@ -1,0 +1,33 @@
+name: CI-CD
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+          uses: actions/checkout@v2
+
+      - name: Use Node.js
+          uses: actions/setup-node@v1
+          with:
+            node-version: '16.x'
+
+      - name: Install dependencies
+          run: yarn install
+
+      - name: Build app
+          run: npm run build:prod
+
+      - name: Inject slug/short variables
+          uses: rlespinasse/github-slug-action@v2.x
+
+      - name: Upload artifact
+          uses: actions/upload-artifact@v2
+          with:
+            name: ng9-github-actions-netlify-${{ github.ref }}-${{ github.run_id }}-${{ github.run_number }}
+            path: ./dist/ng9-github-actions-netlify
