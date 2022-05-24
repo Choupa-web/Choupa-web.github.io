@@ -17,4 +17,4 @@ jobs:
           - uses: actions/upload-artifact@v2
             with:
               name: ng9-github-actions-netlify-${{ github.ref }}-${{ github.run_id }}-${{ github.run_number }}
-              path: ./dist/ng9-github-actions-netlify
+              path: ./dist
