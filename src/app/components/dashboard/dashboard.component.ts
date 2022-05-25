@@ -7,7 +7,8 @@ import {AuthService} from '@auth0/auth0-angular';
 import {ActivitiesService} from '../../services/activities.service';
 import {Activity} from '../../models/activities.model';
 import {ChartsDataComputationService} from '../../services/charts-data-computation.service';
-import {CountByActivity} from '../../models/dashboard.model';
+import {AverageSpeedProgress, CountByActivity} from '../../models/dashboard.model';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,6 +18,7 @@ import {CountByActivity} from '../../models/dashboard.model';
 export class DashboardComponent implements OnInit {
   allActivitiesUserList: Activity[];
   allActivitiesCount: CountByActivity[];
+  allActivitiesAverageSpeedProgress: AverageSpeedProgress[];
   constructor(
     private notification: NotificationService,
     private generalService: GeneralService,
@@ -36,6 +38,10 @@ export class DashboardComponent implements OnInit {
       .subscribe((response) => {
         this.allActivitiesUserList = firestoreDatasTransformation(response);
         this.allActivitiesCount = this.chartComputationService.getCountByActivity(this.allActivitiesUserList);
+        const sortedActivities = this.allActivitiesUserList.sort(
+          (a, b) => Number(formatDate(a.activityDate, 'M', 'fr')) - Number(formatDate(b.activityDate, 'M', 'fr'))
+        );
+        this.allActivitiesAverageSpeedProgress = this.chartComputationService.getAverageSpeedProgress(sortedActivities);
         this.generalService.sendLoadingActivityChangeInformation(false);
       });
   }
