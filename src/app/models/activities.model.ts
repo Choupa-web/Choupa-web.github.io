@@ -1,4 +1,4 @@
-import {ActivityUnits} from '../enums/activity.enum';
+import {ActivitiesNameLabel, ActivityUnits} from '../enums/activity.enum';
 import {ControlType} from '../enums/forms.enum';
 
 export interface Activity {
@@ -70,4 +70,9 @@ export interface BestAverageSpeed {
   ht?: number;
   rower?: number;
   walk?: number;
+}
+
+export interface ActivityColor {
+  activity: ActivitiesNameLabel;
+  color: string;
 }

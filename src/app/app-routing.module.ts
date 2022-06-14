@@ -6,6 +6,7 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {ActivityAddComponent} from './components/activities/activity-add/activity-add.component';
 import {ActivitiesListComponent} from './components/activities/activities-list/activities-list.component';
 import {ActivityEditComponent} from './components/activities/activity-edit/activity-edit.component';
+import {DashboardContainerComponent} from './components/dashboard/dashboard-container/dashboard-container.component';
 
 
 const routes: Routes = [

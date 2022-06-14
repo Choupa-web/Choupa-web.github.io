@@ -10,12 +10,17 @@ import {ActivitiesNameLabel} from '../../enums/activity.enum';
 })
 export class AuthNavComponent implements OnInit {
 
-  activitiesList: ActivitiesNameLabel[] = [ActivitiesNameLabel.VTT, ActivitiesNameLabel.ROWER, ActivitiesNameLabel.VELO_INSIDE];
+  activitiesList: string[] = [ActivitiesNameLabel.VTT, ActivitiesNameLabel.ROWER, ActivitiesNameLabel.VELO_INSIDE];
   public userName: string;
   constructor(public auth: AuthService, private route: Router) {
   }
 
   ngOnInit(): void {
+    // tslint:disable-next-line:forin
+    for ( const value in ActivitiesNameLabel) {
+      this.activitiesList.push(value);
+    }
+    console.log('activitiesList: ', this.activitiesList);
     this.auth.user$.subscribe( (userInfo) => {
       if (userInfo) {
         this.userName = userInfo.given_name;

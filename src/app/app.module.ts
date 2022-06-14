@@ -54,6 +54,9 @@ import {LayoutModule} from '@angular/cdk/layout';
 import { BestAverageSpeedComponent } from './components/best-average-speed/best-average-speed.component';
 import { NgChartsModule } from 'ng2-charts';
 import { ActivitiesCountByActivityNameComponent } from './components/dashboard/activities-count-by-activity-name/activities-count-by-activity-name.component';
+import { DashboardContainerComponent } from './components/dashboard/dashboard-container/dashboard-container.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { AverageSpeedEvolutionComponent } from './components/dashboard/average-speed-evolution/average-speed-evolution.component';
 
 
 
@@ -79,7 +82,9 @@ registerLocaleData(localeFr, 'fr');
     ActivityEditComponent,
     ActivitiesDynamicFormComponent,
     BestAverageSpeedComponent,
-    ActivitiesCountByActivityNameComponent
+    ActivitiesCountByActivityNameComponent,
+    DashboardContainerComponent,
+    AverageSpeedEvolutionComponent
   ],
   imports: [
     BrowserModule,
@@ -118,7 +123,8 @@ registerLocaleData(localeFr, 'fr');
     LayoutModule,
     ExtendedModule,
     MatCardModule,
-    NgChartsModule
+    NgChartsModule,
+    MatGridListModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
