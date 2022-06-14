@@ -3,7 +3,7 @@
  */
 export enum ActivitiesNameLabel {
   VTT = 'VTT',
-  EVTT = 'VTT ELECTRIQUE',
+  VTTAE = 'VTTAE',
   VELO_INSIDE = 'HOME TRAINER',
   ROWER = 'RAMEUR',
   WALK = 'WALK'

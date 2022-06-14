@@ -23,7 +23,7 @@ export class ActivitiesChart {
       color: '#fecab8'
     },
     {
-      activity: ActivitiesNameLabel.EVTT,
+      activity: ActivitiesNameLabel.VTTAE,
       color: '#ffa281'
     }
   ];
