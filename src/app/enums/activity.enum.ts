@@ -41,7 +41,7 @@ export enum ActivityFieldsMax {
   AVERAGE_SPEED = 40,
   MAX_SPEED = 60,
   AVERAGE_FC = 140,
-  MAX_FC = 210,
+  MAX_FC = 230,
   AEROBIE = 5,
   ANAEROBIQUE = 5,
   CONSTANCE = 40,
