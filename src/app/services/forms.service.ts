@@ -201,6 +201,57 @@ export class FormsService {
     });
   }
 
+  addVttaeControls = (activity?: Activity): void => {
+    this.controlsList.push({
+      controlName: 'constance',
+      validationPattern: twoDecimalsRegex,
+      max: ActivityFieldsMax.CONSTANCE,
+      min: ActivityFieldsMin.CONSTANCE,
+      required: true,
+      label: 'Constance',
+      controlType: ControlType.TEXTBOX_DECIMAL,
+      order: 11,
+      value: activity?.constance ?? '',
+      disabled: false,
+    });
+    this.controlsList.push({
+      controlName: 'difficulty',
+      required: true,
+      validationPattern: twoDecimalsRegex,
+      max: ActivityFieldsMax.DIFFICULTY,
+      min: ActivityFieldsMin.DIFFICULTY,
+      label: 'Difficulté',
+      controlType: ControlType.TEXTBOX_DECIMAL,
+      order: 12,
+      value: activity?.difficulty ?? '',
+      disabled: false,
+    });
+    this.controlsList.push({
+      controlName: 'averageCadence',
+      required: true,
+      validationPattern: numberWithNoDecimals,
+      min: ActivityFieldsMin.CADENCE,
+      label: 'Cadence moyenne',
+      controlType: ControlType.TEXTBOX_NODECIMAL,
+      order: 13,
+      value: activity?.averageCadence ?? '',
+      disabled: false,
+      controlUnit: ActivityUnits.CADENCE,
+    });
+    this.controlsList.push({
+      controlName: 'maxCadence',
+      required: true,
+      validationPattern: numberWithNoDecimals,
+      min: ActivityFieldsMin.CADENCE,
+      label: 'Cadence maximum',
+      controlType: ControlType.TEXTBOX_NODECIMAL,
+      order: 14,
+      value: activity?.maxCadence ?? '',
+      disabled: false,
+      controlUnit: ActivityUnits.CADENCE,
+    });
+  }
+
   addHometrainercontrols = (activity?: Activity): void => {
     this.controlsList.push({
       controlName: 'averagePower',
@@ -321,6 +372,9 @@ export class FormsService {
         break;
       case ActivitiesNameLabel.VELO_INSIDE:
         this.addHometrainercontrols(activityInfo);
+        break;
+      case ActivitiesNameLabel.VTTAE:
+        this.addVttaeControls(activityInfo);
         break;
       default:
         break;
