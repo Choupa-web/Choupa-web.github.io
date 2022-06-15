@@ -68,14 +68,13 @@ export enum ActivityUnits {
   POWER = 'w',
   ALLURE = 'mn/500m',
   FREQUENCE_COUPS = 'cps/mn',
-  STROKES = 'cps',
-  TIME = 'hh:mm'
+  STROKES = 'cps'
 }
 
-export enum ActivityFormScope {
+/*export enum ActivityFormScope {
   COMMON = 'COMMON',
   SPECIFIC = 'SPECIFIC'
-}
+}*/
 
 
 
