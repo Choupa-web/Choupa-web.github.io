@@ -1,17 +1,9 @@
 /**
- * Liste des types d'activités possible
- */
-export enum ActivitiesType {
-  VTT = 'VTT',
-  VELO_INSIDE = 'VELO_INSIDE',
-  RAMEUR = 'RAMEUR'
-}
-
-/**
  * Nom des activités
  */
 export enum ActivitiesNameLabel {
   VTT = 'VTT',
+  VTTAE = 'VTTAE',
   VELO_INSIDE = 'HOME TRAINER',
   ROWER = 'RAMEUR',
   WALK = 'WALK'
@@ -76,14 +68,13 @@ export enum ActivityUnits {
   POWER = 'w',
   ALLURE = 'mn/500m',
   FREQUENCE_COUPS = 'cps/mn',
-  STROKES = 'cps',
-  TIME = 'hh:mm'
+  STROKES = 'cps'
 }
 
-export enum ActivityFormScope {
+/*export enum ActivityFormScope {
   COMMON = 'COMMON',
   SPECIFIC = 'SPECIFIC'
-}
+}*/
 
 
 

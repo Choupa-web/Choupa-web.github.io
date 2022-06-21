@@ -28,7 +28,7 @@ import { DragDropModule} from '@angular/cdk/drag-drop';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { AuthNavComponent } from './components/auth-nav/auth-nav.component';
-import {environment, environment as env} from '../environments/environment';
+import { environment } from '../environments/environment';
 import {ExtendedModule, FlexModule} from '@angular/flex-layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ActivityAddComponent } from './components/activities/activity-add/activity-add.component';
@@ -52,6 +52,11 @@ import { ActivitiesDynamicFormComponent } from './components/activities/activiti
 import {MatMenuModule} from '@angular/material/menu';
 import {LayoutModule} from '@angular/cdk/layout';
 import { BestAverageSpeedComponent } from './components/best-average-speed/best-average-speed.component';
+import { NgChartsModule } from 'ng2-charts';
+import { ActivitiesCountByActivityNameComponent } from './components/dashboard/activities-count-by-activity-name/activities-count-by-activity-name.component';
+import { DashboardContainerComponent } from './components/dashboard/dashboard-container/dashboard-container.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { AverageSpeedEvolutionComponent } from './components/dashboard/average-speed-evolution/average-speed-evolution.component';
 
 
 
@@ -76,13 +81,16 @@ registerLocaleData(localeFr, 'fr');
     AlertComponent,
     ActivityEditComponent,
     ActivitiesDynamicFormComponent,
-    BestAverageSpeedComponent
+    BestAverageSpeedComponent,
+    ActivitiesCountByActivityNameComponent,
+    DashboardContainerComponent,
+    AverageSpeedEvolutionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AuthModule.forRoot({...env.auth}),
+    AuthModule.forRoot({...environment.auth}),
     MatButtonModule,
     MatIconModule,
     MatListModule,
@@ -114,7 +122,9 @@ registerLocaleData(localeFr, 'fr');
     MatMenuModule,
     LayoutModule,
     ExtendedModule,
-    MatCardModule
+    MatCardModule,
+    NgChartsModule,
+    MatGridListModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
