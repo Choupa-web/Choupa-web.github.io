@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-eslint/builder": "^13.5.0",
     "@angular-eslint/template-parser": "13.5.0",
     "@angular/animations": "14.0.1",
     "@angular/cdk": "14.0.1",
