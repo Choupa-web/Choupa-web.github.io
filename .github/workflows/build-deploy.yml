@@ -1,0 +1,33 @@
+# This is workflow to build and deploy angular app on github pages
+
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - uses: actions/setup-node@v3 #this installs node and npm for us
+      with:
+        node-version: '16.x'
+    - uses: actions/cache@v3 # this allows for re-using node_modules caching, making builds a bit faster.
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+    - name: Build
+      run: |
+        yarn install
+        npm run-script deploy
+    - name: Deploy
+      uses: Choupa-web/github-pages-deploy-action@releases/v3
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: dist/garminPerformances2
