@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
-    - uses: actions/setup-node@v1 #this installs node and npm for us
+      uses: actions/checkout@v3
+    - uses: actions/setup-node@v3 #this installs node and npm for us
       with:
         node-version: '16.x'
     - uses: actions/cache@v3 # this allows for re-using node_modules caching, making builds a bit faster.
@@ -20,10 +20,10 @@ jobs:
         path: ~/.npm
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-node-    
+          ${{ runner.os }}-node-
     - name: Build
       run: |
-        npm install
+        yarn install
         npm run-script deploy
     - name: Deploy
       uses: Choupa-web/github-pages-deploy-action@releases/v3
