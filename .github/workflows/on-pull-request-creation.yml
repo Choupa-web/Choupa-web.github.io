@@ -1,4 +1,4 @@
-name: on pull request creation
+name: On pull request creation
 on: pull_request
 
 jobs:
@@ -10,4 +10,3 @@ jobs:
         with:
           node-version: '16.x'
       - run: yarn install
-      - run: npm run build --omit=dev
