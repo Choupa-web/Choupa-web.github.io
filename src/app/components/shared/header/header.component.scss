@@ -1,0 +1,24 @@
+$primary: #004c6d;
+$links: #ff784c;
+$text-color: white;
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.header-content {
+  background-color: $primary;
+  color: $text-color;
+}
+.title {
+  text-transform: uppercase;
+}
+
+.right-align {
+  text-align: right;
+}
+
+.full-width {
+  width: 100%;
+}
+

@@ -1,0 +1,12 @@
+$primary: #004c6d;
+$secondary: #3f5790;
+$links: #ff784c;
+$text-color: white;
+$link-active: #ffa600;
+
+footer {
+  position: sticky;
+  bottom: 0;
+    background-color: $secondary;
+  color: $text-color;
+}

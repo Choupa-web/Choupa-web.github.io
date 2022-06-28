@@ -1,0 +1,80 @@
+<section class="dashboard" fxLayout="column">
+  <div fxLayout="row" fxLayoutAlign="space-between stretch" fxLayoutGap="20px">
+    <mat-card fxFlex="25" class="mat-elevation-z3 dashboard-card">
+      <mat-card-header>
+        <mat-card-title>
+          title1
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="dashboard-card-content">
+        <div>content</div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card fxFlex="25" class="mat-elevation-z3 dashboard-card">
+      <mat-card-header>
+        <mat-card-title>
+          title2
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="dashboard-card-content">
+        <div>content</div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card fxFlex="25" class="mat-elevation-z3 dashboard-card">
+      <mat-card-header>
+        <mat-card-title>
+          title3
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="dashboard-card-content">
+        <div>content</div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card fxFlex="25" class="mat-elevation-z3 dashboard-card">
+      <mat-card-header>
+        <mat-card-title>
+          title4
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="dashboard-card-content">
+        <div>content</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-between stretch" fxLayoutGap="20px">
+  <mat-card fxFlex="35" class="mat-elevation-z3 dashboard-card">
+    <mat-card-header>
+      <mat-card-title>
+        Répartition des activités
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="dashboard-card-content">
+      <div *ngIf="allActivitiesCount && allActivitiesCount.length > 0"><app-activities-count-by-activity-name [activitiesData]="allActivitiesCount"></app-activities-count-by-activity-name></div>
+      <div *ngIf="allActivitiesCount && allActivitiesCount.length == 0">Aucune donnée</div>
+    </mat-card-content>
+  </mat-card>
+    <mat-card fxFlex="65" class="mat-elevation-z3 dashboard-card">
+      <mat-card-header>
+        <mat-card-title>
+          Evolution de la vitesse moyenne
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="dashboard-card-content">
+        <div *ngIf="allActivitiesAverageSpeedProgress && allActivitiesAverageSpeedProgress.length > 0"><app-average-speed-evolution [activitiesData]="allActivitiesAverageSpeedProgress"></app-average-speed-evolution></div>
+        <div *ngIf="allActivitiesAverageSpeedProgress && allActivitiesAverageSpeedProgress.length == 0">Aucune donnée</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxLayout="row">
+    <mat-card class="dashboard-card">
+      <mat-card-header>
+        <mat-card-title>
+          titre 1
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="dashboard-card-content">
+        <div>--</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>
