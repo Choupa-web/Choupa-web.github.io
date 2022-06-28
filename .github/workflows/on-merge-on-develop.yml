@@ -1,4 +1,4 @@
-name: Merge on develop
+name: On merge on develop
 on:
   push:
     branches:
