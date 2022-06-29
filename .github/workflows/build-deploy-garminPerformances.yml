@@ -1,7 +1,5 @@
 # This is workflow to build and deploy angular app on github pages
-
-name: Build and Deploy
-
+name: Build and Deploy on github pages
 on:
   push:
     branches:
@@ -15,4 +13,4 @@ jobs:
             with:
               node-version: '16.x'
           - run: yarn install
-          - run: npm run build --omit=dev
+          - run: yarn build:prod
