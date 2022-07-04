@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { BestAverageSpeed } from '../../models/activities.model';
+import {Activity, BestAverageSpeed} from '../../models/activities.model';
 import {ActivitiesNameLabel, ActivityUnits} from '../../enums/activity.enum';
 import {ActivitiesService} from '../../services/activities.service';
-import {combineLatest, Observable} from 'rxjs';
-import {getMaximumValue} from '../../utils/Datas.utils';
+import { Observable, switchMap, tap} from 'rxjs';
+import {AuthService} from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-best-average-speed',
@@ -24,10 +24,28 @@ export class BestAverageSpeedComponent implements OnInit {
   rower$: Observable<string[]> = this.activitiesService.getAverageSpeed(ActivitiesNameLabel.ROWER);
   walk$: Observable<string[]> = this.activitiesService.getAverageSpeed(ActivitiesNameLabel.WALK);
 
-  constructor(private activitiesService: ActivitiesService) { }
+  user: string;
+  activitiesAllDatas: Activity[];
+  distinctActivtyName: string[];
+
+  constructor(private activitiesService: ActivitiesService, private authService: AuthService) { }
 
   ngOnInit(): void {
-   combineLatest([
+    this.authService.user$
+      .pipe(
+        tap( userInfo => this.user = userInfo.email),
+        switchMap( userInfo => this.activitiesService.getAllActivities(userInfo.email) )
+    )
+      .subscribe({
+        next: activitiesList => {
+          this.distinctActivtyName = [...new Set(activitiesList.map(item => item.activityName))] as string[];
+          console.log('act list:', activitiesList);
+          console.log("distinct act: ", this.distinctActivtyName);
+        }
+    });
+
+
+  /* combineLatest([
      this.activitiesService.getAverageSpeed(ActivitiesNameLabel.VTT),
      this.activitiesService.getAverageSpeed(ActivitiesNameLabel.ROWER),
      this.activitiesService.getAverageSpeed(ActivitiesNameLabel.VELO_INSIDE),
@@ -55,7 +73,8 @@ export class BestAverageSpeedComponent implements OnInit {
              ? getMaximumValue(this.walkAverageSpeedDatas)
              : 0;
        }
-     });
+     });*/
+
   }
 
   /**
