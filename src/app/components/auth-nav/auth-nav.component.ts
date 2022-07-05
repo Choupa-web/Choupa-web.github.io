@@ -23,9 +23,6 @@ export class AuthNavComponent implements OnInit {
       }
     });
   }
-  /*addNewActivity(): void {
-    this.route.navigateByUrl('/activity/add');
-  }*/
   navigateTo(activityLabel: string): void {
     this.route.navigateByUrl('/activity/add/' + activityLabel);
   }

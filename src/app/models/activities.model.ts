@@ -66,10 +66,8 @@ export class ActivityFormControl<T> {
 }
 
 export interface BestAverageSpeed {
-  vtt?: number;
-  ht?: number;
-  rower?: number;
-  walk?: number;
+  activityName: string;
+  averageSpeed: number;
 }
 
 export interface ActivityColor {
