@@ -1,6 +1,7 @@
 {
   "name": "garmin-performances2",
   "version": "0.0.0",
+  "homepage": "https://Choupa-web.github.io",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,7 +10,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "eslint": "eslint 'src/**/*.ts'",
-    "build:prod": "npm run build --omit=dev"
+    "build:prod": "npm run build --omit=dev",
+    "publish": "gh-pages -d docs"
   },
   "private": true,
   "dependencies": {
