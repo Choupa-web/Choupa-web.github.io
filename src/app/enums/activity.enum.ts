@@ -37,11 +37,11 @@ export enum FirebaseCollections {
 }
 
 export enum ActivityFieldsMax {
-  DISTANCE = 30,
+  DISTANCE = 100,
   AVERAGE_SPEED = 40,
-  MAX_SPEED = 60,
+  MAX_SPEED = 80,
   AVERAGE_FC = 140,
-  MAX_FC = 210,
+  MAX_FC = 230,
   AEROBIE = 5,
   ANAEROBIQUE = 5,
   CONSTANCE = 40,
