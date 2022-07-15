@@ -228,7 +228,7 @@ export class FormsService {
     });
     this.controlsList.push({
       controlName: 'averageCadence',
-      required: true,
+      required: false,
       validationPattern: numberWithNoDecimals,
       min: ActivityFieldsMin.CADENCE,
       label: 'Cadence moyenne',
@@ -240,7 +240,7 @@ export class FormsService {
     });
     this.controlsList.push({
       controlName: 'maxCadence',
-      required: true,
+      required: false,
       validationPattern: numberWithNoDecimals,
       min: ActivityFieldsMin.CADENCE,
       label: 'Cadence maximum',
