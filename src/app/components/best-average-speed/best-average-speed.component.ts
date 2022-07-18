@@ -28,6 +28,7 @@ export class BestAverageSpeedComponent implements OnInit {
     )
       .subscribe({
         next: activitiesList => {
+          this.bestAverageSpeed = [];
           const extractedActivities = this.extractActivitiesDatas(activitiesList);
           this.distinctActivtyName = [...new Set(extractedActivities.map(item => item.activityName))] as string[];
           const cleanedActivitiesList = extractedActivities.map(value => {return { activityName: value.activityName, averageSpeed: Number(value.averageSpeed)} });
