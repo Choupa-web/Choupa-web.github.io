@@ -18,7 +18,7 @@ export class ActivitiesDynamicFormComponent implements OnInit, OnChanges {
   @Input() formAction: FormActions;
   @Output() submitForm: EventEmitter<PageAction> = new EventEmitter<PageAction>();
   globalForm: FormGroup;
-  activityIcon: ActivityFormControl<any>;
+  controlWithIcon: ActivityFormControl<any>;
   title: string;
 
   GRAPHICAL = ControlType.GRAPHICAL;
@@ -28,14 +28,15 @@ export class ActivitiesDynamicFormComponent implements OnInit, OnChanges {
   constructor(private formsService: FormsService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.activityIcon = this.controlsList.filter(element => element.controlType === ControlType.GRAPHICAL)[0];
+    this.controlWithIcon = this.controlsList.filter(element => element.controlType === ControlType.GRAPHICAL)[0];
+    console.log("controlWithIcon: ", this.controlWithIcon);
     this.title = this.formAction === FormActions.ADD ? 'Entrez les informations de votre nouvelle activité' : 'Modification de l\'activité';
     this.globalForm = this.formsService.toFormGroup(this.controlsList);
   }
 
   ngOnChanges(_changes: SimpleChanges): void {
     this.globalForm = this.formsService.toFormGroup(this.controlsList);
-    this.activityIcon = this.controlsList.filter(element => element.controlType === ControlType.GRAPHICAL)[0];
+    this.controlWithIcon = this.controlsList.filter(element => element.controlType === ControlType.GRAPHICAL)[0];
   }
 
   saveForm = (): void => {
