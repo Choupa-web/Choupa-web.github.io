@@ -44,6 +44,14 @@ export class FormsService {
     activityName: string,
     activityInfo?: Activity
   ): ActivityFormControl<any>[] => {
+    const sportIcon = activityName === ActivitiesNameLabel.VTTAE || activityName === ActivitiesNameLabel.VTT
+      ? "directions_bike" 
+      : activityName === ActivitiesNameLabel.ROWER 
+        ? "rowing"
+        : activityName === ActivitiesNameLabel.VELO_INSIDE 
+          ? "pedal_bike"
+          : activityName === ActivitiesNameLabel.WALK 
+            ? "directions_walk" : undefined;
     this.controlsList = [
       {
         controlName: 'activityDate',
@@ -166,6 +174,7 @@ export class FormsService {
       required: true,
       label: 'Activité',
       controlType: ControlType.GRAPHICAL,
+      activityIcon: sportIcon,
       order: 0,
       value: activityName,
       disabled: true,

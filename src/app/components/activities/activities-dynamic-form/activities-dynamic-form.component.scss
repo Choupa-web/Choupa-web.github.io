@@ -7,11 +7,15 @@ $radius: 20px;
     color: $secondary !important;
 }
 
+mat-icon {
+  font-size: 300px;
+  width: fit-content;
+  height: fit-content;
+}
+
 .left {
   background-color: $primary;
   color: $secondary;
-  writing-mode: vertical-lr;
-  text-orientation: mixed;
   min-width: 50px;
   padding: 30px 10px;
 }
@@ -35,6 +39,11 @@ $radius: 20px;
     .left {
       font-size: 40px;
     }
+    mat-icon {
+      font-size: 100px;
+      width: fit-content;
+      height: fit-content;
+    }
   }
 }
 
@@ -42,6 +51,11 @@ $radius: 20px;
   #container {
     .left {
       font-size: 40px;
+    }
+    mat-icon {
+      font-size: 100px;
+      width: fit-content;
+      height: fit-content;
     }
   }
 }
@@ -51,6 +65,11 @@ $radius: 20px;
   #container {
     .left {
       font-size: 100px;
+    }
+    mat-icon {
+      font-size: 200px;
+      width: fit-content;
+      height: fit-content;
     }
   }
 }

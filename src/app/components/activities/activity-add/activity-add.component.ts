@@ -57,6 +57,7 @@ export class ActivityAddComponent implements OnInit {
 
     this.activatedRoute.params.subscribe(activity => {
       this.controlsList = this.formsService.getControlsList(activity.name);
+      console.log("controlsList: ", this.controlsList);
     });
 
   }

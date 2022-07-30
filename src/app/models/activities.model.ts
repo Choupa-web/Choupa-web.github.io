@@ -38,6 +38,7 @@ export class ActivityFormControl<T> {
   min?: number;
   max?: number;
   controlType: ControlType;
+  activityIcon?: string;
   value: T | undefined;
   controlUnit?: ActivityUnits;
   disabled?: boolean;
@@ -49,6 +50,7 @@ export class ActivityFormControl<T> {
     required?: boolean;
     validationPattern?: RegExp;
     controltype: ControlType;
+    activityIcon?: string;
     label: string;
     controlUnit?: ActivityUnits;
     disabled: boolean;
@@ -59,6 +61,7 @@ export class ActivityFormControl<T> {
     this.required = options.required;
     this.validationPattern = options.validationPattern;
     this.controlType = options.controltype;
+    this.activityIcon = options.activityIcon;
     this.label = options.label;
     this.controlUnit = options.controlUnit;
     this.disabled = options.disabled;
