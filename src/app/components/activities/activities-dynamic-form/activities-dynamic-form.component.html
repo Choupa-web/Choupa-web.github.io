@@ -1,9 +1,9 @@
-<div *ngIf="controlsList.length > 0" id="container" [formGroup]="globalForm" fxLayout="row">
-  <div class="left" fxLayoutAlign="center center" fxFlex="30" [id]="'ctrl-' + activityIcon.order" *ngIf="activityIcon.controlType == GRAPHICAL">
-    <mat-icon class="sportIcon">{{ sport }}</mat-icon>
+<div *ngIf="controlsList.length > 0" id="container" [formGroup]="globalForm" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+  <div class="left" fxLayoutAlign="center center" fxFlex="30" [id]="'ctrl-' + controlWithIcon.order" *ngIf="controlWithIcon.controlType == GRAPHICAL">
+    <mat-icon class="sportIcon">{{ controlWithIcon.activityIcon }}</mat-icon>
   </div>
   <div class="right" fxLayout="column">
-    <h2>{{ title }} {{ activityIcon.value }}</h2>
+    <h2>{{ title }} {{ controlWithIcon.value }}</h2>
     <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">
     <ng-container *ngFor="let control of controlsList">
         <div [ngSwitch]="control.controlType" *ngIf="control.controlType !== GRAPHICAL">

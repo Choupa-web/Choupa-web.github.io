@@ -20,6 +20,13 @@ mat-icon {
   padding: 30px 10px;
 }
 
+.top {
+  background-color: $primary;
+  color: $secondary;
+  min-width: 50px;
+  padding: 30px 10px;
+}
+
 #container {
   border: 2px solid $primary;
   border-radius: $radius;
@@ -31,6 +38,14 @@ mat-icon {
     border-bottom-right-radius: $radius;
     border-top-right-radius: $radius;
     padding: 20px 50px;
+  }
+  .top {
+    border-top-right-radius: $radius;
+    border-top-left-radius: $radius;
+  }
+  .bottom {
+    border-bottom-left-radius: $radius;
+    border-bottom-right-radius: $radius;
   }
 }
 
